@@ -1,50 +1,15 @@
 ---
-// TrueStream landing page — v0.0.1 tracer bullet.
-// Layout mirrors echomusic.fun (hero, action shots, WHY grid, FAQ, footer, donate).
-// Binaries served from GitHub Releases CDN. Wallet addresses are DEMO placeholders.
-import stats from '../data/stats.json';
-// stats.json refreshed at build time (prebuild) + daily cron — baked into
-// static HTML below, zero runtime API dependence for these numbers.
-const TAG = 'v0.0.1';
-const REL = `https://github.com/OnlyXianzo/TrueStream/releases/download/${TAG}`;
-const REPO = 'https://github.com/OnlyXianzo/TrueStream';
-const android = [
-  { f: 'truestream-v0.0.1-arm64-deno.apk', label: 'Android arm64 (Deno, recommended)', arch: 'arm64' },
-  { f: 'truestream-v0.0.1-arm64-node.apk', label: 'Android arm64 (Node.js)', arch: 'arm64' },
-  { f: 'truestream-v0.0.1-armv7-node.apk', label: 'Android 32-bit (armeabi-v7a)', arch: 'armv7' },
-  { f: 'truestream-v0.0.1-x86_64-deno.apk', label: 'Android x86_64 (Chromebook/emulator)', arch: 'x86_64' },
-  { f: 'truestream-v0.0.1-x86_64-node.apk', label: 'Android x86_64 (Node.js)', arch: 'x86_64' },
-  { f: 'truestream-v0.0.1-universal.apk', label: 'Android universal (all ABIs, 458 MB)', arch: 'universal' },
-];
-const linux = [
-  { f: 'truestream-0.0.1-linux-x64.tar.gz', label: 'Linux x64 portable' },
-  { f: 'truestream-0.0.1-linux-arm64.tar.gz', label: 'Linux arm64 portable' },
-  { f: 'truestream_0.0.1_amd64.deb', label: 'Debian/Ubuntu x64 (.deb)' },
-  { f: 'truestream_0.0.1_arm64.deb', label: 'Debian/Ubuntu arm64 (.deb)' },
-  { f: 'truestream-0.0.1-1.x86_64.rpm', label: 'Fedora/RHEL x64 (.rpm)' },
-  { f: 'truestream-0.0.1-1.aarch64.rpm', label: 'Fedora/RHEL arm64 (.rpm)' },
-  { f: 'truestream-0.0.1-1-x86_64.pkg.tar.zst', label: 'Arch x64 (pacman -U)' },
-  { f: 'truestream-0.0.1-1-aarch64.pkg.tar.zst', label: 'Arch arm64 (pacman -U)' },
-];
-const windows = [{ f: 'truestream-windows-x64.zip', label: 'Windows 10/11 x64 portable' }];
-const features = [
-  ['1,000+ sites', 'YouTube 4K/8K/HDR, SoundCloud 320k, Twitch, TikTok, Instagram, Bandcamp and more via yt-dlp.'],
-  ['Dual JS runtimes', 'Deno 2.7.7 for speed, Node.js 25.3.0 for compatibility — picked per device at install.'],
-  ['Zero telemetry', 'No ads, no trackers, no analytics. 100% local processing on your device.'],
-  ['High fidelity', 'Separate video+audio stream parsing, Opus/AAC extraction, playlist batch + shuffle.'],
-  ['Hardware-optimized', 'Native Bionic FFmpeg per ABI: arm64-v8a, armeabi-v7a, x86_64.'],
-  ['Open source', 'Every line public under GPL-3.0. Audit it, fork it, improve it.'],
-  ['Batch playlists', 'Whole playlists with selective filtering, ordering and queue controls.'],
-  ['Fluid dark UI', 'Modern Flutter interface across phones, foldables, tablets and desktops.'],
-];
-const faqs = [
-  ['Is TrueStream really free?', 'Yes, completely. No paid tiers, no ads, no subscription. GPL-3.0 open source.'],
-  ['Where do I download it?', 'Right here — this page routes you to GitHub Releases. Android users can also use Obtainium for auto-updates.'],
-  ['Does it need an account?', 'No account, no sign-up, no tracking. Install and download.'],
-  ['Which platforms are supported?', 'Android (arm64, armv7, x86_64), Linux (x64, arm64: tarball, .deb, .rpm, Arch pkg) and Windows 10/11 (x64). iOS is not supported.'],
-  ['Can I contribute?', 'Absolutely — open issues and PRs on GitHub. Distribution packaging lives in distribution/ and fastlane/.'],
-  ['Where does the media come from?', 'TrueStream extracts publicly available streams via yt-dlp. It hosts nothing. See DMCA for takedown contact.'],
-];
+// TrueStream — Curated Bazaar Landing Page (DESIGN.md Canonical Ethos)
+// Dumb ordered composer importing modular sections
+import Nav from '../sections/Nav.astro';
+import Hero from '../sections/Hero.astro';
+import Showcase from '../sections/Showcase.astro';
+import Features from '../sections/Features.astro';
+import Downloads from '../sections/Downloads.astro';
+import Faq from '../sections/Faq.astro';
+import Community from '../sections/Community.astro';
+import Footer from '../sections/Footer.astro';
+import '../styles/global.css';
 ---
 
 <!doctype html>
@@ -52,327 +17,47 @@ const faqs = [
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="TrueStream — privacy-first, high-performance media extractor. Download audio and video in highest fidelity from 1,000+ platforms." />
+  <meta name="description" content="TrueStream — privacy-first, high-performance media extractor. Download audio and video in highest fidelity from 1,000+ platforms with 100% local device processing." />
   <title>TrueStream — Privacy-First Media Extractor</title>
   <link rel="icon" href="/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0d1117;
-      --panel: #161b22;
-      --line: #30363d;
-      --txt: #e6edf3;
-      --dim: #8b949e;
-      --acc: #58a6ff;
-      --ok: #3fb950;
-      --purple: #8957e5;
-    }
-    * { box-sizing: border-box }
-    body { margin: 0; background: var(--bg); color: var(--txt); font: 16px/1.6 'Instrument Sans', system-ui, sans-serif }
-    a { color: var(--acc) }
-    header, section, footer { max-width: 980px; margin: auto; padding: 24px 16px }
-    .hero { text-align: center; padding: 64px 16px 32px }
-    .hero img { width: 128px; border-radius: 32px }
-    .btn { display: inline-block; margin: 8px; padding: 14px 28px; border-radius: 12px; font-weight: 700; text-decoration: none; font-family: inherit }
-    .btn-p { background: var(--acc); color: #04121f }
-    .btn-s { border: 1px solid var(--line); color: var(--txt) }
-    .badges span { display: inline-block; margin: 4px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--dim); font-size: 13px }
-    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) }
-    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px }
-    .card h3 { margin: 0 0 8px }
-
-    /* Showcase: Scroll-triggered converge-and-glow strip */
-    #showcase { text-align: center; padding: 48px 16px 64px; overflow: hidden }
-    .showcase-header { margin-bottom: 28px }
-    .showcase-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--acc); font-weight: 700; margin-bottom: 6px; display: inline-block }
-    .showcase-sub { color: var(--dim); font-size: 14px; max-width: 540px; margin: 8px auto 0 }
-    
-    .shots {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 28px max(20px, calc(50% - 480px)) 36px;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: nowrap;
-      scrollbar-width: thin;
-      scrollbar-color: var(--line) transparent;
-    }
-    .shots::-webkit-scrollbar { height: 8px }
-    .shots::-webkit-scrollbar-thumb { background: var(--line); border-radius: 8px }
-    .frame { scroll-snap-align: center }
-    .scroll-hint { color: var(--dim); font-size: 13px; margin-top: 4px }
-    .frame {
-      position: relative;
-      width: 172px;
-      flex: 0 0 auto;
-      aspect-ratio: 9/19;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: #010409;
-      padding: 5px;
-      display: flex;
-      flex-direction: column;
-      will-change: transform, opacity;
-      opacity: 0;
-      box-shadow: 0 16px 36px rgba(0,0,0,0.55);
-      transition: transform 560ms cubic-bezier(.16, 1, .3, 1), opacity 560ms cubic-bezier(.16, 1, .3, 1);
-      transition-delay: calc(var(--i, 0) * 90ms);
-    }
-    .frame[data-side="left"] { transform: translateX(-120px) }
-    .frame[data-side="near-left"] { transform: translateX(-60px) }
-    .frame[data-side="center"] { transform: scale(.92) }
-    .frame[data-side="near-right"] { transform: translateX(60px) }
-    .frame[data-side="right"] { transform: translateX(120px) }
-
-    #showcase.inview .frame {
-      transform: none;
-      opacity: 1;
-    }
-
-    /* Glowing device border (compositor-only opacity transition on pseudo-element) */
-    .frame::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: 29px;
-      opacity: 0;
-      box-shadow: 0 0 28px 2px rgba(88, 166, 255, .55), 0 0 64px 8px rgba(137, 87, 229, .28), inset 0 0 0 1px rgba(88, 166, 255, .65);
-      transition: opacity 700ms ease-out 150ms;
-      pointer-events: none;
-      z-index: 10;
-    }
-    .frame[data-side="center"]::before {
-      box-shadow: 0 0 36px 4px rgba(88, 166, 255, .7), 0 0 80px 12px rgba(57, 211, 83, .25), inset 0 0 0 1.5px rgba(88, 166, 255, .85);
-    }
-    #showcase.inview .frame::before {
-      opacity: 1;
-    }
-
-    /* High-Fidelity App Screenshot Images */
-    .screen-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 23px;
-      display: block;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
-    .m-bar-prog { width: 100%; height: 3px; background: #21262d; border-radius: 2px; overflow: hidden; margin-top: 3px }
-    .m-bar-fill { height: 100%; background: var(--ok); border-radius: 2px }
-    .m-row { display: flex; justify-content: space-between; font-size: 7px; color: var(--dim) }
-
-    .stats-live { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin: 20px 0 }
-    .stats-live b { font-size: 26px; display: block }
-    .stats-live span { color: var(--dim); font-size: 13px }
-    .heart { text-align: center; color: var(--dim); max-width: 640px; margin: 12px auto 0 }
-
-    /* Breakpoint adjustments */
-    @media (max-width: 900px) {
-      .frame { width: 148px }
-    }
-    @media (max-width: 640px) {
-      .frame { width: 200px }
-      .frame[data-side] { transform: translateY(48px) }
-      #showcase.inview .frame { transform: none; opacity: 1 }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .orb, .hero img, .marquee .track, .frame, .frame::before, .frame * {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-        opacity: 1 !important;
-      }
-    }
-
-    details { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; padding: 12px 16px }
-    summary { cursor: pointer; font-weight: 600 }
-    .dl li { margin: 6px 0 }
-    footer { color: var(--dim); font-size: 14px; border-top: 1px solid var(--line) }
-    dialog { background: var(--panel); color: var(--txt); border: 1px solid var(--line); border-radius: 12px; max-width: 520px }
-    .demo { background: #3b2f04; border: 1px solid #9e6a03; border-radius: 8px; padding: 8px 12px; font-size: 14px }
-    code.addr { display: block; word-break: break-all; background: #0d1117; padding: 8px; border-radius: 8px; margin: 4px 0 }
-    
-    /* luxury motion layer */
-    nav.top { position: sticky; top: 0; z-index: 40; backdrop-filter: blur(12px); background: rgba(13,17,23,.8); border-bottom: 1px solid var(--line) }
-    nav.top .in { max-width: 980px; margin: auto; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between }
-    nav.top a.l { color: var(--txt); text-decoration: none; font-weight: 700 }
-    nav.top a.n { color: var(--dim); text-decoration: none; margin-left: 16px; font-size: 14px }
-    .orbs { position: fixed; inset: 0; z-index: -1; overflow: hidden }
-    .orb { position: absolute; width: 480px; height: 480px; border-radius: 50%; filter: blur(120px); opacity: .28 }
-    .orb.a { background: #1f6feb; top: -160px; left: -120px; animation: drift 14s ease-in-out infinite alternate }
-    .orb.b { background: #8957e5; bottom: -200px; right: -140px; animation: drift 18s ease-in-out infinite alternate-reverse }
-    @keyframes drift { to { transform: translate(60px,40px) scale(1.12) } }
-    @keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
-    .hero img { animation: floaty 5s ease-in-out infinite }
-    .marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--panel) }
-    .marquee .track { display: inline-flex; gap: 32px; white-space: nowrap; padding: 12px 0; animation: slide 28s linear infinite; color: var(--dim) }
-    @keyframes slide { to { transform: translateX(-50%) } }
-    .stats { display: flex; gap: 32px; justify-content: center; margin-top: 24px; flex-wrap: wrap }
-    .stats b { font-size: 28px; display: block }
-    .stats span { color: var(--dim); font-size: 13px }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
-<body>
-  <div class="orbs" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div></div>
-  <nav class="top"><div class="in">
-    <a class="l" href="#top">TrueStream</a>
-    <div><a class="n" href="#downloads">Downloads</a><a class="n" href="#features">Features</a><a class="n" href="#faq">FAQ</a></div>
-  </div></nav>
-  <header class="hero" id="top">
-    <img src="/logo.png" alt="TrueStream logo" data-hero="logo" />
-    <h1 data-hero="title">Media that moves you.<br />No ads. No tracking.</h1>
-    <p data-hero="sub">TrueStream is a free, privacy-first media extractor for Android, Linux and Windows — highest fidelity from 1,000+ platforms, 100% local processing.</p>
-    <p data-hero="cta"><a id="dl-primary" class="btn btn-p" href={`${REL}/truestream-v0.0.1-arm64-deno.apk`}>Download</a>
-       <a class="btn btn-s" href={REPO}>View Source</a></p>
-    <p data-hero="cta2"><a class="btn btn-s" href="obtainium://app/https://github.com/OnlyXianzo/TrueStream">Add to Obtainium</a>
-       <button class="btn btn-s" onclick="document.getElementById('donate').showModal()">Support TrueStream</button></p>
-    <div class="badges" data-hero="badges"><span>100% Open Source (GPL-3.0)</span><span>Zero Telemetry</span><span>v0.0.1 Beta</span></div>
-    <div class="stats" data-hero="stats">
-      <div><b>1,000+</b><span>platforms via yt-dlp</span></div>
-      <div><b><span data-count={stats.binaries}>{stats.binaries}</span></b><span>release binaries ({stats.latest_tag})</span></div>
-      <div><b>3</b><span>operating systems</span></div>
-    </div>
-  </header>
+<body class="bg-[#131313] text-[#E5E2E1] antialiased selection:bg-[#9B503E]/30 selection:text-[#FFB4A3]">
+  <!-- Clean Narrative Section Tree -->
+  <Nav />
+  <main id="main-content">
+    <Hero />
+    <Showcase />
+    <Features />
+    <Downloads />
+    <Faq />
+    <Community />
+  </main>
+  <Footer />
 
-  <div class="marquee" aria-hidden="true"><div class="track" id="marquee-track">
-    <span>YouTube 4K/8K/HDR ✦ SoundCloud 320k ✦ Twitch ✦ TikTok ✦ Instagram ✦ Twitter/X ✦ Bilibili ✦ Bandcamp ✦ 1,000+ more via yt-dlp ✦&nbsp;</span><span>YouTube 4K/8K/HDR ✦ SoundCloud 320k ✦ Twitch ✦ TikTok ✦ Instagram ✦ Twitter/X ✦ Bilibili ✦ Bandcamp ✦ 1,000+ more via yt-dlp ✦&nbsp;</span>
-  </div></div>
-
-  <section id="showcase">
-    <div class="showcase-header">
-      <span class="showcase-tag" data-reveal>App tour</span>
-      <h2 data-reveal>See it in action</h2>
-      <p class="showcase-sub" data-reveal>Real UI mockups of the v0.0.1 app — swipe through Home, Search, Downloads, Queue and Settings.</p>
-    </div>
-    <div class="shots">
-      <!-- Frame 0: Home -->
-      <div class="frame" data-side="left" style="--i:0">
-        <img src="/shots/home.png" alt="TrueStream Home Screen" width="720" height="1520" class="screen-img" loading="lazy" />
-      </div>
-
-      <!-- Frame 1: Search -->
-      <div class="frame" data-side="near-left" style="--i:1">
-        <img src="/shots/search.png" alt="TrueStream Search Screen" width="720" height="1520" class="screen-img" loading="lazy" />
-      </div>
-
-      <!-- Frame 2: Format Picker Hero -->
-      <div class="frame" data-side="center" style="--i:2">
-        <img src="/shots/format-picker.png" alt="TrueStream Stream Format Picker" width="720" height="1520" class="screen-img" loading="lazy" />
-      </div>
-
-      <!-- Frame 3: Queue -->
-      <div class="frame" data-side="near-right" style="--i:3">
-        <img src="/shots/queue.png" alt="TrueStream Downloads Queue" width="720" height="1520" class="screen-img" loading="lazy" />
-      </div>
-
-      <!-- Frame 4: Settings -->
-      <div class="frame" data-side="right" style="--i:4">
-        <img src="/shots/settings.png" alt="TrueStream Engine Settings" width="720" height="1520" class="screen-img" loading="lazy" />
-      </div>
-    </div>
-    <p class="scroll-hint" aria-hidden="true">← swipe to explore →</p>
-  </section>
-
-  <section id="features">
-    <h2 data-reveal>Why TrueStream</h2>
-    <div class="grid">
-      {features.map(([t, d]) => <div class="card" data-reveal><h3>{t}</h3><p>{d}</p></div>)}
-    </div>
-  </section>
-
-  <section class="dl" id="downloads">
-    <h2 data-reveal>Other architectures &amp; platforms</h2>
-    <details open><summary>Android</summary><ul>{android.map(a => <li><a href={`${REL}/${a.f}`}>{a.label}</a></li>)}</ul></details>
-    <details><summary>Linux</summary><ul>{linux.map(a => <li><a href={`${REL}/${a.f}`}>{a.label}</a></li>)}</ul>
-      <p>Arch (AUR submission pending): <code>sudo pacman -U truestream-0.0.1-1-&lt;arch&gt;.pkg.tar.zst</code> · Flatpak &amp; WinGet listings in progress.</p></details>
-    <details><summary>Windows</summary><ul>{windows.map(a => <li><a href={`${REL}/${a.f}`}>{a.label}</a></li>)}</ul>
-      <p>WinGet (after store approval): <code>winget install OnlyXianzo.TrueStream</code></p></details>
-  </section>
-
-  <section id="faq">
-    <h2 data-reveal>Straight answers</h2>
-    {faqs.map(([q, a]) => <details data-reveal><summary>{q}</summary><p>{a}</p></details>)}
-  </section>
-
-  <section id="community">
-    <h2 data-reveal>Built in the open, backed by people</h2>
-    <div class="stats-live" data-reveal>
-      <div><b>★ <span id="gh-stars">{stats.stars}</span></b><span>stars</span></div>
-      <div><b><span id="gh-forks">{stats.forks}</span></b><span>forks</span></div>
-      <div><b><span id="gh-watchers">{stats.watchers}</span></b><span>watching</span></div>
-    </div>
-    <p style="text-align:center" data-reveal>
-      <a class="btn btn-p" href="https://github.com/OnlyXianzo/TrueStream">★ Star the repo</a>
-      <a class="btn btn-s" href="https://github.com/OnlyXianzo">+ Follow @OnlyXianzo</a>
-    </p>
-    <p class="heart" data-reveal>TrueStream is free forever — no ads, no paywall, no tracking. If it saves you even one frustrating evening of hunting downloads, a star costs you one click and keeps us going through the late nights. Every star is a small light that tells us this matters. Thank you for being part of it.</p>
-  </section>
-
-  <footer>
-    <p>TrueStream extracts publicly available streams and hosts no content. <a href={`${REPO}/blob/main/DMCA.md`}>DMCA</a> · <a href={`${REPO}/blob/main/LICENSE`}>License (GPL-3.0)</a> · <a href={`${REPO}/blob/main/SECURITY.md`}>Security</a> · Contact: truestream.support@gmail.com · VirusTotal scan: pending first APK scan (TODO).</p>
-  </footer>
-
-  <dialog id="donate">
-    <h3>Support TrueStream</h3>
-    <p class="demo">DEMO — placeholder addresses, do not send. Real links arrive with monetization launch.</p>
-    <p><a href="https://ko-fi.com/truestream_demo">Ko-fi (demo)</a> · <a href="https://github.com/sponsors/OnlyXianzo">GitHub Sponsors</a></p>
-    <p>XMR (demo):<code class="addr">44FAKETrueStreamDemoDoNotSend000000000000000000000000000000000000000000000000000000000000</code></p>
-    <p>BTC (demo):<code class="addr">bc1qfaktruestreamdemodonotsend000000000</code></p>
-    <p>SOL (demo):<code class="addr">FakeSolTrueStreamDemoDoNotSend111111111111111111111</code></p>
-    <button onclick="document.getElementById('donate').close()">Close</button>
-  </dialog>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Scoped GSAP Motion Initialization -->
   <script>
-  // Luxury motion: hero timeline, scroll reveals, counters, magnetic buttons, orb parallax.
-  (function(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!window.gsap)return;
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.timeline({defaults:{ease:'power3.out'}})
-    .from('[data-hero="logo"]',{scale:.4,opacity:0,duration:.7,ease:'back.out(1.6)'})
-    .from('[data-hero="title"]',{y:44,opacity:0,duration:.8},'-=.35')
-    .from('[data-hero="sub"]',{y:28,opacity:0,duration:.6},'-=.5')
-    .from('[data-hero="cta"] .btn',{y:20,opacity:0,stagger:.1,duration:.5},'-=.35')
-    .from('[data-hero="cta2"] .btn',{y:16,opacity:0,stagger:.1,duration:.45},'-=.3')
-    .from('[data-hero="badges"] span',{y:12,opacity:0,stagger:.08,duration:.4},'-=.3')
-    .from('[data-hero="stats"]',{opacity:0,duration:.5},'-=.2');
-  gsap.utils.toArray('[data-reveal]').forEach(function(el){
-    gsap.from(el,{y:36,opacity:0,duration:.7,ease:'power3.out',
-      scrollTrigger:{trigger:el,start:'top 88%',once:true}});});
-  document.querySelectorAll('[data-count]').forEach(function(el){
-    var end=+el.dataset.count,o={v:0};
-    ScrollTrigger.create({trigger:el,start:'top 92%',once:true,onEnter:function(){
-      gsap.to(o,{v:end,duration:1.4,ease:'power2.out',onUpdate:function(){el.textContent=Math.round(o.v);}});}});});
-  document.querySelectorAll('.btn-p').forEach(function(b){
-    b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();
-      gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.28,duration:.3});});
-    b.addEventListener('mouseleave',function(){gsap.to(b,{x:0,y:0,duration:.5,ease:'elastic.out(1,.5)'});});});
-  window.addEventListener('mousemove',function(e){
-    var x=(e.clientX/window.innerWidth-.5),y=(e.clientY/window.innerHeight-.5);
-    gsap.to('.orb.a',{x:x*50,y:y*40,duration:1.2});gsap.to('.orb.b',{x:x*-60,y:y*-50,duration:1.4});});
-  })();
-  </script>
-  <script>
-  // <2KB OS/arch router (userAgentData + userAgent fallback)
-  (function(){var b=document.getElementById('dl-primary'),d=navigator.userAgentData||{},ua=navigator.userAgent||'';
-  var mob=d.mobile||/Android|Mobile/i.test(ua),plat=(d.platform||'').toLowerCase();
-  function apk(f,l){b.href='https://github.com/OnlyXianzo/TrueStream/releases/download/v0.0.1/'+f;b.textContent=l;}
-  if(mob||/android/i.test(ua)){if(/armv7|armeabi/i.test(ua))apk('truestream-v0.0.1-armv7-node.apk','Download for Android (32-bit)');else if(/x86_64|x86/i.test(ua))apk('truestream-v0.0.1-x86_64-deno.apk','Download for Android (x86_64)');else apk('truestream-v0.0.1-arm64-deno.apk','Download for Android (arm64)');}
-  else if(/win/i.test(plat)||/windows/i.test(ua)){b.href='https://github.com/OnlyXianzo/TrueStream/releases/download/v0.0.1/truestream-windows-x64.zip';b.textContent='Download for Windows (x64)';}
-  else if(/linux/i.test(plat)||/linux/i.test(ua)){b.href='https://github.com/OnlyXianzo/TrueStream/releases/download/v0.0.1/truestream-0.0.1-linux-x64.tar.gz';b.textContent='Download for Linux (x64)';}
-  else{b.textContent='Download (all platforms below)';b.href='https://github.com/OnlyXianzo/TrueStream/releases/latest';}})();
-  </script>
-  <script>
-  // Showcase: single IntersectionObserver, CSS does the motion (see verified-approach-showcase.md).
-  (function(){var s=document.getElementById('showcase');if(!s)return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){s.classList.add('inview');return;}
-  var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){s.classList.add('inview');o.disconnect();}},{threshold:.25});
-  o.observe(s);})();
+    import {
+      initHeroAnimation,
+      initScrollReveals,
+      initCountUps,
+      initMagneticButtons,
+    } from '../lib/gsap';
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    function init() {
+      initHeroAnimation();
+      initScrollReveals();
+      initCountUps();
+      initMagneticButtons();
+    }
   </script>
 </body>
 </html>

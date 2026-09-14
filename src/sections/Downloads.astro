@@ -1,0 +1,116 @@
+---
+// src/sections/Downloads.astro — Architecture matrix and platform downloads with checksums and byte sizes
+import { androidDownloads, linuxDownloads, windowsDownloads, REL } from '../data/downloads';
+
+function formatMB(bytes: number): string {
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+---
+
+<section id="downloads" class="py-20 px-4 max-w-4xl mx-auto">
+  <div class="text-center max-w-2xl mx-auto mb-12">
+    <span class="eyebrow mb-2 inline-block" data-reveal>
+      Target Matrix · 15 Binaries
+    </span>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#E5E2E1] tracking-tight" data-reveal>
+      All Architectures & Platforms
+    </h2>
+    <p class="text-sm sm:text-base text-[#D9C1BC] mt-3" data-reveal>
+      Dedicated native binaries compiled per ABI with embedded Bionic FFmpeg and dual JavaScript runtimes.
+    </p>
+  </div>
+
+  <div class="space-y-4">
+    <!-- Android Accordion -->
+    <details class="faq-item group" open data-reveal>
+      <summary class="text-[#E5E2E1] text-base sm:text-lg font-bold">
+        <span class="flex items-center gap-2.5">
+          <svg class="w-5 h-5 text-[#B7CCB9]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.413 13.8564 8 12 8s-3.5902.413-5.1368 1.4507L4.841 5.9477a.416.416 0 00-.5676-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.693 0 15.659 0 20.25h24c0-4.591-2.6889-8.557-6.1185-10.9286"/>
+          </svg>
+          Android Packages (.apk)
+        </span>
+      </summary>
+      <div class="mt-4 pt-4 border-t border-[#353534] space-y-3">
+        {androidDownloads.map((item) => (
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-[#201F1F] border border-[#54433F]/30 hover:border-[#54433F]/60 transition">
+            <div class="mb-2 sm:mb-0">
+              <span class="text-sm font-semibold text-[#E5E2E1] block">{item.label}</span>
+              <span class="text-xs text-[#D9C1BC]">{item.file} · {formatMB(item.size)}</span>
+              <span class="text-[10px] font-mono text-[#A28C87] block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
+                SHA256: {item.sha256.substring(0, 16)}…
+              </span>
+            </div>
+            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E] hover:text-white transition w-fit">
+              Download .apk
+            </a>
+          </div>
+        ))}
+      </div>
+    </details>
+
+    <!-- Linux Accordion -->
+    <details class="faq-item group" data-reveal>
+      <summary class="text-[#E5E2E1] text-base sm:text-lg font-bold">
+        <span class="flex items-center gap-2.5">
+          <svg class="w-5 h-5 text-[#FFB4A3]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.003 0C5.373 0 0 5.373 0 12.003c0 5.302 3.438 9.8 8.207 11.387.6.111.82-.261.82-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.218.694.825.576C20.565 21.799 24 17.302 24 12.003 24 5.373 18.627 0 12.003 0z"/>
+          </svg>
+          Linux Distributions (.deb, .rpm, Arch pkg, tarball)
+        </span>
+      </summary>
+      <div class="mt-4 pt-4 border-t border-[#353534] space-y-3">
+        {linuxDownloads.map((item) => (
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-[#201F1F] border border-[#54433F]/30 hover:border-[#54433F]/60 transition">
+            <div class="mb-2 sm:mb-0">
+              <span class="text-sm font-semibold text-[#E5E2E1] block">{item.label}</span>
+              <span class="text-xs text-[#D9C1BC]">{item.file} · {formatMB(item.size)}</span>
+              <span class="text-[10px] font-mono text-[#A28C87] block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
+                SHA256: {item.sha256.substring(0, 16)}…
+              </span>
+            </div>
+            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E] hover:text-white transition w-fit">
+              Download
+            </a>
+          </div>
+        ))}
+        <div class="p-3.5 rounded-lg bg-[#0E0E0E] border border-[#353534] text-xs text-[#D9C1BC]">
+          <p class="font-mono text-[#A28C87] mb-1"># Arch Linux installation (AUR submission pending):</p>
+          <code class="text-[#FFB4A3] block overflow-x-auto select-all">sudo pacman -U truestream-0.0.1-1-x86_64.pkg.tar.zst</code>
+        </div>
+      </div>
+    </details>
+
+    <!-- Windows Accordion -->
+    <details class="faq-item group" data-reveal>
+      <summary class="text-[#E5E2E1] text-base sm:text-lg font-bold">
+        <span class="flex items-center gap-2.5">
+          <svg class="w-5 h-5 text-[#B7CCB9]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+          </svg>
+          Windows 10 / 11 (x64)
+        </span>
+      </summary>
+      <div class="mt-4 pt-4 border-t border-[#353534] space-y-3">
+        {windowsDownloads.map((item) => (
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-[#201F1F] border border-[#54433F]/30 hover:border-[#54433F]/60 transition">
+            <div class="mb-2 sm:mb-0">
+              <span class="text-sm font-semibold text-[#E5E2E1] block">{item.label}</span>
+              <span class="text-xs text-[#D9C1BC]">{item.file} · {formatMB(item.size)}</span>
+              <span class="text-[10px] font-mono text-[#A28C87] block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
+                SHA256: {item.sha256.substring(0, 16)}…
+              </span>
+            </div>
+            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E] hover:text-white transition w-fit">
+              Download .zip
+            </a>
+          </div>
+        ))}
+        <div class="p-3.5 rounded-lg bg-[#0E0E0E] border border-[#353534] text-xs text-[#D9C1BC]">
+          <p class="font-mono text-[#A28C87] mb-1"># WinGet Package Manager (after store ingestion):</p>
+          <code class="text-[#FFB4A3] block overflow-x-auto select-all">winget install OnlyXianzo.TrueStream</code>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
