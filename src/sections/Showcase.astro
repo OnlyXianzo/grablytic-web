@@ -336,37 +336,68 @@
       });
     }
 
-    // Unified Pointer Drag (Fluid PC Mouse Drag + Seamless Touch Fallthrough)
+    // Unified Pointer Drag & Swipe (Touch + Mouse with 45° axis lock & momentum)
     let isPointerDown = false;
     let isDragging = false;
+    let isScrolling = false;
     let startX = 0;
+    let startY = 0;
     let startScrollLeft = 0;
     let hasMoved = false;
     let activePointerId: number | null = null;
+    let lastX = 0;
+    let lastTime = 0;
+    let velocity = 0;
 
     track.addEventListener('pointerdown', (e: PointerEvent) => {
-      // Only capture primary mouse button (touch uses native scroll-snap with touch-action: pan-y)
-      if (e.pointerType === 'mouse') {
-        if (e.button !== 0) return;
-        isPointerDown = true;
-        isDragging = false;
-        hasMoved = false;
-        startX = e.clientX;
-        startScrollLeft = track.scrollLeft;
-        activePointerId = e.pointerId;
-        track.setPointerCapture(e.pointerId);
-        track.classList.add('is-grabbing');
-      }
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isPointerDown = true;
+      isDragging = false;
+      isScrolling = false;
+      hasMoved = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      lastX = e.clientX;
+      lastTime = performance.now();
+      velocity = 0;
+      startScrollLeft = track.scrollLeft;
+      activePointerId = e.pointerId;
     });
 
     track.addEventListener('pointermove', (e: PointerEvent) => {
-      if (!isPointerDown || e.pointerId !== activePointerId) return;
+      if (!isPointerDown || e.pointerId !== activePointerId || isScrolling) return;
       const deltaX = e.clientX - startX;
-      if (Math.abs(deltaX) > 6) {
-        isDragging = true;
-        hasMoved = true;
+      const deltaY = e.clientY - startY;
+
+      // Axis disambiguation: lock horizontal drag if horizontal swipe dominates
+      if (!isDragging) {
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        if (absX > 6 || absY > 6) {
+          const angle = Math.atan2(absY, absX) * (180 / Math.PI);
+          if (angle > 45) {
+            // Dominant vertical motion: yield to native page scroll
+            isScrolling = true;
+            return;
+          }
+          // Dominant horizontal motion: lock into carousel swipe
+          isDragging = true;
+          hasMoved = true;
+          track.classList.add('is-grabbing');
+          try {
+            track.setPointerCapture(e.pointerId);
+          } catch (_) {}
+        }
       }
+
       if (isDragging) {
+        const now = performance.now();
+        const dt = now - lastTime;
+        if (dt > 0) {
+          velocity = (e.clientX - lastX) / dt;
+          lastX = e.clientX;
+          lastTime = now;
+        }
         track.scrollLeft = startScrollLeft - deltaX;
         requestUpdate();
       }
@@ -377,18 +408,21 @@
       isPointerDown = false;
       track.classList.remove('is-grabbing');
       if (track.hasPointerCapture(e.pointerId)) {
-        track.releasePointerCapture(e.pointerId);
+        try {
+          track.releasePointerCapture(e.pointerId);
+        } catch (_) {}
       }
       activePointerId = null;
 
       if (isDragging) {
         isDragging = false;
-        // Snap to nearest frame
-        const currentScrollCenter = track.scrollLeft + (containerWidth / 2);
+        // Inertial flick target calculation
+        const flickDistance = velocity * 100;
+        const targetScroll = track.scrollLeft - flickDistance + (containerWidth / 2);
         let closestIdx = 0;
         let minDiff = Infinity;
         for (let i = 0; i < frameCenters.length; i++) {
-          const diff = Math.abs(frameCenters[i] - currentScrollCenter);
+          const diff = Math.abs(frameCenters[i] - targetScroll);
           if (diff < minDiff) {
             minDiff = diff;
             closestIdx = i;

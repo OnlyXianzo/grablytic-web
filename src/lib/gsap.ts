@@ -255,3 +255,77 @@ export function initMagneticButtons(selector: string = '.btn-magnetic'): void {
     });
   });
 }
+
+/**
+ * Smooth hardware-accelerated accordion disclosure for <details class="faq-item">.
+ * Eliminates abrupt binary snap with 60/120fps height interpolation and opacity fade.
+ */
+export function initAccordions(selector: string = 'details.faq-item'): void {
+  if (typeof window === 'undefined' || isReducedMotion()) return;
+  if (!('animate' in HTMLElement.prototype)) return;
+
+  const accordions = document.querySelectorAll<HTMLDetailsElement>(selector);
+  accordions.forEach((details) => {
+    const summary = details.querySelector('summary');
+    if (!summary) return;
+
+    let isAnimating = false;
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (isAnimating) return;
+
+      const isOpen = details.hasAttribute('open');
+
+      if (isOpen) {
+        // Smooth closing
+        isAnimating = true;
+        const startHeight = details.offsetHeight;
+        const endHeight = summary.offsetHeight;
+
+        details.style.overflow = 'hidden';
+        const anim = details.animate({
+          height: [`${startHeight}px`, `${endHeight}px`],
+          opacity: [1, 0.92]
+        }, {
+          duration: 260,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+        });
+
+        anim.onfinish = () => {
+          details.removeAttribute('open');
+          details.style.overflow = '';
+          isAnimating = false;
+        };
+        anim.oncancel = () => {
+          details.style.overflow = '';
+          isAnimating = false;
+        };
+      } else {
+        // Smooth opening
+        isAnimating = true;
+        const startHeight = summary.offsetHeight;
+        details.setAttribute('open', '');
+        const endHeight = details.offsetHeight;
+
+        details.style.overflow = 'hidden';
+        const anim = details.animate({
+          height: [`${startHeight}px`, `${endHeight}px`],
+          opacity: [0.92, 1]
+        }, {
+          duration: 300,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+        });
+
+        anim.onfinish = () => {
+          details.style.overflow = '';
+          isAnimating = false;
+        };
+        anim.oncancel = () => {
+          details.style.overflow = '';
+          isAnimating = false;
+        };
+      }
+    });
+  });
+}
