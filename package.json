@@ -11,6 +11,9 @@
     "preview": "node node_modules/astro/astro.js preview"
   },
   "dependencies": {
-    "astro": "^5.13.0"
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^5.13.0",
+    "gsap": "^3.15.0",
+    "tailwindcss": "^4.3.3"
   }
 }

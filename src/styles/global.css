@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #090d13;
+    --panel: #121820;
+    --panel-translucent: rgba(18, 24, 32, 0.78);
+    --line: #222d3d;
+    --line-subtle: rgba(255, 255, 255, 0.08);
+    --txt: #f0f6fc;
+    --dim: #8b949e;
+    --acc: #58a6ff;
+    --acc-hover: #79b8ff;
+    --acc-glow: rgba(88, 166, 255, 0.4);
+    --ok: #3fb950;
+    --purple: #8957e5;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--txt);
+    font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Atmospheric Multi-Stop Radial Caustic Glow Background (Cologne technique) */
+.ambient-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(at 15% 15%, rgba(88, 166, 255, 0.09) 0px, transparent 55%),
+    radial-gradient(at 85% 25%, rgba(137, 87, 229, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(63, 185, 80, 0.05) 0px, transparent 50%);
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.28;
+  will-change: transform;
+}
+
+.ambient-orb-a {
+  width: 520px;
+  height: 520px;
+  background: #1f6feb;
+  top: -180px;
+  left: -140px;
+  animation: orbDriftA 16s ease-in-out infinite alternate;
+}
+
+.ambient-orb-b {
+  width: 540px;
+  height: 540px;
+  background: #8957e5;
+  bottom: -220px;
+  right: -160px;
+  animation: orbDriftB 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes orbDriftA {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(70px, 50px) scale(1.1); }
+}
+
+@keyframes orbDriftB {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-60px, -40px) scale(1.15); }
+}
+
+/* Glassmorphism Classes */
+.glass-pill {
+  background: var(--panel-translucent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line-subtle);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(88, 166, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* Button Component Styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acc);
+  color: #030d17;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(88, 166, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--acc-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(88, 166, 255, 0.45);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--txt);
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Marquee Infinite Track */
+.marquee-container {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(18, 24, 32, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 32px;
+  white-space: nowrap;
+  padding: 14px 0;
+  animation: marqueeScroll 32s linear infinite;
+  color: var(--dim);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Accordion Styling */
+details.faq-item {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s ease;
+}
+
+details.faq-item[open] {
+  border-color: rgba(88, 166, 255, 0.3);
+}
+
+details.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq-item summary::after {
+  content: "+";
+  font-size: 20px;
+  color: var(--dim);
+  transition: transform 0.2s ease;
+}
+
+details.faq-item[open] summary::after {
+  content: "−";
+  color: var(--acc);
+}
+
+/* Reduced Motion Guard — Instant Static Display */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ambient-orb-a,
+  .ambient-orb-b,
+  .marquee-track {
+    animation: none !important;
+  }
+
+  [data-reveal],
+  .frame,
+  .frame::before {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

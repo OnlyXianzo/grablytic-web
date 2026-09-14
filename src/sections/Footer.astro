@@ -1,0 +1,66 @@
+---
+// src/sections/Footer.astro — Legal links, contact, DMCA, and licensing
+import { REPO } from '../data/downloads';
+---
+
+<footer class="py-12 px-4 max-w-5xl mx-auto border-t border-zinc-800/80 text-center text-xs text-zinc-400 space-y-4">
+  <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-zinc-400 font-medium">
+    <a href={`${REPO}/blob/main/DMCA.md`} class="hover:text-white transition-colors">DMCA Notice</a>
+    <span class="text-zinc-700" aria-hidden="true">•</span>
+    <a href={`${REPO}/blob/main/LICENSE`} class="hover:text-white transition-colors">GPL-3.0 License</a>
+    <span class="text-zinc-700" aria-hidden="true">•</span>
+    <a href={`${REPO}/blob/main/SECURITY.md`} class="hover:text-white transition-colors">Security Policy</a>
+    <span class="text-zinc-700" aria-hidden="true">•</span>
+    <a href="mailto:truestream.support@gmail.com" class="hover:text-white transition-colors">truestream.support@gmail.com</a>
+  </div>
+
+  <p class="max-w-2xl mx-auto leading-relaxed text-zinc-400">
+    TrueStream is a client-side media extraction tool powered by yt-dlp. TrueStream hosts no media, streams, or copyrighted files. All media is fetched directly from public platform streams on your local device.
+  </p>
+
+  <p class="text-zinc-400 text-[11px]">
+    VirusTotal scan: pending first APK submission.
+  </p>
+</footer>
+
+<dialog id="donate-dialog" class="backdrop:bg-black/80 backdrop:backdrop-blur-sm bg-zinc-900 text-zinc-200 border border-zinc-800 rounded-2xl p-6 max-w-md w-full shadow-2xl mx-auto my-auto">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+      <span>♥</span> Support TrueStream
+    </h3>
+    <button onclick="document.getElementById('donate-dialog')?.close()" class="text-zinc-400 hover:text-white p-1 cursor-pointer" aria-label="Close dialog">
+      ✕
+    </button>
+  </div>
+
+  <div class="p-3 mb-4 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs leading-relaxed">
+    <strong>DEMO ONLY:</strong> Placeholder addresses for demonstration. Real donation links will launch with Section 4 monetization.
+  </div>
+
+  <div class="space-y-3 text-xs">
+    <div class="flex justify-between items-center p-2.5 rounded-lg bg-zinc-950 border border-zinc-800">
+      <span class="font-medium text-zinc-300">GitHub Sponsors</span>
+      <a href="https://github.com/sponsors/OnlyXianzo" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">
+        sponsor @OnlyXianzo →
+      </a>
+    </div>
+
+    <div>
+      <span class="text-zinc-400 block mb-1 font-semibold">Monero (XMR demo):</span>
+      <code class="block p-2 rounded bg-zinc-950 border border-zinc-800 font-mono text-[11px] text-zinc-400 break-all select-all">
+        44FAKETrueStreamDemoDoNotSend000000000000000000000000000000000000000000000000000000000000
+      </code>
+    </div>
+
+    <div>
+      <span class="text-zinc-400 block mb-1 font-semibold">Bitcoin (BTC demo):</span>
+      <code class="block p-2 rounded bg-zinc-950 border border-zinc-800 font-mono text-[11px] text-zinc-400 break-all select-all">
+        bc1qfaktruestreamdemodonotsend000000000
+      </code>
+    </div>
+  </div>
+
+  <button onclick="document.getElementById('donate-dialog')?.close()" class="mt-6 w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-medium text-xs transition cursor-pointer">
+    Close
+  </button>
+</dialog>

@@ -1,0 +1,49 @@
+---
+// src/sections/Community.astro — Live GitHub stats, star CTA, and community note
+import stats from '../data/stats.json';
+---
+
+<section id="community" class="py-20 px-4 max-w-4xl mx-auto text-center">
+  <div class="max-w-2xl mx-auto mb-10">
+    <span class="text-xs uppercase tracking-widest text-blue-400 font-bold mb-2 inline-block" data-reveal>
+      Open Source
+    </span>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight" data-reveal>
+      Built in the open, backed by people
+    </h2>
+  </div>
+
+  <div class="flex justify-center gap-6 sm:gap-12 flex-wrap mb-10 py-6 px-8 rounded-2xl bg-zinc-900/50 border border-zinc-800/80 max-w-xl mx-auto" data-reveal>
+    <div class="text-center">
+      <b class="text-3xl sm:text-4xl font-extrabold text-white block tracking-tight">
+        ★ <span id="gh-stars" data-count={stats.stars}>{stats.stars}</span>
+      </b>
+      <span class="text-xs text-zinc-400 uppercase tracking-wider font-medium">stars</span>
+    </div>
+    <div class="text-center">
+      <b class="text-3xl sm:text-4xl font-extrabold text-white block tracking-tight">
+        <span id="gh-forks" data-count={stats.forks}>{stats.forks}</span>
+      </b>
+      <span class="text-xs text-zinc-400 uppercase tracking-wider font-medium">forks</span>
+    </div>
+    <div class="text-center">
+      <b class="text-3xl sm:text-4xl font-extrabold text-white block tracking-tight">
+        <span id="gh-watchers" data-count={stats.watchers}>{stats.watchers}</span>
+      </b>
+      <span class="text-xs text-zinc-400 uppercase tracking-wider font-medium">watching</span>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-center gap-3 mb-8" data-reveal>
+    <a class="btn-primary btn-magnetic" href="https://github.com/OnlyXianzo/TrueStream" target="_blank" rel="noopener noreferrer">
+      ★ Star the Repo
+    </a>
+    <a class="btn-secondary btn-magnetic" href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer">
+      + Follow @OnlyXianzo
+    </a>
+  </div>
+
+  <p class="text-sm text-zinc-400 leading-relaxed max-w-2xl mx-auto font-normal" data-reveal>
+    TrueStream is free forever — no ads, no paywalls, no tracking. If it saves you even one frustrating evening of hunting downloads, a star costs you one click and keeps us going through the late nights. Every star is a small light that tells us this matters. Thank you for being part of it.
+  </p>
+</section>

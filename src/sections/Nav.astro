@@ -1,0 +1,56 @@
+---
+// src/sections/Nav.astro — Directional auto-hiding floating glass pill navbar
+---
+
+<nav id="site-nav" class="fixed top-4 inset-x-0 z-50 flex justify-center px-4 transition-transform duration-300 ease-out" aria-label="Main Navigation">
+  <div class="glass-pill max-w-4xl w-full mx-auto px-5 py-3 rounded-full flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 text-white font-bold tracking-tight hover:opacity-80 transition-opacity">
+      <img src="/logo.png" alt="TrueStream" class="w-6 h-6 rounded-md" />
+      <span>TrueStream</span>
+    </a>
+    
+    <div class="flex items-center gap-4 md:gap-6 text-sm font-medium">
+      <a href="#showcase" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline-block">Tour</a>
+      <a href="#features" class="text-zinc-400 hover:text-white transition-colors">Features</a>
+      <a href="#downloads" class="text-zinc-400 hover:text-white transition-colors">Downloads</a>
+      <a href="#faq" class="text-zinc-400 hover:text-white transition-colors hidden sm:inline-block">FAQ</a>
+      <a href="https://github.com/OnlyXianzo/TrueStream" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 transition-all flex items-center gap-1.5">
+        <span>★</span> <span class="hidden xs:inline">GitHub</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Directional scroll handler for floating navbar (Zentry pattern)
+  (function() {
+    const nav = document.getElementById('site-nav');
+    if (!nav) return;
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          
+          if (currentScrollY <= 20) {
+            // At the top
+            nav.style.transform = 'translateY(0)';
+          } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down — hide navbar
+            nav.style.transform = 'translateY(-120%)';
+          } else if (currentScrollY < lastScrollY) {
+            // Scrolling up — reveal navbar
+            nav.style.transform = 'translateY(0)';
+          }
+
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+</script>
