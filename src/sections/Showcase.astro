@@ -1,22 +1,22 @@
 ---
-// src/sections/Showcase.astro — Converge-and-glow screenshot showcase strip
+// src/sections/Showcase.astro — Tactile Hardware Screenshot Showcase (Anti-AI Earth Aesthetic)
 ---
 
-<section id="showcase" class="text-center py-16 px-4 overflow-hidden relative">
-  <div class="showcase-header mb-8 max-w-2xl mx-auto">
-    <span class="text-xs uppercase tracking-widest text-blue-400 font-bold mb-2 inline-block" data-reveal>
-      App Tour
+<section id="showcase" class="text-center py-20 px-4 overflow-hidden relative">
+  <div class="showcase-header mb-10 max-w-2xl mx-auto">
+    <span class="eyebrow mb-2 inline-block" data-reveal>
+      App Tour · Live Interface
     </span>
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight" data-reveal>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#E5E2E1] tracking-tight" data-reveal>
       See it in action
     </h2>
-    <p class="text-sm sm:text-base text-zinc-400 mt-3" data-reveal>
-      Real UI mockups of the v0.0.1 app — swipe through Home, Search, Format Picker, Queue, and Settings.
+    <p class="text-sm sm:text-base text-[#D9C1BC] mt-3" data-reveal>
+      Authentic screenshots captured directly from the v0.0.1 Flutter engine — explore Home, Search, Format Picker, Queue, and Settings.
     </p>
   </div>
 
   <div class="shots-container relative w-full overflow-hidden">
-    <div class="shots flex gap-5 overflow-x-auto scroll-smooth py-8 px-4 sm:px-8 justify-start sm:justify-center items-center flex-nowrap scrollbar-thin">
+    <div class="shots flex gap-5 overflow-x-auto scroll-smooth py-8 px-4 sm:px-8 justify-start sm:justify-center items-center flex-nowrap">
       <!-- Frame 0: Home -->
       <div class="frame" data-side="left" style="--i:0">
         <img src="/shots/home.png" alt="TrueStream Home Screen" width="720" height="1520" class="screen-img" loading="lazy" />
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <p class="text-xs text-zinc-400 mt-4 tracking-wide flex items-center justify-center gap-1.5 sm:hidden" aria-hidden="true">
+  <p class="text-xs text-[#A28C87] mt-4 tracking-wide flex items-center justify-center gap-1.5 sm:hidden" aria-hidden="true">
     <span>←</span> swipe horizontally to explore <span>→</span>
   </p>
 </section>
@@ -53,13 +53,13 @@
   .shots {
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
-    scrollbar-color: var(--line) transparent;
+    scrollbar-color: var(--color-hairline) transparent;
   }
   .shots::-webkit-scrollbar {
     height: 6px;
   }
   .shots::-webkit-scrollbar-thumb {
-    background: var(--line);
+    background: var(--color-hairline);
     border-radius: 6px;
   }
 
@@ -69,14 +69,14 @@
     flex: 0 0 auto;
     aspect-ratio: 9/19;
     border-radius: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: #010409;
+    border: 1px solid rgba(84, 67, 63, 0.45);
+    background: var(--color-tile-low);
     padding: 5px;
     display: flex;
     flex-direction: column;
     will-change: transform, opacity;
     opacity: 0;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
     scroll-snap-align: center;
     transition: transform 560ms cubic-bezier(.16, 1, .3, 1), opacity 560ms cubic-bezier(.16, 1, .3, 1);
     transition-delay: calc(var(--i, 0) * 90ms);
@@ -93,21 +93,21 @@
     opacity: 1;
   }
 
-  /* Glowing device border (compositor-only opacity transition on pseudo-element) */
+  /* Tactile Hardware Rim Light (Warm ceramic/terracotta edge reflection — no cheap neon glow) */
   .frame::before {
     content: "";
     position: absolute;
     inset: -1px;
     border-radius: 29px;
     opacity: 0;
-    box-shadow: 0 0 28px 2px rgba(88, 166, 255, .55), 0 0 64px 8px rgba(137, 87, 229, .28), inset 0 0 0 1px rgba(88, 166, 255, .65);
+    box-shadow: inset 0 0 0 1px rgba(255, 180, 163, 0.35), 0 8px 24px rgba(125, 57, 41, 0.15);
     transition: opacity 700ms ease-out 150ms;
     pointer-events: none;
     z-index: 10;
   }
 
   .frame[data-side="center"]::before {
-    box-shadow: 0 0 36px 4px rgba(88, 166, 255, .7), 0 0 80px 12px rgba(57, 211, 83, .25), inset 0 0 0 1.5px rgba(88, 166, 255, .85);
+    box-shadow: inset 0 0 0 1.5px rgba(255, 180, 163, 0.55), 0 12px 32px rgba(125, 57, 41, 0.25);
   }
 
   #showcase.inview .frame::before {
@@ -145,7 +145,6 @@
 </style>
 
 <script>
-  // Single IntersectionObserver activating converge & glow animations
   (function() {
     const showcase = document.getElementById('showcase');
     if (!showcase) return;

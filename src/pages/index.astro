@@ -1,5 +1,6 @@
 ---
-import '../styles/global.css';
+// TrueStream — Curated Bazaar Landing Page (DESIGN.md Canonical Ethos)
+// Dumb ordered composer importing modular sections
 import Nav from '../sections/Nav.astro';
 import Hero from '../sections/Hero.astro';
 import Showcase from '../sections/Showcase.astro';
@@ -8,6 +9,7 @@ import Downloads from '../sections/Downloads.astro';
 import Faq from '../sections/Faq.astro';
 import Community from '../sections/Community.astro';
 import Footer from '../sections/Footer.astro';
+import '../styles/global.css';
 ---
 
 <!doctype html>
@@ -15,13 +17,17 @@ import Footer from '../sections/Footer.astro';
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="TrueStream — privacy-first, high-performance media extractor. Download audio and video in highest fidelity from 1,000+ platforms." />
+  <meta name="description" content="TrueStream — privacy-first, high-performance media extractor. Download audio and video in highest fidelity from 1,000+ platforms with 100% local device processing." />
   <title>TrueStream — Privacy-First Media Extractor</title>
   <link rel="icon" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
-<body>
+<body class="bg-[#131313] text-[#E5E2E1] antialiased selection:bg-[#9B503E]/30 selection:text-[#FFB4A3]">
+  <!-- Clean Narrative Section Tree -->
   <Nav />
-  <main>
+  <main id="main-content">
     <Hero />
     <Showcase />
     <Features />
@@ -31,27 +37,27 @@ import Footer from '../sections/Footer.astro';
   </main>
   <Footer />
 
+  <!-- Scoped GSAP Motion Initialization -->
   <script>
-    import { initHeroAnimation, initScrollReveals, initCountUps, initMagneticButtons, initOrbParallax } from '../lib/gsap.ts';
-    initHeroAnimation();
-    initScrollReveals();
-    initCountUps();
-    initMagneticButtons();
-    initOrbParallax();
+    import {
+      initHeroAnimation,
+      initScrollReveals,
+      initCountUps,
+      initMagneticButtons,
+    } from '../lib/gsap';
 
-    // Showcase converge-and-glow trigger (CSS does the motion).
-    (function () {
-      const s = document.getElementById('showcase');
-      if (!s) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-        s.classList.add('inview');
-        return;
-      }
-      const o = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) { s.classList.add('inview'); o.disconnect(); }
-      }, { threshold: 0.25 });
-      o.observe(s);
-    })();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    function init() {
+      initHeroAnimation();
+      initScrollReveals();
+      initCountUps();
+      initMagneticButtons();
+    }
   </script>
 </body>
 </html>

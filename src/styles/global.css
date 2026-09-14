@@ -2,18 +2,36 @@
 
 @layer base {
   :root {
-    --bg: #090d13;
-    --panel: #121820;
-    --panel-translucent: rgba(18, 24, 32, 0.78);
-    --line: #222d3d;
-    --line-subtle: rgba(255, 255, 255, 0.08);
-    --txt: #f0f6fc;
-    --dim: #8b949e;
-    --acc: #58a6ff;
-    --acc-hover: #79b8ff;
-    --acc-glow: rgba(88, 166, 255, 0.4);
-    --ok: #3fb950;
-    --purple: #8957e5;
+    /* DESIGN.md §3 Canonical Color Ramp — Curated Bazaar & Earth Tones */
+    --color-paper-base: #131313;              /* Scaffold, app background */
+    --color-tile-lowest: #0E0E0E;             /* Deep wells, modals */
+    --color-tile-low: #1C1B1B;                /* Cards, device frames, input wells */
+    --color-tile: #201F1F;                    /* Standard section cards, tiles */
+    --color-tile-high: #2A2A2A;               /* Hover/pressed state, segmented wells */
+    --color-tile-highest: #353534;            /* Dividers, progress tracks */
+
+    /* Inks */
+    --color-ink: #E5E2E1;                     /* Primary headings, titles, body */
+    --color-ink-muted: #D9C1BC;               /* Secondary text, metadata, descriptions */
+    --color-hairline: rgba(84, 67, 63, 0.35); /* Hairline borders at 20-40% alpha */
+    --color-ink-faint: #A28C87;               /* Icons, hints */
+
+    /* Terracotta (Primary Accent Voice - used once as value + once as action) */
+    --color-terracotta: #FFB4A3;              /* Primary value, active text highlight */
+    --color-terracotta-container: #9B503E;    /* Primary button fill */
+    --color-terracotta-deep: #7D3929;         /* Hover state on primary button */
+    --color-on-terracotta: #FFFFFF;           /* Text on primary button */
+    --color-terracotta-wash: rgba(255, 218, 210, 0.12); /* Subtle badge highlight */
+
+    /* Sage (Quiet Voice - verified, saved, healthy, copyleft) */
+    --color-sage: #B7CCB9;                    /* Verified tick, safe harbor notice */
+    --color-sage-container: #576A5B;          /* Sage badge fill */
+    --color-on-sage: #FFFFFF;                 /* Text on sage */
+    --color-sage-wash: rgba(183, 204, 185, 0.12); /* Subtle safe tag */
+
+    /* Danger */
+    --color-danger: #FFB4AB;
+    --color-danger-wash: rgba(147, 0, 10, 0.2);
   }
 
   * {
@@ -27,8 +45,8 @@
 
   body {
     margin: 0;
-    background-color: var(--bg);
-    color: var(--txt);
+    background-color: var(--color-paper-base);
+    color: var(--color-ink);
     font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
@@ -40,136 +58,115 @@
   }
 }
 
-/* Atmospheric Multi-Stop Radial Caustic Glow Background (Cologne technique) */
-.ambient-mesh {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-  background:
-    radial-gradient(at 15% 15%, rgba(88, 166, 255, 0.09) 0px, transparent 55%),
-    radial-gradient(at 85% 25%, rgba(137, 87, 229, 0.08) 0px, transparent 50%),
-    radial-gradient(at 50% 80%, rgba(63, 185, 80, 0.05) 0px, transparent 50%);
+/* Provenance Eyebrow (DESIGN.md Principle 3) */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-terracotta);
 }
 
-.ambient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.28;
-  will-change: transform;
+.eyebrow-muted {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-muted);
 }
 
-.ambient-orb-a {
-  width: 520px;
-  height: 520px;
-  background: #1f6feb;
-  top: -180px;
-  left: -140px;
-  animation: orbDriftA 16s ease-in-out infinite alternate;
+/* Primary Value (DESIGN.md Principle 2: One loud thing per card) */
+.primary-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-terracotta);
+  line-height: 1.15;
 }
 
-.ambient-orb-b {
-  width: 540px;
-  height: 540px;
-  background: #8957e5;
-  bottom: -220px;
-  right: -160px;
-  animation: orbDriftB 20s ease-in-out infinite alternate-reverse;
+/* Tactile Tonal Paper Tile (DESIGN.md Principle 4: Tonal, never shadowed) */
+.paper-tile {
+  background-color: var(--color-tile);
+  border: 1px solid var(--color-hairline);
+  border-radius: 12px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-@keyframes orbDriftA {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(70px, 50px) scale(1.1); }
+.paper-tile:hover {
+  background-color: var(--color-tile-high);
+  border-color: rgba(255, 180, 163, 0.35);
+  transform: translateY(-2px);
 }
 
-@keyframes orbDriftB {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-60px, -40px) scale(1.15); }
-}
-
-/* Glassmorphism Classes */
-.glass-pill {
-  background: var(--panel-translucent);
+/* Floating Glass Pill Navbar */
+.navbar-pill {
+  background: rgba(28, 27, 27, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--line-subtle);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid var(--color-hairline);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.glass-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.glass-card:hover {
-  border-color: rgba(88, 166, 255, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-}
-
-/* Button Component Styles */
+/* Buttons (DESIGN.md §6.8) */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--acc);
-  color: #030d17;
-  font-weight: 700;
-  padding: 13px 26px;
+  background-color: var(--color-terracotta-container);
+  color: var(--color-on-terracotta);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 24px;
   border-radius: 12px;
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 18px rgba(88, 166, 255, 0.3);
+  border: 1px solid rgba(255, 180, 163, 0.2);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .btn-primary:hover {
-  background: var(--acc-hover);
+  background-color: var(--color-terracotta-deep);
+  border-color: rgba(255, 180, 163, 0.4);
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(88, 166, 255, 0.45);
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  color: var(--txt);
-  font-weight: 600;
+  background-color: var(--color-tile-low);
+  color: var(--color-ink);
+  font-weight: 500;
+  font-size: 14px;
   padding: 12px 24px;
   border-radius: 12px;
   text-decoration: none;
-  border: 1px solid var(--line);
+  border: 1px solid var(--color-hairline);
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background-color: var(--color-tile-high);
+  border-color: rgba(217, 193, 188, 0.3);
+  color: #FFFFFF;
 }
 
-/* Marquee Infinite Track */
+/* Marquee Infinite Track with Warm Tonal Styling */
 .marquee-container {
   overflow: hidden;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: rgba(18, 24, 32, 0.6);
-  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--color-hairline);
+  border-bottom: 1px solid var(--color-hairline);
+  background: var(--color-tile-low);
 }
 
 .marquee-track {
   display: inline-flex;
   gap: 32px;
   white-space: nowrap;
-  padding: 14px 0;
+  padding: 12px 0;
   animation: marqueeScroll 32s linear infinite;
-  color: var(--dim);
-  font-size: 14px;
+  color: var(--color-ink-muted);
+  font-size: 13px;
   font-weight: 500;
+  letter-spacing: 0.04em;
 }
 
 @keyframes marqueeScroll {
@@ -177,29 +174,31 @@
   100% { transform: translateX(-50%); }
 }
 
-/* Accordion Styling */
+/* Accordion Styling (Tonal Paper Tiles) */
 details.faq-item {
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background-color: var(--color-tile-low);
+  border: 1px solid var(--color-hairline);
   border-radius: 12px;
   padding: 16px 20px;
   margin-bottom: 12px;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 details.faq-item[open] {
-  border-color: rgba(88, 166, 255, 0.3);
+  background-color: var(--color-tile);
+  border-color: rgba(255, 180, 163, 0.3);
 }
 
 details.faq-item summary {
   cursor: pointer;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   user-select: none;
+  color: var(--color-ink);
 }
 
 details.faq-item summary::-webkit-details-marker {
@@ -208,14 +207,14 @@ details.faq-item summary::-webkit-details-marker {
 
 details.faq-item summary::after {
   content: "+";
-  font-size: 20px;
-  color: var(--dim);
+  font-size: 18px;
+  color: var(--color-ink-faint);
   transition: transform 0.2s ease;
 }
 
 details.faq-item[open] summary::after {
   content: "−";
-  color: var(--acc);
+  color: var(--color-terracotta);
 }
 
 /* Reduced Motion Guard — Instant Static Display */
@@ -227,8 +226,6 @@ details.faq-item[open] summary::after {
     scroll-behavior: auto !important;
   }
 
-  .ambient-orb-a,
-  .ambient-orb-b,
   .marquee-track {
     animation: none !important;
   }
