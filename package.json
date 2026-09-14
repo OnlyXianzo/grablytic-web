@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "node node_modules/astro/astro.js dev",
     "prebuild": "node scripts/fetch-stats.mjs",
