@@ -152,6 +152,7 @@
 /* Marquee Infinite Track with Warm Tonal Styling */
 .marquee-container {
   overflow: hidden;
+  contain: paint;
   border-top: 1px solid var(--color-hairline);
   border-bottom: 1px solid var(--color-hairline);
   background: var(--color-tile-low);
@@ -215,6 +216,12 @@ details.faq-item summary::after {
 details.faq-item[open] summary::after {
   content: "−";
   color: var(--color-terracotta);
+}
+
+/* Performance: Off-screen Subtree Virtualization (Skips layout & paint until near viewport) */
+.section-contain {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* Reduced Motion Guard — Instant Static Display */

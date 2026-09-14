@@ -31,23 +31,29 @@ import stats from '../data/stats.json';
     const nav = document.getElementById('site-nav');
     if (!nav) return;
 
-    let lastScrollY = window.scrollY;
+    let lastScrollY = Math.max(0, window.scrollY);
     let ticking = false;
 
     window.addEventListener('scroll', () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          
-          if (currentScrollY <= 20) {
+          const currentScrollY = Math.max(0, window.scrollY);
+          const delta = currentScrollY - lastScrollY;
+
+          // Clamped top region (overscroll protection on iOS / Android)
+          if (currentScrollY <= 48) {
             nav.style.transform = 'translateY(0)';
-          } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            nav.style.transform = 'translateY(-120%)';
-          } else if (currentScrollY < lastScrollY) {
-            nav.style.transform = 'translateY(0)';
+            lastScrollY = currentScrollY;
+          } else if (Math.abs(delta) > 10) {
+            // Apply 10px hysteresis threshold to filter out microscopic scroll flutter
+            if (delta > 0 && currentScrollY > 100) {
+              nav.style.transform = 'translateY(-120%)';
+            } else if (delta < 0) {
+              nav.style.transform = 'translateY(0)';
+            }
+            lastScrollY = currentScrollY;
           }
 
-          lastScrollY = currentScrollY;
           ticking = false;
         });
         ticking = true;

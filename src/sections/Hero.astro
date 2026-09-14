@@ -162,4 +162,17 @@ import { TAG, REL, REPO } from '../data/downloads';
       setObtainium(null);
     }
   })();
+
+  // Off-screen marquee pausing to conserve mobile GPU bandwidth and battery
+  (function() {
+    const marquee = document.querySelector('.marquee-container');
+    const track = marquee?.querySelector('.marquee-track') as HTMLElement | null;
+    if (!marquee || !track || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      track.style.animationPlayState = entries[0].isIntersecting ? 'running' : 'paused';
+    }, { threshold: 0.05 });
+
+    observer.observe(marquee);
+  })();
 </script>
