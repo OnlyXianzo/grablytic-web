@@ -19,7 +19,7 @@
   <g transform="translate(36, 92)">
     <text x="0" y="32" fill="#ffffff" font-size="30" font-weight="800" font-family="sans-serif">Settings &amp; Engine</text>
     <rect x="496" y="6" width="152" height="34" rx="17" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-    <text x="572" y="28" fill="#8b949e" font-size="15" font-weight="700" text-anchor="middle" font-family="sans-serif">TrueStream v0.0.1</text>
+    <text x="572" y="28" fill="#8b949e" font-size="15" font-weight="700" text-anchor="middle" font-family="sans-serif">Grablytic v0.0.1</text>
   </g>
 
   <g transform="translate(36, 168)">
@@ -56,7 +56,7 @@
     <g transform="translate(0, 352)">
       <rect width="648" height="114" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
       <text x="24" y="44" fill="#ffffff" font-size="20" font-weight="700" font-family="sans-serif">Storage Location</text>
-      <text x="24" y="72" fill="#c9d1d9" font-size="15" font-family="monospace">/storage/emulated/0/Movies/TrueStream</text>
+      <text x="24" y="72" fill="#c9d1d9" font-size="15" font-family="monospace">/storage/emulated/0/Movies/Grablytic</text>
       <text x="24" y="96" fill="#8b949e" font-size="14" font-family="sans-serif">Scoped Storage • No root required • SAF access</text>
 
       <rect x="532" y="38" width="84" height="36" rx="10" fill="#21262d" stroke="#30363d" stroke-width="1"/>

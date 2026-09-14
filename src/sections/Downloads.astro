@@ -21,7 +21,7 @@ function formatMB(bytes: number): string {
     <div class="mt-6 p-3.5 rounded-lg bg-[#0E0E0E] border border-[#9B503E]/40 text-xs text-[#D9C1BC]" data-reveal>
       <p class="font-semibold text-[#E5E2E1] mb-1">Zero decisions — auto-detects your distro, arch & package:</p>
       <div class="flex items-start gap-2">
-        <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/TrueStream/main/install.sh | bash</code>
+        <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/Grablytic/main/install.sh | bash</code>
         <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy universal installer command">Copy</button>
       </div>
     </div>
@@ -86,33 +86,33 @@ function formatMB(bytes: number): string {
           <div>
             <p class="font-mono text-[#A28C87] mb-1"># Debian / Ubuntu / Mint (x64 — apt resolves dependencies):</p>
             <div class="flex items-start gap-2">
-              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">curl -LO {REL}/truestream_0.0.1_amd64.deb && sudo apt install ./truestream_0.0.1_amd64.deb</code>
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">curl -LO {REL}/grablytic_0.0.1_amd64.deb && sudo apt install ./grablytic_0.0.1_amd64.deb</code>
               <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy Debian install command">Copy</button>
             </div>
             <p class="font-mono text-[#A28C87] mt-2 mb-1"># ARM64 variant:</p>
             <div class="flex items-start gap-2">
-              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">curl -LO {REL}/truestream_0.0.1_arm64.deb && sudo apt install ./truestream_0.0.1_arm64.deb</code>
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">curl -LO {REL}/grablytic_0.0.1_arm64.deb && sudo apt install ./grablytic_0.0.1_arm64.deb</code>
               <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy ARM64 Debian install command">Copy</button>
             </div>
           </div>
           <div>
             <p class="font-mono text-[#A28C87] mb-1"># Fedora / RHEL / openSUSE (x64 — direct URL install):</p>
             <div class="flex items-start gap-2">
-              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo dnf install {REL}/truestream-0.0.1-1.x86_64.rpm</code>
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo dnf install {REL}/grablytic-0.0.1-1.x86_64.rpm</code>
               <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy Fedora install command">Copy</button>
             </div>
             <div class="flex items-start gap-2 mt-2">
-              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo zypper install {REL}/truestream-0.0.1-1.x86_64.rpm</code>
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo zypper install {REL}/grablytic-0.0.1-1.x86_64.rpm</code>
               <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy openSUSE install command">Copy</button>
             </div>
           </div>
           <div>
             <p class="font-mono text-[#A28C87] mb-1"># Arch / Manjaro / EndeavourOS (x64 — today; AUR submission pending):</p>
             <div class="flex items-start gap-2">
-              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo pacman -U {REL}/truestream-0.0.1-1-x86_64.pkg.tar.zst</code>
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo pacman -U {REL}/grablytic-0.0.1-1-x86_64.pkg.tar.zst</code>
               <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy Arch install command">Copy</button>
             </div>
-            <p class="font-mono text-[#A28C87] mt-2">With helpers: <code class="text-[#FFB4A3]">yay -U {REL}/truestream-0.0.1-1-x86_64.pkg.tar.zst</code> or <code class="text-[#FFB4A3]">paru -U {REL}/truestream-0.0.1-1-x86_64.pkg.tar.zst</code> — after AUR ingestion: <code class="text-[#FFB4A3]">paru -S truestream-bin</code></p>
+            <p class="font-mono text-[#A28C87] mt-2">With helpers: <code class="text-[#FFB4A3]">yay -U {REL}/grablytic-0.0.1-1-x86_64.pkg.tar.zst</code> or <code class="text-[#FFB4A3]">paru -U {REL}/grablytic-0.0.1-1-x86_64.pkg.tar.zst</code> — after AUR ingestion: <code class="text-[#FFB4A3]">paru -S grablytic-bin</code></p>
           </div>
         </div>
 
@@ -171,7 +171,7 @@ function formatMB(bytes: number): string {
         ))}
         <div class="p-3.5 rounded-lg bg-[#0E0E0E] border border-[#353534] text-xs text-[#D9C1BC]">
           <p class="font-mono text-[#A28C87] mb-1"># WinGet Package Manager (after store ingestion):</p>
-          <code class="text-[#FFB4A3] block overflow-x-auto select-all">winget install OnlyXianzo.TrueStream</code>
+          <code class="text-[#FFB4A3] block overflow-x-auto select-all">winget install OnlyXianzo.Grablytic</code>
         </div>
       </div>
     </details>

@@ -5,8 +5,8 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    q: 'Is TrueStream really free?',
-    a: 'Yes, completely. No paid tiers, no ads, no tracking, and no subscriptions. TrueStream is 100% open source under the GNU General Public License v3.0 (GPL-3.0).',
+    q: 'Is Grablytic really free?',
+    a: 'Yes, completely. No paid tiers, no ads, no tracking, and no subscriptions. Grablytic is 100% open source under the GNU General Public License v3.0 (GPL-3.0).',
   },
   {
     q: 'Where do I download it?',
@@ -26,6 +26,6 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'Where does the downloaded media come from?',
-    a: 'TrueStream extracts publicly available streams directly via yt-dlp. It does not host or store any content. See DMCA for takedown inquiries and contact information.',
+    a: 'Grablytic extracts publicly available streams directly via yt-dlp. It does not host or store any content. See DMCA for takedown inquiries and contact information.',
   },
 ];

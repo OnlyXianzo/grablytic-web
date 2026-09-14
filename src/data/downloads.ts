@@ -1,6 +1,6 @@
 export const TAG = 'v0.0.1';
-export const REL = `https://github.com/OnlyXianzo/TrueStream/releases/download/${TAG}`;
-export const REPO = 'https://github.com/OnlyXianzo/TrueStream';
+export const REL = `https://github.com/OnlyXianzo/Grablytic/releases/download/${TAG}`;
+export const REPO = 'https://github.com/OnlyXianzo/Grablytic';
 
 export interface DownloadItem {
   file: string;

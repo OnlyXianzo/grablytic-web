@@ -79,7 +79,7 @@ function makeHomeSvg() {
     <circle cx="28" cy="28" r="28" fill="#1f6feb"/>
     <!-- Play arrow icon in logo -->
     <polygon points="22,18 40,28 22,38" fill="#ffffff"/>
-    <text x="70" y="36" fill="#ffffff" font-size="30" font-weight="800" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">TrueStream</text>
+    <text x="70" y="36" fill="#ffffff" font-size="30" font-weight="800" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Grablytic</text>
     <rect x="520" y="10" width="128" height="34" rx="17" fill="#21262d" stroke="#30363d" stroke-width="1"/>
     <circle cx="538" cy="27" r="5" fill="#3fb950"/>
     <text x="552" y="34" fill="#3fb950" font-size="15" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">ENGINE OK</text>
@@ -527,7 +527,7 @@ function makeQueueSvg() {
         <path d="M42 57 l6 6 12-12" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round"/>
 
         <text x="92" y="46" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">Dune_Part_Two_OST_Lossless.flac</text>
-        <text x="92" y="74" fill="#8b949e" font-size="15" font-family="sans-serif">580 MB • Saved to /storage/Movies/TrueStream</text>
+        <text x="92" y="74" fill="#8b949e" font-size="15" font-family="sans-serif">580 MB • Saved to /storage/Movies/Grablytic</text>
 
         <rect x="548" y="38" width="80" height="38" rx="10" fill="#21262d"/>
         <text x="588" y="62" fill="#58a6ff" font-size="15" font-weight="700" text-anchor="middle" font-family="sans-serif">PLAY</text>
@@ -540,7 +540,7 @@ function makeQueueSvg() {
         <path d="M42 57 l6 6 12-12" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round"/>
 
         <text x="92" y="46" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">Lofi_Chill_Beats_Study_2026.m4a</text>
-        <text x="92" y="74" fill="#8b949e" font-size="15" font-family="sans-serif">14.2 MB • Saved to /storage/Music/TrueStream</text>
+        <text x="92" y="74" fill="#8b949e" font-size="15" font-family="sans-serif">14.2 MB • Saved to /storage/Music/Grablytic</text>
 
         <rect x="548" y="38" width="80" height="38" rx="10" fill="#21262d"/>
         <text x="588" y="62" fill="#58a6ff" font-size="15" font-weight="700" text-anchor="middle" font-family="sans-serif">PLAY</text>
@@ -564,7 +564,7 @@ function makeSettingsSvg() {
   <g transform="translate(36, 92)">
     <text x="0" y="32" fill="#ffffff" font-size="30" font-weight="800" font-family="sans-serif">Settings &amp; Engine</text>
     <rect x="496" y="6" width="152" height="34" rx="17" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-    <text x="572" y="28" fill="#8b949e" font-size="15" font-weight="700" text-anchor="middle" font-family="sans-serif">TrueStream v0.0.1</text>
+    <text x="572" y="28" fill="#8b949e" font-size="15" font-weight="700" text-anchor="middle" font-family="sans-serif">Grablytic v0.0.1</text>
   </g>
 
   <g transform="translate(36, 168)">
@@ -601,7 +601,7 @@ function makeSettingsSvg() {
     <g transform="translate(0, 352)">
       <rect width="648" height="114" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
       <text x="24" y="44" fill="#ffffff" font-size="20" font-weight="700" font-family="sans-serif">Storage Location</text>
-      <text x="24" y="72" fill="#c9d1d9" font-size="15" font-family="monospace">/storage/emulated/0/Movies/TrueStream</text>
+      <text x="24" y="72" fill="#c9d1d9" font-size="15" font-family="monospace">/storage/emulated/0/Movies/Grablytic</text>
       <text x="24" y="96" fill="#8b949e" font-size="14" font-family="sans-serif">Scoped Storage • No root required • SAF access</text>
 
       <rect x="532" y="38" width="84" height="36" rx="10" fill="#21262d" stroke="#30363d" stroke-width="1"/>

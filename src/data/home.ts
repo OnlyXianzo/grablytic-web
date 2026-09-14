@@ -34,21 +34,21 @@ export const homeData: HomeData = {
     badge: 'v0.0.1 Beta',
     title: 'Media that moves you.',
     titleHighlight: 'No ads. No tracking.',
-    sub: 'TrueStream is a free, privacy-first media extractor for Android, Linux, and Windows — highest fidelity from 1,000+ platforms with 100% local device processing.',
+    sub: 'Grablytic is a free, privacy-first media extractor for Android, Linux, and Windows — highest fidelity from 1,000+ platforms with 100% local device processing.',
     primaryCta: {
       text: 'Download',
-      defaultFile: 'truestream-v0.0.1-arm64-deno.apk',
+      defaultFile: 'grablytic-v0.0.1-arm64-deno.apk',
     },
     sourceCta: {
       text: 'View Source',
-      url: 'https://github.com/OnlyXianzo/TrueStream',
+      url: 'https://github.com/OnlyXianzo/Grablytic',
     },
     obtainiumCta: {
       text: '✦ Add to Obtainium',
-      url: 'obtainium://app/https://github.com/OnlyXianzo/TrueStream',
+      url: 'obtainium://app/https://github.com/OnlyXianzo/Grablytic',
     },
     supportCta: {
-      text: '♥ Support TrueStream',
+      text: '♥ Support Grablytic',
     },
     trustBadges: [
       '100% Open Source (GPL-3.0)',

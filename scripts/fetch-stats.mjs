@@ -4,8 +4,8 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const SNAP = new URL('../src/data/stats.json', import.meta.url);
-const REPO = 'OnlyXianzo/TrueStream';
-const HEADERS = { 'User-Agent': 'truestream-web-stats', Accept: 'application/vnd.github+json' };
+const REPO = 'OnlyXianzo/Grablytic';
+const HEADERS = { 'User-Agent': 'grablytic-web-stats', Accept: 'application/vnd.github+json' };
 if (process.env.GH_TOKEN || process.env.GITHUB_TOKEN) {
   HEADERS.Authorization = `Bearer ${process.env.GH_TOKEN || process.env.GITHUB_TOKEN}`;
 }
