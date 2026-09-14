@@ -2,7 +2,7 @@ export interface HomeData {
   hero: {
     badge: string;
     title: string;
-    titleGradient: string;
+    titleHighlight: string;
     sub: string;
     primaryCta: {
       text: string;
@@ -33,7 +33,7 @@ export const homeData: HomeData = {
   hero: {
     badge: 'v0.0.1 Beta',
     title: 'Media that moves you.',
-    titleGradient: 'No ads. No tracking.',
+    titleHighlight: 'No ads. No tracking.',
     sub: 'TrueStream is a free, privacy-first media extractor for Android, Linux, and Windows — highest fidelity from 1,000+ platforms with 100% local device processing.',
     primaryCta: {
       text: 'Download',
