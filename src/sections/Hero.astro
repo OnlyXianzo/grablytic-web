@@ -52,7 +52,7 @@ import { TAG, REL, REPO } from '../data/downloads';
       </svg>
       <span>+ Follow @OnlyXianzo</span>
     </a>
-    <a class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition inline-flex items-center gap-1.5" href="obtainium://app/https://github.com/OnlyXianzo/TrueStream">
+    <a id="obtainium-add" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition inline-flex items-center gap-1.5" href="obtainium://app/https://github.com/OnlyXianzo/TrueStream">
       <span>✦ Add to Obtainium</span>
     </a>
     <button class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition cursor-pointer inline-flex items-center gap-1.5" onclick="document.getElementById('donate-dialog')?.showModal()">
@@ -119,22 +119,47 @@ import { TAG, REL, REPO } from '../data/downloads';
       }
     }
 
+    // Dynamic Obtainium link: same detected variant as the download button,
+    // with apkFilterRegEx so one tap adds the RIGHT APK (Obtainium is Android-only).
+    function setObtainium(filter: string | null) {
+      const ob = document.getElementById('obtainium-add');
+      if (!ob) return;
+      if (!filter) { (ob as HTMLElement).style.display = 'none'; return; }
+      const app = {
+        id: 'com.theonly.truestream',
+        url: 'https://github.com/OnlyXianzo/TrueStream',
+        author: 'OnlyXianzo',
+        name: 'TrueStream',
+        additionalSettings: JSON.stringify({ apkFilterRegEx: filter }),
+      };
+      ob.setAttribute(
+        'href',
+        'https://apps.obtainium.imranr.dev/redirect?r=' + encodeURIComponent('obtainium://app/' + JSON.stringify(app)),
+      );
+    }
+
     if (mob || /android/i.test(ua)) {
       if (/armv7|armeabi/i.test(ua)) {
         setBtn('truestream-v0.0.1-armv7-node.apk', 'Download for Android (32-bit)');
+        setObtainium('armv7-node');
       } else if (/x86_64|x86/i.test(ua)) {
         setBtn('truestream-v0.0.1-x86_64-deno.apk', 'Download for Android (x86_64)');
+        setObtainium('x86_64-deno');
       } else {
         setBtn('truestream-v0.0.1-arm64-deno.apk', 'Download for Android (arm64)');
+        setObtainium('arm64-deno');
       }
     } else if (/win/i.test(plat) || /windows/i.test(ua)) {
       setBtn('truestream-windows-x64.zip', 'Download for Windows (x64)');
+      setObtainium(null);
     } else if (/linux/i.test(plat) || /linux/i.test(ua)) {
       setBtn('truestream-0.0.1-linux-x64.tar.gz', 'Download for Linux (x64)');
+      setObtainium(null);
     } else {
       btn.setAttribute('href', 'https://github.com/OnlyXianzo/TrueStream/releases/latest');
       const span = btn.querySelector('span');
       if (span) span.textContent = 'Download (All Platforms)';
+      setObtainium(null);
     }
   })();
 </script>
