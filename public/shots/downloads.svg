@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1520" viewBox="0 0 720 1520">
+  <defs>
+    <linearGradient id="glowBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#1f6feb"/>
+    </linearGradient>
+    <linearGradient id="dlBtn" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1f6feb"/>
+      <stop offset="100%" stop-color="#388bfd"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="720" height="1520" rx="36" fill="#0d1117"/>
+  
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+      <text x="56" y="52" fill="#e6edf3" font-size="24" font-weight="600" letter-spacing="0.5">09:41</text>
+      <!-- Dynamic island / pill camera -->
+      <rect x="290" y="24" width="140" height="34" rx="17" fill="#000000"/>
+      <circle cx="395" cy="41" r="5" fill="#161b22"/>
+      <!-- Right status icons -->
+      <path d="M570 38 L582 52 L594 38 Z" fill="#8b949e"/>
+      <text x="610" y="52" fill="#8b949e" font-size="20" font-weight="700">5G</text>
+      <rect x="650" y="34" width="30" height="18" rx="4" fill="none" stroke="#e6edf3" stroke-width="2"/>
+      <rect x="652" y="36" width="22" height="14" rx="2" fill="#3fb950"/>
+      <rect x="681" y="40" width="2.5" height="6" rx="1" fill="#e6edf3"/>
+    </g>
+  
+
+  <!-- Top App Bar -->
+  <g transform="translate(36, 92)">
+    <circle cx="22" cy="22" r="22" fill="#21262d"/>
+    <path d="M26 14 L18 22 L26 30" fill="none" stroke="#e6edf3" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="64" y="29" fill="#ffffff" font-size="24" font-weight="700" font-family="sans-serif">Select Stream &amp; Quality</text>
+    <rect x="524" y="6" width="124" height="32" rx="8" fill="#238636"/>
+    <text x="586" y="27" fill="#ffffff" font-size="14" font-weight="800" text-anchor="middle" font-family="sans-serif">BEST QUALITY</text>
+  </g>
+
+  <!-- Video Info Preview Card -->
+  <g transform="translate(36, 168)">
+    <rect width="648" height="236" rx="20" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+    <rect x="16" y="16" width="220" height="140" rx="12" fill="#010409"/>
+    <path d="M16 110 Q 80 50, 160 80 T 236 70 L 236 156 L 16 156 Z" fill="#1f6feb" opacity="0.4"/>
+    <rect x="164" y="122" width="60" height="24" rx="6" fill="#000000" opacity="0.85"/>
+    <text x="194" y="139" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">18:24</text>
+
+    <text x="256" y="44" fill="#ffffff" font-size="20" font-weight="700" font-family="sans-serif">Cyberpunk 2077 Night City</text>
+    <text x="256" y="70" fill="#ffffff" font-size="18" font-weight="700" font-family="sans-serif">Overdrive 4K HDR Raytracing</text>
+    <text x="256" y="104" fill="#8b949e" font-size="15" font-family="sans-serif">CD PROJEKT RED • 4.2M views</text>
+    <text x="256" y="130" fill="#58a6ff" font-size="14" font-weight="600" font-family="sans-serif">yt-dlp engine: 16 streams found</text>
+
+    <!-- Tab Toggle -->
+    <rect x="16" y="172" width="616" height="48" rx="12" fill="#010409" stroke="#30363d" stroke-width="1"/>
+    <rect x="20" y="176" width="304" height="40" rx="9" fill="#21262d"/>
+    <text x="172" y="202" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle" font-family="sans-serif">Video + Audio (Merged)</text>
+    <text x="480" y="202" fill="#8b949e" font-size="16" font-weight="600" text-anchor="middle" font-family="sans-serif">Audio Only (Extracted)</text>
+  </g>
+
+  <!-- Format Option Cards -->
+  <g transform="translate(36, 432)">
+    <!-- Stream 1 (RECOMMENDED / SELECTED) -->
+    <g transform="translate(0, 0)">
+      <rect width="648" height="124" rx="18" fill="rgba(88, 166, 255, 0.08)" stroke="#58a6ff" stroke-width="2"/>
+      <circle cx="42" cy="62" r="14" fill="#58a6ff"/>
+      <circle cx="42" cy="62" r="6" fill="#ffffff"/>
+
+      <text x="76" y="46" fill="#ffffff" font-size="20" font-weight="700" font-family="sans-serif">2160p 4K UHD 60fps HDR</text>
+      <rect x="350" y="28" width="70" height="24" rx="6" fill="#238636"/>
+      <text x="385" y="45" fill="#ffffff" font-size="12" font-weight="800" text-anchor="middle" font-family="sans-serif">AV1 PRO</text>
+      
+      <text x="76" y="80" fill="#8b949e" font-size="15" font-family="sans-serif">Codec: av01.0.12M.10 • Bitrate: 28.4 Mbps • HDR10</text>
+      <text x="76" y="104" fill="#58a6ff" font-size="14" font-weight="600" font-family="sans-serif">+ Opus 160kbps (48kHz stereo) auto-muxed</text>
+
+      <text x="590" y="68" fill="#58a6ff" font-size="22" font-weight="800" text-anchor="end" font-family="sans-serif">1.42 GB</text>
+    </g>
+
+    <!-- Stream 2 -->
+    <g transform="translate(0, 144)">
+      <rect width="648" height="114" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+      <circle cx="42" cy="57" r="14" fill="none" stroke="#8b949e" stroke-width="2"/>
+
+      <text x="76" y="44" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">1440p 2K QHD 60fps</text>
+      <rect x="290" y="28" width="60" height="22" rx="6" fill="#21262d"/>
+      <text x="320" y="44" fill="#8b949e" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">VP9</text>
+
+      <text x="76" y="76" fill="#8b949e" font-size="15" font-family="sans-serif">Codec: vp09.00 • Bitrate: 16.2 Mbps • 2560x1440</text>
+      <text x="76" y="98" fill="#8b949e" font-size="13" font-family="sans-serif">+ Opus 160kbps audio</text>
+
+      <text x="590" y="64" fill="#c9d1d9" font-size="20" font-weight="700" text-anchor="end" font-family="sans-serif">840 MB</text>
+    </g>
+
+    <!-- Stream 3 -->
+    <g transform="translate(0, 278)">
+      <rect width="648" height="114" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+      <circle cx="42" cy="57" r="14" fill="none" stroke="#8b949e" stroke-width="2"/>
+
+      <text x="76" y="44" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">1080p Full HD 60fps</text>
+      <rect x="274" y="28" width="70" height="22" rx="6" fill="#21262d"/>
+      <text x="309" y="44" fill="#8b949e" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">H.264</text>
+
+      <text x="76" y="76" fill="#8b949e" font-size="15" font-family="sans-serif">Codec: avc1.64002a • Bitrate: 8.4 Mbps • Compatible</text>
+      <text x="76" y="98" fill="#8b949e" font-size="13" font-family="sans-serif">+ AAC 128kbps audio</text>
+
+      <text x="590" y="64" fill="#c9d1d9" font-size="20" font-weight="700" text-anchor="end" font-family="sans-serif">420 MB</text>
+    </g>
+
+    <!-- Stream 4 (Audio Only) -->
+    <g transform="translate(0, 412)">
+      <rect width="648" height="114" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+      <circle cx="42" cy="57" r="14" fill="none" stroke="#8b949e" stroke-width="2"/>
+
+      <text x="76" y="44" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">Opus Audio 160 kbps (Lossy HQ)</text>
+      <rect x="380" y="28" width="80" height="22" rx="6" fill="#8957e5"/>
+      <text x="420" y="44" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">ORIGINAL</text>
+
+      <text x="76" y="76" fill="#8b949e" font-size="15" font-family="sans-serif">Pure Audio Stream • Container: .opus • 48 kHz</text>
+      <text x="76" y="98" fill="#8b949e" font-size="13" font-family="sans-serif">Embedded album art &amp; chapter metadata</text>
+
+      <text x="590" y="64" fill="#c9d1d9" font-size="20" font-weight="700" text-anchor="end" font-family="sans-serif">28 MB</text>
+    </g>
+  </g>
+
+  <!-- Download CTA Button (Fixed at bottom above nav) -->
+  <g transform="translate(36, 1290)">
+    <rect width="648" height="84" rx="22" fill="url(#dlBtn)" filter="drop-shadow(0 12px 28px rgba(31, 111, 235, 0.5))"/>
+    <text x="324" y="52" fill="#ffffff" font-size="23" font-weight="800" text-anchor="middle" font-family="sans-serif">Download Selected (1.42 GB)</text>
+  </g>
+
+  
+    <!-- Bottom nav bar background -->
+    <rect x="0" y="1410" width="720" height="110" fill="#161b22" opacity="0.98"/>
+    <line x1="0" y1="1410" x2="720" y2="1410" stroke="#30363d" stroke-width="1.5"/>
+    
+      <g transform="translate(54, 1430)">
+        <rect x="0" y="0" width="72" height="38" rx="19" fill="transparent"/>
+        <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" fill="#8b949e" transform="translate(24, 7) scale(1)"/>
+        <text x="36" y="54" fill="#8b949e" font-size="16" font-weight="500" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Home</text>
+      </g>
+    
+      <g transform="translate(234, 1430)">
+        <rect x="0" y="0" width="72" height="38" rx="19" fill="transparent"/>
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#8b949e" transform="translate(24, 7) scale(1)"/>
+        <text x="36" y="54" fill="#8b949e" font-size="16" font-weight="500" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Search</text>
+      </g>
+    
+      <g transform="translate(414, 1430)">
+        <rect x="0" y="0" width="72" height="38" rx="19" fill="rgba(88, 166, 255, 0.12)"/>
+        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="#58a6ff" transform="translate(24, 7) scale(1)"/>
+        <text x="36" y="54" fill="#58a6ff" font-size="16" font-weight="700" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Queue</text>
+      </g>
+    
+      <g transform="translate(594, 1430)">
+        <rect x="0" y="0" width="72" height="38" rx="19" fill="transparent"/>
+        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" fill="#8b949e" transform="translate(24, 7) scale(1)"/>
+        <text x="36" y="54" fill="#8b949e" font-size="16" font-weight="500" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Settings</text>
+      </g>
+    
+  
+</svg>

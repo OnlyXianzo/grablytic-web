@@ -152,136 +152,15 @@ const faqs = [
       opacity: 1;
     }
 
-    /* Phone Mockup Screen Internals */
-    .screen {
-      position: relative;
-      flex: 1;
+    /* High-Fidelity App Screenshot Images */
+    .screen-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       border-radius: 23px;
-      background: #0d1117;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid rgba(255,255,255,0.06);
-      text-align: left;
-      font-size: 9px;
+      display: block;
       user-select: none;
-    }
-    .island {
-      position: absolute;
-      top: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 38px;
-      height: 9px;
-      background: #000;
-      border-radius: 99px;
-      z-index: 20;
-    }
-    .screen-status {
-      padding: 6px 10px 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--dim);
-      font-weight: 600;
-      font-size: 8px;
-      line-height: 1;
-      margin-top: 10px;
-    }
-    .screen-body {
-      flex: 1;
-      padding: 6px 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      overflow: hidden;
-    }
-    .screen-nav {
-      height: 22px;
-      background: #161b22;
-      border-top: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 0 8px;
-      color: var(--dim);
-      font-size: 10px;
-    }
-    .screen-nav span.active { color: var(--acc); font-weight: bold }
-
-    /* Mockup UI Component Elements */
-    .m-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px }
-    .m-head b { color: #fff; font-size: 10px }
-    .m-pill-tag { background: #21262d; color: var(--acc); padding: 1px 5px; border-radius: 6px; font-size: 7px; font-weight: 700 }
-    .m-input {
-      background: #161b22;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 4px 6px;
-      color: var(--dim);
-      font-size: 7.5px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .m-chips { display: flex; gap: 4px; flex-wrap: nowrap; overflow: hidden }
-    .m-chip { background: #21262d; border: 1px solid var(--line); border-radius: 4px; padding: 1px 4px; font-size: 7px; color: var(--dim) }
-    .m-chip.active { background: rgba(88,166,255,0.15); border-color: var(--acc); color: var(--acc); font-weight: 600 }
-    .m-card {
-      background: #161b22;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 5px;
-      display: flex;
-      gap: 5px;
-      align-items: center;
-    }
-    .m-thumb {
-      width: 26px;
-      height: 26px;
-      border-radius: 5px;
-      background: #21262d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--acc);
-      font-size: 8px;
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-    .m-meta { flex: 1; min-width: 0 }
-    .m-title { color: #fff; font-weight: 600; font-size: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
-    .m-sub { color: var(--dim); font-size: 7px }
-    .m-seg {
-      background: #010409;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 2px;
-      display: flex;
-      gap: 2px;
-    }
-    .m-seg div { flex: 1; text-align: center; padding: 2px 0; border-radius: 4px; font-size: 7px; color: var(--dim) }
-    .m-seg div.active { background: #21262d; color: #fff; font-weight: 700 }
-    .m-fmt {
-      background: #161b22;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 3px 6px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 7px;
-    }
-    .m-fmt.sel { border-color: var(--acc); background: rgba(88,166,255,0.08) }
-    .m-btn-mini {
-      background: var(--ok);
-      color: #04121f;
-      text-align: center;
-      padding: 4px 0;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 7.5px;
-      margin-top: auto;
+      -webkit-user-drag: none;
     }
     .m-bar-prog { width: 100%; height: 3px; background: #21262d; border-radius: 2px; overflow: hidden; margin-top: 3px }
     .m-bar-fill { height: 100%; background: var(--ok); border-radius: 2px }
@@ -373,246 +252,27 @@ const faqs = [
     <div class="shots">
       <!-- Frame 0: Home -->
       <div class="frame" data-side="left" style="--i:0">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="screen-status">
-            <span>09:41</span>
-            <span>5G 98%</span>
-          </div>
-          <div class="screen-body">
-            <div class="m-head">
-              <b>TrueStream</b>
-              <span class="m-pill-tag">v0.0.1</span>
-            </div>
-            <div class="m-input">
-              <span>🔗</span>
-              <span style="color:#8b949e; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">https://youtu.be/dQw4w9WgXcQ</span>
-            </div>
-            <div class="m-chips">
-              <span class="m-chip active">All</span>
-              <span class="m-chip">Video</span>
-              <span class="m-chip">Audio</span>
-              <span class="m-chip">Playlist</span>
-            </div>
-            <div class="m-card">
-              <div class="m-thumb" style="color:#58a6ff;background:#0d1117;border:1px solid #30363d;">▶</div>
-              <div class="m-meta">
-                <div class="m-title">Lofi Chill Beats 2026</div>
-                <div class="m-sub">1080p60 • Opus 160k</div>
-              </div>
-            </div>
-            <div class="m-card">
-              <div class="m-thumb" style="color:#bc8cff;background:#0d1117;border:1px solid #30363d;">♪</div>
-              <div class="m-meta">
-                <div class="m-title">Synthwave Radio Live</div>
-                <div class="m-sub">SoundCloud • 320kbps</div>
-              </div>
-            </div>
-            <div class="m-btn-mini">Paste &amp; Extract</div>
-          </div>
-          <div class="screen-nav">
-            <span class="active">Home</span>
-            <span>Search</span>
-            <span>Queue</span>
-            <span>Settings</span>
-          </div>
-        </div>
+        <img src="/shots/home.png" alt="TrueStream Home Screen" width="720" height="1520" class="screen-img" loading="lazy" />
       </div>
 
       <!-- Frame 1: Search -->
       <div class="frame" data-side="near-left" style="--i:1">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="screen-status">
-            <span>09:41</span>
-            <span>5G 98%</span>
-          </div>
-          <div class="screen-body">
-            <div class="m-head">
-              <b>Search</b>
-              <span class="m-pill-tag">1,000+ SITES</span>
-            </div>
-            <div class="m-input">
-              <span>🔍</span>
-              <span style="color:#c9d1d9;">Hans Zimmer Live</span>
-            </div>
-            <div class="m-chips">
-              <span class="m-chip active">YouTube</span>
-              <span class="m-chip">SoundCloud</span>
-              <span class="m-chip">Bilibili</span>
-            </div>
-            <div class="m-card">
-              <div class="m-thumb" style="color:#58a6ff;background:#0d1117;border:1px solid #30363d;">4K</div>
-              <div class="m-meta">
-                <div class="m-title">Interstellar Main Theme</div>
-                <div class="m-sub">04:22 • 4K AV1 60fps</div>
-              </div>
-            </div>
-            <div class="m-card">
-              <div class="m-thumb" style="color:#bc8cff;background:#0d1117;border:1px solid #30363d;">FLAC</div>
-              <div class="m-meta">
-                <div class="m-title">Dune Part Two OST</div>
-                <div class="m-sub">WaterTower • Lossless</div>
-              </div>
-            </div>
-            <div class="m-card">
-              <div class="m-thumb" style="color:#3fb950;background:#0d1117;border:1px solid #30363d;">LIVE</div>
-              <div class="m-meta">
-                <div class="m-title">Prague Concert Full</div>
-                <div class="m-sub">02:18:40 • 1080p</div>
-              </div>
-            </div>
-          </div>
-          <div class="screen-nav">
-            <span>Home</span>
-            <span class="active">Search</span>
-            <span>Queue</span>
-            <span>Settings</span>
-          </div>
-        </div>
+        <img src="/shots/search.png" alt="TrueStream Search Screen" width="720" height="1520" class="screen-img" loading="lazy" />
       </div>
 
       <!-- Frame 2: Format Picker Hero -->
       <div class="frame" data-side="center" style="--i:2">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="screen-status">
-            <span>09:41</span>
-            <span>5G 98%</span>
-          </div>
-          <div class="screen-body">
-            <div class="m-head">
-              <b>Select Stream</b>
-              <span class="m-pill-tag" style="background:#238636;color:#fff;">BEST</span>
-            </div>
-            <div class="m-card" style="background:#161b22;border-color:rgba(88,166,255,0.3);">
-              <div class="m-thumb" style="color:#58a6ff;background:#0d1117;border:1px solid #388bfd;">HDR</div>
-              <div class="m-meta">
-                <div class="m-title">Cyberpunk City 2077</div>
-                <div class="m-sub">HDR10 • 60 FPS • 2160p</div>
-              </div>
-            </div>
-            <div class="m-seg">
-              <div class="active">Video + Audio</div>
-              <div>Audio Only</div>
-            </div>
-            <div class="m-fmt sel">
-              <span><b style="color:var(--acc)">AV1</b> 2160p60 HDR</span>
-              <span style="color:var(--acc)">1.4 GB</span>
-            </div>
-            <div class="m-fmt">
-              <span><b>VP9</b> 1440p60</span>
-              <span style="color:var(--dim)">840 MB</span>
-            </div>
-            <div class="m-fmt">
-              <span><b>Opus</b> 160kbps (HQ)</span>
-              <span style="color:var(--dim)">48 MB</span>
-            </div>
-            <div class="m-btn-mini" style="background:var(--acc);color:#04121f;">Start Download</div>
-          </div>
-          <div class="screen-nav">
-            <span>Home</span>
-            <span>Search</span>
-            <span class="active">Queue</span>
-            <span>Settings</span>
-          </div>
-        </div>
+        <img src="/shots/format-picker.png" alt="TrueStream Stream Format Picker" width="720" height="1520" class="screen-img" loading="lazy" />
       </div>
 
-      <!-- Frame 3: Active Queue -->
+      <!-- Frame 3: Queue -->
       <div class="frame" data-side="near-right" style="--i:3">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="screen-status">
-            <span>09:41</span>
-            <span>5G 98%</span>
-          </div>
-          <div class="screen-body">
-            <div class="m-head">
-              <b>Active Queue</b>
-              <span class="m-pill-tag" style="background:#1f6feb;color:#fff;">2 ACTIVE</span>
-            </div>
-            <div class="m-card" style="flex-direction:column;align-items:stretch;gap:3px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span class="m-title">Interstellar_4k.mkv</span>
-                <span class="m-sub" style="color:var(--acc);font-weight:700;">78%</span>
-              </div>
-              <div class="m-bar-prog"><div class="m-bar-fill" style="width:78%"></div></div>
-              <div class="m-row"><span>18.4 MB/s</span><span>ETA 14s</span></div>
-            </div>
-            <div class="m-card" style="flex-direction:column;align-items:stretch;gap:3px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span class="m-title">Soundtrack_HQ.opus</span>
-                <span class="m-sub" style="color:var(--ok);font-weight:700;">Muxing</span>
-              </div>
-              <div class="m-bar-prog"><div class="m-bar-fill" style="width:100%;background:var(--ok);"></div></div>
-              <div class="m-row"><span>ffmpeg libopus</span><span>99%</span></div>
-            </div>
-            <div class="m-card" style="flex-direction:column;align-items:stretch;gap:3px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span class="m-title">Live_Concert_1080p.mp4</span>
-                <span class="m-sub">Queued</span>
-              </div>
-              <div class="m-bar-prog"><div class="m-bar-fill" style="width:0%"></div></div>
-              <div class="m-row"><span>Pending slot</span><span>Standby</span></div>
-            </div>
-          </div>
-          <div class="screen-nav">
-            <span>Home</span>
-            <span>Search</span>
-            <span class="active">Queue</span>
-            <span>Settings</span>
-          </div>
-        </div>
+        <img src="/shots/queue.png" alt="TrueStream Downloads Queue" width="720" height="1520" class="screen-img" loading="lazy" />
       </div>
 
       <!-- Frame 4: Settings -->
       <div class="frame" data-side="right" style="--i:4">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="screen-status">
-            <span>09:41</span>
-            <span>5G 98%</span>
-          </div>
-          <div class="screen-body">
-            <div class="m-head">
-              <b>Engine Settings</b>
-              <span class="m-pill-tag">CONFIG</span>
-            </div>
-            <div class="m-card">
-              <div class="m-meta">
-                <div class="m-title">JavaScript Runtime</div>
-                <div class="m-sub">Deno (Native Rust / ARM64)</div>
-              </div>
-              <span style="color:var(--ok);font-size:10px;">●</span>
-            </div>
-            <div class="m-card">
-              <div class="m-meta">
-                <div class="m-title">yt-dlp Core</div>
-                <div class="m-sub">Chaquopy 3.11 • Up to date</div>
-              </div>
-              <span class="m-pill-tag" style="background:#238636;color:#fff;">AUTO</span>
-            </div>
-            <div class="m-card">
-              <div class="m-meta">
-                <div class="m-title">Download Path</div>
-                <div class="m-sub">/storage/emulated/0/Movies/</div>
-              </div>
-            </div>
-            <div class="m-card">
-              <div class="m-meta">
-                <div class="m-title">Parallel Chunks</div>
-                <div class="m-sub">8 connections (aria2c)</div>
-              </div>
-            </div>
-          </div>
-          <div class="screen-nav">
-            <span>Home</span>
-            <span>Search</span>
-            <span>Queue</span>
-            <span class="active">Settings</span>
-          </div>
-        </div>
+        <img src="/shots/settings.png" alt="TrueStream Engine Settings" width="720" height="1520" class="screen-img" loading="lazy" />
       </div>
     </div>
     <p class="scroll-hint" aria-hidden="true">← swipe to explore →</p>

@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1520" viewBox="0 0 720 1520">
+  <defs>
+    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#238636"/>
+      <stop offset="100%" stop-color="#2ea043"/>
+    </linearGradient>
+    <linearGradient id="heroCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="720" height="1520" rx="36" fill="#0d1117"/>
+  
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+      <text x="56" y="52" fill="#e6edf3" font-size="24" font-weight="600" letter-spacing="0.5">09:41</text>
+      <!-- Dynamic island / pill camera -->
+      <rect x="290" y="24" width="140" height="34" rx="17" fill="#000000"/>
+      <circle cx="395" cy="41" r="5" fill="#161b22"/>
+      <!-- Right status icons -->
+      <path d="M570 38 L582 52 L594 38 Z" fill="#8b949e"/>
+      <text x="610" y="52" fill="#8b949e" font-size="20" font-weight="700">5G</text>
+      <rect x="650" y="34" width="30" height="18" rx="4" fill="none" stroke="#e6edf3" stroke-width="2"/>
+      <rect x="652" y="36" width="22" height="14" rx="2" fill="#3fb950"/>
+      <rect x="681" y="40" width="2.5" height="6" rx="1" fill="#e6edf3"/>
+    </g>
+  
+
+  <!-- Top App Bar -->
+  <g transform="translate(36, 92)">
+    <circle cx="28" cy="28" r="28" fill="#1f6feb"/>
+    <!-- Play arrow icon in logo -->
+    <polygon points="22,18 40,28 22,38" fill="#ffffff"/>
+    <text x="70" y="36" fill="#ffffff" font-size="30" font-weight="800" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">TrueStream</text>
+    <rect x="520" y="10" width="128" height="34" rx="17" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+    <circle cx="538" cy="27" r="5" fill="#3fb950"/>
+    <text x="552" y="34" fill="#3fb950" font-size="15" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">ENGINE OK</text>
+  </g>
+
+  <!-- URL Input Card -->
+  <g transform="translate(36, 175)">
+    <rect width="648" height="186" rx="20" fill="url(#heroCard)" stroke="#30363d" stroke-width="1.5"/>
+    <text x="24" y="44" fill="#e6edf3" font-size="22" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Direct Media Extractor</text>
+    <text x="24" y="70" fill="#8b949e" font-size="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Paste YouTube, SoundCloud, Twitch, TikTok, or 1,000+ links</text>
+    
+    <!-- Input Box -->
+    <rect x="24" y="96" width="460" height="66" rx="14" fill="#010409" stroke="#388bfd" stroke-width="1.5"/>
+    <text x="44" y="138" fill="#58a6ff" font-size="24">🔗</text>
+    <text x="82" y="137" fill="#c9d1d9" font-size="18" font-family="monospace">https://youtu.be/dQw4w9WgXcQ</text>
+    
+    <!-- Paste button -->
+    <rect x="500" y="96" width="124" height="66" rx="14" fill="url(#btnGrad)"/>
+    <text x="562" y="137" fill="#ffffff" font-size="19" font-weight="700" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Extract</text>
+  </g>
+
+  <!-- Quick Filter Pills -->
+  <g transform="translate(36, 386)">
+    <rect x="0" y="0" width="88" height="42" rx="21" fill="rgba(88, 166, 255, 0.18)" stroke="#58a6ff" stroke-width="1.5"/>
+    <text x="44" y="27" fill="#58a6ff" font-size="17" font-weight="700" text-anchor="middle" font-family="sans-serif">All</text>
+
+    <rect x="104" y="0" width="112" height="42" rx="21" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="160" y="27" fill="#8b949e" font-size="17" font-weight="600" text-anchor="middle" font-family="sans-serif">Video (4K)</text>
+
+    <rect x="232" y="0" width="116" height="42" rx="21" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="290" y="27" fill="#8b949e" font-size="17" font-weight="600" text-anchor="middle" font-family="sans-serif">Audio Only</text>
+
+    <rect x="364" y="0" width="124" height="42" rx="21" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="426" y="27" fill="#8b949e" font-size="17" font-weight="600" text-anchor="middle" font-family="sans-serif">Playlists (4)</text>
+
+    <rect x="504" y="0" width="144" height="42" rx="21" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="576" y="27" fill="#8b949e" font-size="17" font-weight="600" text-anchor="middle" font-family="sans-serif">Livestreams</text>
+  </g>
+
+  <!-- Section: Recent Extractions -->
+  <g transform="translate(36, 460)">
+    <text x="0" y="24" fill="#e6edf3" font-size="22" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Recent Extractions</text>
+    <text x="590" y="24" fill="#58a6ff" font-size="16" font-weight="600" font-family="sans-serif">View all</text>
+
+    <!-- Card 1 -->
+    <g transform="translate(0, 44)">
+      <rect width="648" height="142" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+      <rect x="14" y="14" width="160" height="114" rx="12" fill="#010409"/>
+      <!-- Thumbnail vector art -->
+      <path d="M14 80 Q 54 40, 94 70 T 174 50 L 174 128 L 14 128 Z" fill="#1f6feb" opacity="0.4"/>
+      <rect x="108" y="96" width="56" height="22" rx="6" fill="#000000" opacity="0.85"/>
+      <text x="136" y="112" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">14:28</text>
+      
+      <text x="194" y="44" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">Cyberpunk 2077 Night City 4K</text>
+      <text x="194" y="74" fill="#8b949e" font-size="15" font-family="sans-serif">HDR10 • 60 FPS • AV1 / Opus</text>
+      <rect x="194" y="90" width="80" height="26" rx="6" fill="rgba(88, 166, 255, 0.15)"/>
+      <text x="234" y="108" fill="#58a6ff" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">1.42 GB</text>
+      <rect x="284" y="90" width="94" height="26" rx="6" fill="rgba(63, 185, 80, 0.15)"/>
+      <text x="331" y="108" fill="#3fb950" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">COMPLETED</text>
+    </g>
+
+    <!-- Card 2 -->
+    <g transform="translate(0, 204)">
+      <rect width="648" height="142" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+      <rect x="14" y="14" width="160" height="114" rx="12" fill="#010409"/>
+      <circle cx="94" cy="71" r="32" fill="#8957e5" opacity="0.3"/>
+      <text x="94" y="80" fill="#bc8cff" font-size="34" text-anchor="middle">♪</text>
+      <rect x="114" y="96" width="50" height="22" rx="6" fill="#000000" opacity="0.85"/>
+      <text x="139" y="112" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">03:45</text>
+      
+      <text x="194" y="44" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">Lofi Hip Hop Radio - Beats</text>
+      <text x="194" y="74" fill="#8b949e" font-size="15" font-family="sans-serif">SoundCloud • 320kbps • Opus 160k</text>
+      <rect x="194" y="90" width="70" height="26" rx="6" fill="rgba(188, 140, 255, 0.15)"/>
+      <text x="229" y="108" fill="#bc8cff" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">4.8 MB</text>
+      <rect x="274" y="90" width="94" height="26" rx="6" fill="rgba(63, 185, 80, 0.15)"/>
+      <text x="321" y="108" fill="#3fb950" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">COMPLETED</text>
+    </g>
+
+    <!-- Card 3 -->
+    <g transform="translate(0, 364)">
+      <rect width="648" height="142" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+      <rect x="14" y="14" width="160" height="114" rx="12" fill="#010409"/>
+      <rect x="44" y="44" width="100" height="54" rx="8" fill="#3fb950" opacity="0.2"/>
+      <text x="94" y="78" fill="#3fb950" font-size="20" font-weight="800" text-anchor="middle" font-family="sans-serif">FLAC</text>
+      
+      <text x="194" y="44" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">Hans Zimmer Live in Prague</text>
+      <text x="194" y="74" fill="#8b949e" font-size="15" font-family="sans-serif">Lossless Audio • 48kHz • 24-bit</text>
+      <rect x="194" y="90" width="80" height="26" rx="6" fill="rgba(63, 185, 80, 0.15)"/>
+      <text x="234" y="108" fill="#3fb950" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">580 MB</text>
+      <rect x="284" y="90" width="94" height="26" rx="6" fill="rgba(63, 185, 80, 0.15)"/>
+      <text x="331" y="108" fill="#3fb950" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">COMPLETED</text>
+    </g>
+
+    <!-- Card 4 -->
+    <g transform="translate(0, 524)">
+      <rect width="648" height="142" rx="18" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+      <rect x="14" y="14" width="160" height="114" rx="12" fill="#010409"/>
+      <polygon points="74,51 124,71 74,91" fill="#58a6ff" opacity="0.4"/>
+      <text x="194" y="44" fill="#ffffff" font-size="19" font-weight="700" font-family="sans-serif">Dune Part Two - Sound Design</text>
+      <text x="194" y="74" fill="#8b949e" font-size="15" font-family="sans-serif">WaterTower Music • 4K UHD 60fps</text>
+      <rect x="194" y="90" width="80" height="26" rx="6" fill="rgba(88, 166, 255, 0.15)"/>
+      <text x="234" y="108" fill="#58a6ff" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">890 MB</text>
+      <rect x="284" y="90" width="94" height="26" rx="6" fill="rgba(63, 185, 80, 0.15)"/>
+      <text x="331" y="108" fill="#3fb950" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">COMPLETED</text>
+    </g>
+  </g>
+
+  <!-- Bottom Floating Action Bar -->
+  <g transform="translate(180, 1310)">
+    <rect width="360" height="66" rx="33" fill="#1f6feb" filter="drop-shadow(0 8px 24px rgba(31, 111, 235, 0.45))"/>
+    <text x="180" y="41" fill="#ffffff" font-size="20" font-weight="700" text-anchor="middle" font-family="sans-serif">⚡ Paste &amp; Download</text>
+  </g>
+
+  
+    <!-- Bottom nav bar background -->
+    <rect x="0" y="1410" width="720" height="110" fill="#161b22" opacity="0.98"/>
+    <line x1="0" y1="1410" x2="720" y2="1410" stroke="#30363d" stroke-width="1.5"/>
+    
+      <g transform="translate(54, 1430)">
+        <rect x="0" y="0" width="72" height="38" rx="19" fill="rgba(88, 166, 255, 0.12)"/>
+        <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" fill="#58a6ff" transform="translate(24, 7) scale(1)"/>
+        <text x="36" y="54" fill="#58a6ff" font-size="16" font-weight="700" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Home</text>
+      </g>
+    
+      <g transform="translate(234, 1430)">
+        <rect x="0" y="0" width="72" height="38" rx="19" fill="transparent"/>
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#8b949e" transform="translate(24, 7) scale(1)"/>
+        <text x="36" y="54" fill="#8b949e" font-size="16" font-weight="500" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Search</text>
+      </g>
+    
+      <g transform="translate(414, 1430)">
+        <rect x="0" y="0" width="72" height="38" rx="19" fill="transparent"/>
+        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="#8b949e" transform="translate(24, 7) scale(1)"/>
+        <text x="36" y="54" fill="#8b949e" font-size="16" font-weight="500" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Queue</text>
+      </g>
+    
+      <g transform="translate(594, 1430)">
+        <rect x="0" y="0" width="72" height="38" rx="19" fill="transparent"/>
+        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" fill="#8b949e" transform="translate(24, 7) scale(1)"/>
+        <text x="36" y="54" fill="#8b949e" font-size="16" font-weight="500" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Settings</text>
+      </g>
+    
+  
+</svg>
