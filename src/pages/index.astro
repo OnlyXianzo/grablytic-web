@@ -1,0 +1,144 @@
+---
+// TrueStream landing page — v0.0.1 tracer bullet.
+// Layout mirrors echomusic.fun (hero, action shots, WHY grid, FAQ, footer, donate).
+// Binaries served from GitHub Releases CDN. Wallet addresses are DEMO placeholders.
+const TAG = 'v0.0.1';
+const REL = `https://github.com/OnlyXianzo/TrueStream/releases/download/${TAG}`;
+const REPO = 'https://github.com/OnlyXianzo/TrueStream';
+const android = [
+  { f: 'truestream-v0.0.1-arm64-deno.apk', label: 'Android arm64 (Deno, recommended)', arch: 'arm64' },
+  { f: 'truestream-v0.0.1-arm64-node.apk', label: 'Android arm64 (Node.js)', arch: 'arm64' },
+  { f: 'truestream-v0.0.1-armv7-node.apk', label: 'Android 32-bit (armeabi-v7a)', arch: 'armv7' },
+  { f: 'truestream-v0.0.1-x86_64-deno.apk', label: 'Android x86_64 (Chromebook/emulator)', arch: 'x86_64' },
+  { f: 'truestream-v0.0.1-x86_64-node.apk', label: 'Android x86_64 (Node.js)', arch: 'x86_64' },
+  { f: 'truestream-v0.0.1-universal.apk', label: 'Android universal (all ABIs, 458 MB)', arch: 'universal' },
+];
+const linux = [
+  { f: 'truestream-0.0.1-linux-x64.tar.gz', label: 'Linux x64 portable' },
+  { f: 'truestream-0.0.1-linux-arm64.tar.gz', label: 'Linux arm64 portable' },
+  { f: 'truestream_0.0.1_amd64.deb', label: 'Debian/Ubuntu x64 (.deb)' },
+  { f: 'truestream_0.0.1_arm64.deb', label: 'Debian/Ubuntu arm64 (.deb)' },
+  { f: 'truestream-0.0.1-1.x86_64.rpm', label: 'Fedora/RHEL x64 (.rpm)' },
+  { f: 'truestream-0.0.1-1.aarch64.rpm', label: 'Fedora/RHEL arm64 (.rpm)' },
+  { f: 'truestream-0.0.1-1-x86_64.pkg.tar.zst', label: 'Arch x64 (pacman -U)' },
+  { f: 'truestream-0.0.1-1-aarch64.pkg.tar.zst', label: 'Arch arm64 (pacman -U)' },
+];
+const windows = [{ f: 'truestream-windows-x64.zip', label: 'Windows 10/11 x64 portable' }];
+const features = [
+  ['1,000+ sites', 'YouTube 4K/8K/HDR, SoundCloud 320k, Twitch, TikTok, Instagram, Bandcamp and more via yt-dlp.'],
+  ['Dual JS runtimes', 'Deno 2.7.7 for speed, Node.js 25.3.0 for compatibility — picked per device at install.'],
+  ['Zero telemetry', 'No ads, no trackers, no analytics. 100% local processing on your device.'],
+  ['High fidelity', 'Separate video+audio stream parsing, Opus/AAC extraction, playlist batch + shuffle.'],
+  ['Hardware-optimized', 'Native Bionic FFmpeg per ABI: arm64-v8a, armeabi-v7a, x86_64.'],
+  ['Open source', 'Every line public under GPL-3.0. Audit it, fork it, improve it.'],
+  ['Batch playlists', 'Whole playlists with selective filtering, ordering and queue controls.'],
+  ['Fluid dark UI', 'Modern Flutter interface across phones, foldables, tablets and desktops.'],
+];
+const faqs = [
+  ['Is TrueStream really free?', 'Yes, completely. No paid tiers, no ads, no subscription. GPL-3.0 open source.'],
+  ['Where do I download it?', 'Right here — this page routes you to GitHub Releases. Android users can also use Obtainium for auto-updates.'],
+  ['Does it need an account?', 'No account, no sign-up, no tracking. Install and download.'],
+  ['Which platforms are supported?', 'Android (arm64, armv7, x86_64), Linux (x64, arm64: tarball, .deb, .rpm, Arch pkg) and Windows 10/11 (x64). iOS is not supported.'],
+  ['Can I contribute?', 'Absolutely — open issues and PRs on GitHub. Distribution packaging lives in distribution/ and fastlane/.'],
+  ['Where does the media come from?', 'TrueStream extracts publicly available streams via yt-dlp. It hosts nothing. See DMCA for takedown contact.'],
+];
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="TrueStream — privacy-first, high-performance media extractor. Download audio and video in highest fidelity from 1,000+ platforms." />
+  <title>TrueStream — Privacy-First Media Extractor</title>
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root { --bg:#0d1117; --panel:#161b22; --line:#30363d; --txt:#e6edf3; --dim:#8b949e; --acc:#58a6ff; --ok:#3fb950; }
+    * { box-sizing:border-box } body { margin:0; background:var(--bg); color:var(--txt); font:16px/1.6 system-ui,sans-serif }
+    a { color:var(--acc) } header,section,footer { max-width:960px; margin:auto; padding:24px 16px }
+    .hero { text-align:center; padding:64px 16px 32px } .hero img { width:128px; border-radius:32px }
+    .btn { display:inline-block; margin:8px; padding:14px 28px; border-radius:12px; font-weight:700; text-decoration:none }
+    .btn-p { background:var(--acc); color:#04121f } .btn-s { border:1px solid var(--line); color:var(--txt) }
+    .badges span { display:inline-block; margin:4px; padding:4px 12px; border:1px solid var(--line); border-radius:999px; color:var(--dim); font-size:13px }
+    .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px }
+    .card h3 { margin:0 0 8px } .shots { display:flex; gap:12px; overflow-x:auto; padding-bottom:8px }
+    .shot { min-width:180px; height:320px; border:1px dashed var(--line); border-radius:16px; display:flex; align-items:center; justify-content:center; color:var(--dim); background:var(--panel) }
+    details { background:var(--panel); border:1px solid var(--line); border-radius:10px; margin:8px 0; padding:12px 16px }
+    summary { cursor:pointer; font-weight:600 } .dl li { margin:6px 0 }
+    footer { color:var(--dim); font-size:14px; border-top:1px solid var(--line) }
+    dialog { background:var(--panel); color:var(--txt); border:1px solid var(--line); border-radius:12px; max-width:520px }
+    .demo { background:#3b2f04; border:1px solid #9e6a03; border-radius:8px; padding:8px 12px; font-size:14px }
+    code.addr { display:block; word-break:break-all; background:#0d1117; padding:8px; border-radius:8px; margin:4px 0 }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <img src="/logo.png" alt="TrueStream logo" />
+    <h1>Media that moves you.<br />No ads. No tracking.</h1>
+    <p>TrueStream is a free, privacy-first media extractor for Android, Linux and Windows — highest fidelity from 1,000+ platforms, 100% local processing.</p>
+    <p><a id="dl-primary" class="btn btn-p" href={`${REL}/truestream-v0.0.1-arm64-deno.apk`}>Download</a>
+       <a class="btn btn-s" href={REPO}>View Source</a></p>
+    <p><a class="btn btn-s" href="obtainium://app/https://github.com/OnlyXianzo/TrueStream">Add to Obtainium</a>
+       <button class="btn btn-s" onclick="document.getElementById('donate').showModal()">Support TrueStream</button></p>
+    <div class="badges"><span>100% Open Source (GPL-3.0)</span><span>Zero Telemetry</span><span>v0.0.1 Beta</span></div>
+  </header>
+
+  <section>
+    <h2>See it in action</h2>
+    <div class="shots">
+      <div class="shot">Home (screenshot TODO)</div>
+      <div class="shot">Search (screenshot TODO)</div>
+      <div class="shot">Downloads (screenshot TODO)</div>
+      <div class="shot">Queue (screenshot TODO)</div>
+      <div class="shot">Settings (screenshot TODO)</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why TrueStream</h2>
+    <div class="grid">
+      {features.map(([t, d]) => <div class="card"><h3>{t}</h3><p>{d}</p></div>)}
+    </div>
+  </section>
+
+  <section class="dl">
+    <h2>Other architectures &amp; platforms</h2>
+    <details open><summary>Android</summary><ul>{android.map(a => <li><a href={`${REL}/${a.f}`}>{a.label}</a></li>)}</ul></details>
+    <details><summary>Linux</summary><ul>{linux.map(a => <li><a href={`${REL}/${a.f}`}>{a.label}</a></li>)}</ul>
+      <p>Arch (AUR submission pending): <code>sudo pacman -U truestream-0.0.1-1-&lt;arch&gt;.pkg.tar.zst</code> · Flatpak &amp; WinGet listings in progress.</p></details>
+    <details><summary>Windows</summary><ul>{windows.map(a => <li><a href={`${REL}/${a.f}`}>{a.label}</a></li>)}</ul>
+      <p>WinGet (after store approval): <code>winget install OnlyXianzo.TrueStream</code></p></details>
+  </section>
+
+  <section>
+    <h2>Straight answers</h2>
+    {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+  </section>
+
+  <footer>
+    <p>TrueStream extracts publicly available streams and hosts no content. <a href={`${REPO}/blob/main/DMCA.md`}>DMCA</a> · <a href={`${REPO}/blob/main/LICENSE`}>License (GPL-3.0)</a> · <a href={`${REPO}/blob/main/SECURITY.md`}>Security</a> · Contact: xianzo.help@gmail.com · VirusTotal scan: pending first APK scan (TODO).</p>
+  </footer>
+
+  <dialog id="donate">
+    <h3>Support TrueStream</h3>
+    <p class="demo">DEMO — placeholder addresses, do not send. Real links arrive with monetization launch.</p>
+    <p><a href="https://ko-fi.com/truestream_demo">Ko-fi (demo)</a> · <a href="https://github.com/sponsors/OnlyXianzo">GitHub Sponsors</a></p>
+    <p>XMR (demo):<code class="addr">44FAKETrueStreamDemoDoNotSend000000000000000000000000000000000000000000000000000000000000</code></p>
+    <p>BTC (demo):<code class="addr">bc1qfaktruestreamdemodonotsend000000000</code></p>
+    <p>SOL (demo):<code class="addr">FakeSolTrueStreamDemoDoNotSend111111111111111111111</code></p>
+    <button onclick="document.getElementById('donate').close()">Close</button>
+  </dialog>
+
+  <script>
+  // <2KB OS/arch router (userAgentData + userAgent fallback)
+  (function(){var b=document.getElementById('dl-primary'),d=navigator.userAgentData||{},ua=navigator.userAgent||'';
+  var mob=d.mobile||/Android|Mobile/i.test(ua),plat=(d.platform||'').toLowerCase();
+  function apk(f,l){b.href='https://github.com/OnlyXianzo/TrueStream/releases/download/v0.0.1/'+f;b.textContent=l;}
+  if(mob||/android/i.test(ua)){if(/armv7|armeabi/i.test(ua))apk('truestream-v0.0.1-armv7-node.apk','Download for Android (32-bit)');else if(/x86_64|x86/i.test(ua))apk('truestream-v0.0.1-x86_64-deno.apk','Download for Android (x86_64)');else apk('truestream-v0.0.1-arm64-deno.apk','Download for Android (arm64)');}
+  else if(/win/i.test(plat)||/windows/i.test(ua)){b.href='https://github.com/OnlyXianzo/TrueStream/releases/download/v0.0.1/truestream-windows-x64.zip';b.textContent='Download for Windows (x64)';}
+  else if(/linux/i.test(plat)||/linux/i.test(ua)){b.href='https://github.com/OnlyXianzo/TrueStream/releases/download/v0.0.1/truestream-0.0.1-linux-x64.tar.gz';b.textContent='Download for Linux (x64)';}
+  else{b.textContent='Download (all platforms below)';b.href='https://github.com/OnlyXianzo/TrueStream/releases/latest';}})();
+  </script>
+</body>
+</html>

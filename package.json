@@ -1,0 +1,14 @@
+{
+  "name": "truestream-web",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node node_modules/astro/astro.js dev",
+    "build": "node node_modules/astro/astro.js build",
+    "preview": "node node_modules/astro/astro.js preview"
+  },
+  "dependencies": {
+    "astro": "^5.13.0"
+  }
+}
