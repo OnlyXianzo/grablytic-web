@@ -5,9 +5,15 @@ import { TAG, REL, REPO } from '../data/downloads';
 ---
 
 <header class="pt-32 pb-16 px-4 max-w-5xl mx-auto text-center flex flex-col items-center" id="top">
-  <div class="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1B1B] border border-[#54433F]/40" data-hero="badges">
-    <span class="w-2 h-2 rounded-full bg-[#B7CCB9]" aria-hidden="true"></span>
-    <span class="eyebrow-muted text-[11px]">LOCAL MEDIA EXTRACTION · ZERO TELEMETRY · GPL-3.0</span>
+  <div class="mb-4 inline-flex flex-wrap items-center justify-center gap-2" data-hero="badges">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1B1B] border border-[#54433F]/40">
+      <span class="w-2 h-2 rounded-full bg-[#B7CCB9]" aria-hidden="true"></span>
+      <span class="eyebrow-muted text-[11px]">LOCAL MEDIA EXTRACTION · ZERO TELEMETRY · GPL-3.0</span>
+    </div>
+    <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1C1B1B] border border-[#54433F]/40 text-[11px] font-semibold text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#FFB4A3]/50 transition">
+      <span class="text-[#A28C87]">by</span>
+      <span class="text-[#FFB4A3]">@OnlyXianzo</span>
+    </a>
   </div>
 
   <div class="mb-6 relative" data-hero="logo">
@@ -23,34 +29,41 @@ import { TAG, REL, REPO } from '../data/downloads';
     A curated, privacy-first media extractor for Android, Linux, and Windows — highest fidelity Opus/AAC streams from 1,000+ platforms with 100% local device execution.
   </p>
 
-  <div class="mt-8 flex flex-wrap items-center justify-center gap-3 w-full max-w-md" data-hero="cta">
+  <div class="mt-8 flex flex-wrap items-center justify-center gap-3 w-full max-w-lg" data-hero="cta">
     <a id="dl-primary" class="btn-primary btn-magnetic w-full sm:w-auto" href={`${REL}/truestream-v0.0.1-arm64-deno.apk`}>
       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
       </svg>
       <span>Download for Android (arm64)</span>
     </a>
-    <a class="btn-secondary btn-magnetic w-full sm:w-auto" href={REPO} target="_blank" rel="noopener noreferrer">
-      <svg class="w-4 h-4 mr-2 text-[#A28C87]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <a class="btn-secondary btn-magnetic w-full sm:w-auto flex items-center justify-center gap-2" href={REPO} target="_blank" rel="noopener noreferrer" aria-label={`Star TrueStream on GitHub (${stats.stars} stars)`}>
+      <svg class="w-4 h-4 text-[#FFB4A3]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
       </svg>
-      <span>View Source</span>
+      <span>Star on GitHub</span>
+      <span class="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-[#9B503E]/25 text-[#FFB4A3] border border-[#9B503E]/40">★ {stats.stars}</span>
     </a>
   </div>
 
-  <div class="mt-4 flex flex-wrap items-center justify-center gap-3" data-hero="cta2">
-    <a class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition" href="obtainium://app/https://github.com/OnlyXianzo/TrueStream">
-      ✦ Add to Obtainium
+  <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5" data-hero="cta2">
+    <a class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#FFB4A3]/50 transition inline-flex items-center gap-1.5" href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer">
+      <svg class="w-3.5 h-3.5 text-[#A28C87]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+      </svg>
+      <span>+ Follow @OnlyXianzo</span>
     </a>
-    <button class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition cursor-pointer" onclick="document.getElementById('donate-dialog')?.showModal()">
-      ♥ Support TrueStream
+    <a class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition inline-flex items-center gap-1.5" href="obtainium://app/https://github.com/OnlyXianzo/TrueStream">
+      <span>✦ Add to Obtainium</span>
+    </a>
+    <button class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition cursor-pointer inline-flex items-center gap-1.5" onclick="document.getElementById('donate-dialog')?.showModal()">
+      <span>♥ Support TrueStream</span>
     </button>
   </div>
 
-  <div class="mt-10 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg w-full pt-8 border-t border-[#353534]" data-hero="stats">
+  <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl w-full pt-8 border-t border-[#353534]" data-hero="stats">
     <div class="text-center">
       <b class="primary-value block">1,000+</b>
-      <span class="text-xs text-[#D9C1BC]">platforms via yt-dlp</span>
+      <span class="text-xs text-[#D9C1BC]">supported platforms</span>
     </div>
     <div class="text-center">
       <b class="primary-value block">
@@ -61,6 +74,15 @@ import { TAG, REL, REPO } from '../data/downloads';
     <div class="text-center">
       <b class="primary-value block">3</b>
       <span class="text-xs text-[#D9C1BC]">operating systems</span>
+    </div>
+    <div class="text-center">
+      <a href="https://github.com/OnlyXianzo/TrueStream" target="_blank" rel="noopener noreferrer" class="group block hover:opacity-90 transition">
+        <b class="primary-value block flex items-center justify-center gap-1">
+          <span class="text-lg text-[#FFB4A3]">★</span>
+          <span data-count={stats.stars}>{stats.stars}</span>
+        </b>
+        <span class="text-xs text-[#D9C1BC] group-hover:text-[#FFB4A3] transition-colors">GitHub stars</span>
+      </a>
     </div>
   </div>
 </header>
