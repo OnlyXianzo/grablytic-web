@@ -1,0 +1,36 @@
+name: Refresh GitHub stats
+
+# Daily rebuild of live repo numbers (stars/forks/watchers/binary count).
+# Runs scripts/fetch-stats.mjs and commits the snapshot on change.
+# No deploy attached yet (site previewed on localhost, Vercel parked);
+# once hosting is connected this same snapshot rides the normal build.
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch stats
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/fetch-stats.mjs
+      - name: Commit on change
+        run: |
+          git config user.name "truestream-stats-bot"
+          git config user.email "truestream-stats-bot@users.noreply.github.com"
+          git add src/data/stats.json
+          if git diff --cached --quiet; then
+            echo "stats unchanged"
+          else
+            git commit -m "chore(stats): refresh GitHub snapshot" && git push
+          fi

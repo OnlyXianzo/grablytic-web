@@ -2,6 +2,9 @@
 // TrueStream landing page — v0.0.1 tracer bullet.
 // Layout mirrors echomusic.fun (hero, action shots, WHY grid, FAQ, footer, donate).
 // Binaries served from GitHub Releases CDN. Wallet addresses are DEMO placeholders.
+import stats from '../data/stats.json';
+// stats.json refreshed at build time (prebuild) + daily cron — baked into
+// static HTML below, zero runtime API dependence for these numbers.
 const TAG = 'v0.0.1';
 const REL = `https://github.com/OnlyXianzo/TrueStream/releases/download/${TAG}`;
 const REPO = 'https://github.com/OnlyXianzo/TrueStream';
@@ -88,13 +91,20 @@ const faqs = [
     
     .shots {
       display: flex;
-      gap: 16px;
-      overflow-x: visible;
-      padding: 28px 8px 36px;
-      justify-content: center;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 28px max(20px, calc(50% - 480px)) 36px;
+      justify-content: flex-start;
       align-items: center;
       flex-wrap: nowrap;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line) transparent;
     }
+    .shots::-webkit-scrollbar { height: 8px }
+    .shots::-webkit-scrollbar-thumb { background: var(--line); border-radius: 8px }
+    .frame { scroll-snap-align: center }
+    .scroll-hint { color: var(--dim); font-size: 13px; margin-top: 4px }
     .frame {
       position: relative;
       width: 172px;
@@ -287,8 +297,7 @@ const faqs = [
       .frame { width: 148px }
     }
     @media (max-width: 640px) {
-      .shots { flex-direction: column; align-items: center; gap: 24px; padding: 16px 0 }
-      .frame { width: 220px }
+      .frame { width: 200px }
       .frame[data-side] { transform: translateY(48px) }
       #showcase.inview .frame { transform: none; opacity: 1 }
     }
@@ -345,9 +354,9 @@ const faqs = [
        <button class="btn btn-s" onclick="document.getElementById('donate').showModal()">Support TrueStream</button></p>
     <div class="badges" data-hero="badges"><span>100% Open Source (GPL-3.0)</span><span>Zero Telemetry</span><span>v0.0.1 Beta</span></div>
     <div class="stats" data-hero="stats">
-      <div><b><span data-count="1000">0</span>+</b><span>platforms via yt-dlp</span></div>
-      <div><b><span data-count="15">0</span></b><span>release binaries</span></div>
-      <div><b><span data-count="3">0</span></b><span>operating systems</span></div>
+      <div><b>1,000+</b><span>platforms via yt-dlp</span></div>
+      <div><b><span data-count={stats.binaries}>{stats.binaries}</span></b><span>release binaries ({stats.latest_tag})</span></div>
+      <div><b>3</b><span>operating systems</span></div>
     </div>
   </header>
 
@@ -356,7 +365,11 @@ const faqs = [
   </div></div>
 
   <section id="showcase">
-    <h2 data-reveal>See it in action</h2>
+    <div class="showcase-header">
+      <span class="showcase-tag" data-reveal>App tour</span>
+      <h2 data-reveal>See it in action</h2>
+      <p class="showcase-sub" data-reveal>Real UI mockups of the v0.0.1 app — swipe through Home, Search, Downloads, Queue and Settings.</p>
+    </div>
     <div class="shots">
       <!-- Frame 0: Home -->
       <div class="frame" data-side="left" style="--i:0">
@@ -602,6 +615,7 @@ const faqs = [
         </div>
       </div>
     </div>
+    <p class="scroll-hint" aria-hidden="true">← swipe to explore →</p>
   </section>
 
   <section id="features">
@@ -628,9 +642,9 @@ const faqs = [
   <section id="community">
     <h2 data-reveal>Built in the open, backed by people</h2>
     <div class="stats-live" data-reveal>
-      <div><b>★ <span id="gh-stars">–</span></b><span>stars</span></div>
-      <div><b><span id="gh-forks">–</span></b><span>forks</span></div>
-      <div><b><span id="gh-watchers">–</span></b><span>watching</span></div>
+      <div><b>★ <span id="gh-stars">{stats.stars}</span></b><span>stars</span></div>
+      <div><b><span id="gh-forks">{stats.forks}</span></b><span>forks</span></div>
+      <div><b><span id="gh-watchers">{stats.watchers}</span></b><span>watching</span></div>
     </div>
     <p style="text-align:center" data-reveal>
       <a class="btn btn-p" href="https://github.com/OnlyXianzo/TrueStream">★ Star the repo</a>
@@ -699,13 +713,6 @@ const faqs = [
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){s.classList.add('inview');return;}
   var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){s.classList.add('inview');o.disconnect();}},{threshold:.25});
   o.observe(s);})();
-  </script>
-  <script>
-  // Live GitHub stats (graceful: static links remain if fetch fails/rate-limited).
-  (function(){fetch('https://api.github.com/repos/OnlyXianzo/TrueStream').then(function(r){return r.json();}).then(function(d){
-  if(d.stargazers_count!=null)document.getElementById('gh-stars').textContent=d.stargazers_count;
-  if(d.forks_count!=null)document.getElementById('gh-forks').textContent=d.forks_count;
-  if(d.subscribers_count!=null)document.getElementById('gh-watchers').textContent=d.subscribers_count;}).catch(function(){});})();
   </script>
 </body>
 </html>
