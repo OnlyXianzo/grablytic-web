@@ -5,3 +5,5 @@ devserver.log
 .env.*
 !.env.example
 .vercel/
+.vercel
+.env*
