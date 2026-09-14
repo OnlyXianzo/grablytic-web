@@ -32,6 +32,12 @@
     /* Danger */
     --color-danger: #FFB4AB;
     --color-danger-wash: rgba(147, 0, 10, 0.2);
+
+    /* Semantic Navigation Clearance */
+    --nav-height: 3.5rem;
+    --nav-top-offset: 1rem;
+    --nav-safe-top: env(safe-area-inset-top, 0px);
+    --nav-clearance: calc(var(--nav-top-offset) + var(--nav-safe-top) + var(--nav-height) + 2.5rem);
   }
 
   * {
@@ -40,6 +46,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: var(--nav-clearance);
     color-scheme: dark;
   }
 
@@ -72,55 +79,61 @@
   code, pre {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  /* Static SSR visibility baseline (zero flash, zero lost buttons) */
+  [data-hero] {
+    opacity: 1;
+  }
 }
 
-/* Provenance Eyebrow (DESIGN.md Principle 3) */
-.eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-terracotta);
-}
+@layer components {
+  /* Provenance Eyebrow (DESIGN.md Principle 3) */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-terracotta);
+  }
 
-.eyebrow-muted {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-ink-muted);
-}
+  .eyebrow-muted {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-ink-muted);
+  }
 
-/* Primary Value (DESIGN.md Principle 2: One loud thing per card) */
-.primary-value {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--color-terracotta);
-  line-height: 1.15;
-}
+  /* Primary Value (DESIGN.md Principle 2: One loud thing per card) */
+  .primary-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-terracotta);
+    line-height: 1.15;
+  }
 
-/* Tactile Tonal Paper Tile (DESIGN.md Principle 4: Tonal, never shadowed) */
-.paper-tile {
-  background-color: var(--color-tile);
-  border: 1px solid var(--color-hairline);
-  border-radius: 12px;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
+  /* Tactile Tonal Paper Tile (DESIGN.md Principle 4: Tonal, never shadowed) */
+  .paper-tile {
+    background-color: var(--color-tile);
+    border: 1px solid var(--color-hairline);
+    border-radius: 12px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
 
-.paper-tile:hover {
-  background-color: var(--color-tile-high);
-  border-color: rgba(255, 180, 163, 0.35);
-  transform: translateY(-2px);
-}
+  .paper-tile:hover {
+    background-color: var(--color-tile-high);
+    border-color: rgba(255, 180, 163, 0.35);
+    transform: translateY(-2px);
+  }
 
-/* Floating Glass Pill Navbar */
-.navbar-pill {
-  background: rgba(28, 27, 27, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--color-hairline);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
+  /* Floating Glass Pill Navbar */
+  .navbar-pill {
+    background: rgba(28, 27, 27, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-hairline);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
 
 /* Buttons (DESIGN.md §6.8) */
 .btn-primary {
@@ -242,6 +255,7 @@ details.faq-item[open] summary::after {
 details.faq-item:active {
   transform: scale(0.98);
   transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
 }
 
 /* Reduced Motion Guard — Instant Static Display */

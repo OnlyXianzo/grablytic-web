@@ -21,23 +21,66 @@ export function isReducedMotion(): boolean {
 /**
  * Hero entrance timeline with spring bounce and staggered beats.
  */
-export function initHeroAnimation(container: HTMLElement | null = null): void {
+export function initHeroAnimation(container: HTMLElement | null = null): (() => void) | void {
   if (typeof window === 'undefined' || isReducedMotion()) return;
 
   const scope = container || document;
-  const ctx = gsap.context(() => {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  let ctx: gsap.Context | null = null;
+  try {
+    ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.from('[data-hero="badges"]', { y: -16, opacity: 0, duration: 0.6, ease: 'power2.out' })
-      .from('[data-hero="logo"]', { scale: 0.7, opacity: 0, rotation: -6, duration: 0.8, ease: 'back.out(1.8)' }, '-=0.3')
-      .from('[data-hero="title"]', { y: 35, opacity: 0, duration: 0.85, ease: 'power3.out' }, '-=0.45')
-      .from('[data-hero="sub"]', { y: 20, opacity: 0, duration: 0.7 }, '-=0.55')
-      .from('[data-hero="cta"] a, [data-hero="cta"] button', { y: 22, opacity: 0, scale: 0.95, stagger: 0.1, duration: 0.6, ease: 'back.out(1.5)' }, '-=0.4')
-      .from('[data-hero="cta2"] a, [data-hero="cta2"] button', { y: 15, opacity: 0, stagger: 0.08, duration: 0.5 }, '-=0.3')
-      .from('[data-hero="stats"] > div', { y: 20, opacity: 0, stagger: 0.08, duration: 0.6, ease: 'power2.out' }, '-=0.3');
-  }, scope);
+      tl.fromTo('[data-hero="badges"]',
+        { y: -16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out', clearProps: 'opacity,transform' }
+      )
+      .fromTo('[data-hero="logo"]',
+        { scale: 0.7, opacity: 0, rotation: -6 },
+        { scale: 1, opacity: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.8)', clearProps: 'opacity,transform' },
+        '-=0.3'
+      )
+      .fromTo('[data-hero="title"]',
+        { y: 35, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.85, ease: 'power3.out', clearProps: 'opacity,transform' },
+        '-=0.45'
+      )
+      .fromTo('[data-hero="sub"]',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, clearProps: 'opacity,transform' },
+        '-=0.55'
+      )
+      .fromTo('[data-hero="cta"] a, [data-hero="cta"] button',
+        { y: 22, opacity: 0, scale: 0.95 },
+        { y: 0, opacity: 1, scale: 1, stagger: 0.1, duration: 0.6, ease: 'back.out(1.5)', clearProps: 'opacity,transform' },
+        '-=0.4'
+      );
 
-  return () => ctx.revert();
+      // Pre-filter cta2 elements to eliminate display:none elements (e.g. Obtainium on desktop).
+      // Eliminates the CSSPlugin reparenting forced reflow and phantom stagger gaps.
+      const cta2Elements = Array.from(
+        scope.querySelectorAll<HTMLElement>('[data-hero="cta2"] a, [data-hero="cta2"] button')
+      ).filter((el) => el.style.display !== 'none' && el.offsetParent !== null);
+
+      if (cta2Elements.length > 0) {
+        tl.fromTo(cta2Elements,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.08, duration: 0.5, clearProps: 'opacity,transform' },
+          '-=0.3'
+        );
+      }
+
+      tl.fromTo('[data-hero="stats"] > div',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power2.out', clearProps: 'opacity,transform' },
+        '-=0.3'
+      );
+    }, scope);
+
+    return () => ctx?.revert();
+  } catch (err) {
+    console.error('[GSAP] Hero animation init failed, restoring static visibility:', err);
+    ctx?.revert();
+  }
 }
 
 /**

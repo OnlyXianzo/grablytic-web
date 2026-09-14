@@ -3,14 +3,14 @@
 import stats from '../data/stats.json';
 ---
 
-<nav id="site-nav" class="fixed top-4 inset-x-0 z-50 flex justify-center px-4 transition-transform duration-300 ease-out" aria-label="Main Navigation">
-  <div class="navbar-pill max-w-4xl w-full mx-auto px-5 py-3 rounded-full flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-2.5 text-[#E5E2E1] font-bold tracking-tight hover:opacity-90 transition-opacity">
-      <img src="/logo.png" alt="TrueStream" class="w-6 h-6 rounded-md" />
+<nav id="site-nav" class="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] inset-x-0 z-50 flex justify-center px-4 transition-transform duration-300 ease-out" aria-label="Main Navigation">
+  <div class="navbar-pill max-w-4xl w-full mx-auto px-4 sm:px-5 py-2.5 sm:py-3 rounded-full flex items-center justify-between flex-nowrap min-h-[3.25rem]">
+    <a href="#top" class="flex items-center gap-2.5 text-[#E5E2E1] font-bold tracking-tight hover:opacity-90 transition-opacity shrink-0">
+      <img src="/logo.png" alt="TrueStream" class="w-6 h-6 rounded-md shrink-0" />
       <span class="text-sm font-semibold tracking-wide">TrueStream</span>
     </a>
     
-    <div class="flex items-center gap-3 sm:gap-5 text-xs sm:text-sm font-medium">
+    <div class="flex items-center gap-2.5 sm:gap-5 text-xs sm:text-sm font-medium flex-nowrap shrink-0">
       <a href="#showcase" class="text-[#D9C1BC] hover:text-[#E5E2E1] transition-colors hidden md:inline-block">Tour</a>
       <a href="#features" class="text-[#D9C1BC] hover:text-[#E5E2E1] transition-colors hidden md:inline-block">Features</a>
       <a href="#downloads" class="text-[#D9C1BC] hover:text-[#E5E2E1] transition-colors">Downloads</a>
@@ -19,7 +19,7 @@ import stats from '../data/stats.json';
         <span class="text-[#A28C87]">by</span>
         <span>@OnlyXianzo</span>
       </a>
-      <a href="https://github.com/OnlyXianzo/TrueStream" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E]/25 transition-all flex items-center gap-1.5" aria-label={`Star TrueStream on GitHub (${stats.stars} stars)`}>
+      <a href="https://github.com/OnlyXianzo/TrueStream" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold px-2.5 sm:px-3 py-1.5 rounded-full bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E]/25 transition-all flex items-center gap-1.5 shrink-0" aria-label={`Star TrueStream on GitHub (${stats.stars} stars)`}>
         <span class="text-[#FFB4A3]">★</span> <span>{stats.stars}</span> <span>Star</span>
       </a>
     </div>
