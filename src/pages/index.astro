@@ -52,59 +52,281 @@ const faqs = [
   <meta name="description" content="TrueStream — privacy-first, high-performance media extractor. Download audio and video in highest fidelity from 1,000+ platforms." />
   <title>TrueStream — Privacy-First Media Extractor</title>
   <link rel="icon" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root { --bg:#0d1117; --panel:#161b22; --line:#30363d; --txt:#e6edf3; --dim:#8b949e; --acc:#58a6ff; --ok:#3fb950; }
-    * { box-sizing:border-box } body { margin:0; background:var(--bg); color:var(--txt); font:16px/1.6 system-ui,sans-serif }
-    a { color:var(--acc) } header,section,footer { max-width:960px; margin:auto; padding:24px 16px }
-    .hero { text-align:center; padding:64px 16px 32px } .hero img { width:128px; border-radius:32px }
-    .btn { display:inline-block; margin:8px; padding:14px 28px; border-radius:12px; font-weight:700; text-decoration:none }
-    .btn-p { background:var(--acc); color:#04121f } .btn-s { border:1px solid var(--line); color:var(--txt) }
-    .badges span { display:inline-block; margin:4px; padding:4px 12px; border:1px solid var(--line); border-radius:999px; color:var(--dim); font-size:13px }
-    .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) }
-    .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px }
-    .card h3 { margin:0 0 8px }     .shots { display:flex; gap:18px; overflow-x:visible; padding:24px 4px 32px; justify-content:center; flex-wrap:nowrap }
-    .frame { position:relative; width:168px; flex:0 0 auto; aspect-ratio:9/19; border-radius:26px; border:1px solid var(--line); background:#010409; display:flex; align-items:center; justify-content:center; color:var(--dim); font-size:13px; text-align:center; padding:12px; will-change:transform,opacity; opacity:0; transition:transform 560ms cubic-bezier(.16,1,.3,1), opacity 560ms cubic-bezier(.16,1,.3,1); transition-delay:calc(var(--i,0)*90ms) }
-    .frame[data-side="left"] { transform:translateX(-120px) }
-    .frame[data-side="right"] { transform:translateX(120px) }
-    .frame[data-side="near-left"] { transform:translateX(-60px) }
-    .frame[data-side="near-right"] { transform:translateX(60px) }
-    .frame[data-side="center"] { transform:scale(.92) }
-    #showcase.inview .frame { transform:none; opacity:1 }
-    .frame::before { content:""; position:absolute; inset:-1px; border-radius:27px; opacity:0; box-shadow:0 0 24px 2px rgba(88,166,255,.55), 0 0 64px 8px rgba(137,87,229,.28), inset 0 0 0 1px rgba(88,166,255,.65); transition:opacity 700ms ease-out 150ms; pointer-events:none }
-    #showcase.inview .frame::before { opacity:1 }
-    .stats-live { display:flex; gap:28px; justify-content:center; flex-wrap:wrap; margin:20px 0 }
-    .stats-live b { font-size:26px; display:block } .stats-live span { color:var(--dim); font-size:13px }
-    .heart { text-align:center; color:var(--dim); max-width:640px; margin:12px auto 0 }
-    @media (max-width:640px) {
-      .shots { flex-direction:column; align-items:center }
-      .frame[data-side] { transform:translateY(48px) }
-      #showcase.inview .frame { transform:none }
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --line: #30363d;
+      --txt: #e6edf3;
+      --dim: #8b949e;
+      --acc: #58a6ff;
+      --ok: #3fb950;
+      --purple: #8957e5;
     }
-    @media (prefers-reduced-motion: reduce) { .orb,.hero img,.marquee .track,.frame,.frame::before { animation:none !important; transition:none !important } }
-    details { background:var(--panel); border:1px solid var(--line); border-radius:10px; margin:8px 0; padding:12px 16px }
-    summary { cursor:pointer; font-weight:600 } .dl li { margin:6px 0 }
-    footer { color:var(--dim); font-size:14px; border-top:1px solid var(--line) }
-    dialog { background:var(--panel); color:var(--txt); border:1px solid var(--line); border-radius:12px; max-width:520px }
-    .demo { background:#3b2f04; border:1px solid #9e6a03; border-radius:8px; padding:8px 12px; font-size:14px }
-    code.addr { display:block; word-break:break-all; background:#0d1117; padding:8px; border-radius:8px; margin:4px 0 }
+    * { box-sizing: border-box }
+    body { margin: 0; background: var(--bg); color: var(--txt); font: 16px/1.6 'Instrument Sans', system-ui, sans-serif }
+    a { color: var(--acc) }
+    header, section, footer { max-width: 980px; margin: auto; padding: 24px 16px }
+    .hero { text-align: center; padding: 64px 16px 32px }
+    .hero img { width: 128px; border-radius: 32px }
+    .btn { display: inline-block; margin: 8px; padding: 14px 28px; border-radius: 12px; font-weight: 700; text-decoration: none; font-family: inherit }
+    .btn-p { background: var(--acc); color: #04121f }
+    .btn-s { border: 1px solid var(--line); color: var(--txt) }
+    .badges span { display: inline-block; margin: 4px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--dim); font-size: 13px }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px }
+    .card h3 { margin: 0 0 8px }
+
+    /* Showcase: Scroll-triggered converge-and-glow strip */
+    #showcase { text-align: center; padding: 48px 16px 64px; overflow: hidden }
+    .showcase-header { margin-bottom: 28px }
+    .showcase-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--acc); font-weight: 700; margin-bottom: 6px; display: inline-block }
+    .showcase-sub { color: var(--dim); font-size: 14px; max-width: 540px; margin: 8px auto 0 }
+    
+    .shots {
+      display: flex;
+      gap: 16px;
+      overflow-x: visible;
+      padding: 28px 8px 36px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .frame {
+      position: relative;
+      width: 172px;
+      flex: 0 0 auto;
+      aspect-ratio: 9/19;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #010409;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      will-change: transform, opacity;
+      opacity: 0;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.55);
+      transition: transform 560ms cubic-bezier(.16, 1, .3, 1), opacity 560ms cubic-bezier(.16, 1, .3, 1);
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+    .frame[data-side="left"] { transform: translateX(-120px) }
+    .frame[data-side="near-left"] { transform: translateX(-60px) }
+    .frame[data-side="center"] { transform: scale(.92) }
+    .frame[data-side="near-right"] { transform: translateX(60px) }
+    .frame[data-side="right"] { transform: translateX(120px) }
+
+    #showcase.inview .frame {
+      transform: none;
+      opacity: 1;
+    }
+
+    /* Glowing device border (compositor-only opacity transition on pseudo-element) */
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 29px;
+      opacity: 0;
+      box-shadow: 0 0 28px 2px rgba(88, 166, 255, .55), 0 0 64px 8px rgba(137, 87, 229, .28), inset 0 0 0 1px rgba(88, 166, 255, .65);
+      transition: opacity 700ms ease-out 150ms;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .frame[data-side="center"]::before {
+      box-shadow: 0 0 36px 4px rgba(88, 166, 255, .7), 0 0 80px 12px rgba(57, 211, 83, .25), inset 0 0 0 1.5px rgba(88, 166, 255, .85);
+    }
+    #showcase.inview .frame::before {
+      opacity: 1;
+    }
+
+    /* Phone Mockup Screen Internals */
+    .screen {
+      position: relative;
+      flex: 1;
+      border-radius: 23px;
+      background: #0d1117;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: left;
+      font-size: 9px;
+      user-select: none;
+    }
+    .island {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 9px;
+      background: #000;
+      border-radius: 99px;
+      z-index: 20;
+    }
+    .screen-status {
+      padding: 6px 10px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--dim);
+      font-weight: 600;
+      font-size: 8px;
+      line-height: 1;
+      margin-top: 10px;
+    }
+    .screen-body {
+      flex: 1;
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow: hidden;
+    }
+    .screen-nav {
+      height: 22px;
+      background: #161b22;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 8px;
+      color: var(--dim);
+      font-size: 10px;
+    }
+    .screen-nav span.active { color: var(--acc); font-weight: bold }
+
+    /* Mockup UI Component Elements */
+    .m-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px }
+    .m-head b { color: #fff; font-size: 10px }
+    .m-pill-tag { background: #21262d; color: var(--acc); padding: 1px 5px; border-radius: 6px; font-size: 7px; font-weight: 700 }
+    .m-input {
+      background: #161b22;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 4px 6px;
+      color: var(--dim);
+      font-size: 7.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .m-chips { display: flex; gap: 4px; flex-wrap: nowrap; overflow: hidden }
+    .m-chip { background: #21262d; border: 1px solid var(--line); border-radius: 4px; padding: 1px 4px; font-size: 7px; color: var(--dim) }
+    .m-chip.active { background: rgba(88,166,255,0.15); border-color: var(--acc); color: var(--acc); font-weight: 600 }
+    .m-card {
+      background: #161b22;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 5px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .m-thumb {
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      background: #21262d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--acc);
+      font-size: 8px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .m-meta { flex: 1; min-width: 0 }
+    .m-title { color: #fff; font-weight: 600; font-size: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+    .m-sub { color: var(--dim); font-size: 7px }
+    .m-seg {
+      background: #010409;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px;
+      display: flex;
+      gap: 2px;
+    }
+    .m-seg div { flex: 1; text-align: center; padding: 2px 0; border-radius: 4px; font-size: 7px; color: var(--dim) }
+    .m-seg div.active { background: #21262d; color: #fff; font-weight: 700 }
+    .m-fmt {
+      background: #161b22;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 3px 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7px;
+    }
+    .m-fmt.sel { border-color: var(--acc); background: rgba(88,166,255,0.08) }
+    .m-btn-mini {
+      background: var(--ok);
+      color: #04121f;
+      text-align: center;
+      padding: 4px 0;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 7.5px;
+      margin-top: auto;
+    }
+    .m-bar-prog { width: 100%; height: 3px; background: #21262d; border-radius: 2px; overflow: hidden; margin-top: 3px }
+    .m-bar-fill { height: 100%; background: var(--ok); border-radius: 2px }
+    .m-row { display: flex; justify-content: space-between; font-size: 7px; color: var(--dim) }
+
+    .stats-live { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin: 20px 0 }
+    .stats-live b { font-size: 26px; display: block }
+    .stats-live span { color: var(--dim); font-size: 13px }
+    .heart { text-align: center; color: var(--dim); max-width: 640px; margin: 12px auto 0 }
+
+    /* Breakpoint adjustments */
+    @media (max-width: 900px) {
+      .frame { width: 148px }
+    }
+    @media (max-width: 640px) {
+      .shots { flex-direction: column; align-items: center; gap: 24px; padding: 16px 0 }
+      .frame { width: 220px }
+      .frame[data-side] { transform: translateY(48px) }
+      #showcase.inview .frame { transform: none; opacity: 1 }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .orb, .hero img, .marquee .track, .frame, .frame::before, .frame * {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+    details { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; padding: 12px 16px }
+    summary { cursor: pointer; font-weight: 600 }
+    .dl li { margin: 6px 0 }
+    footer { color: var(--dim); font-size: 14px; border-top: 1px solid var(--line) }
+    dialog { background: var(--panel); color: var(--txt); border: 1px solid var(--line); border-radius: 12px; max-width: 520px }
+    .demo { background: #3b2f04; border: 1px solid #9e6a03; border-radius: 8px; padding: 8px 12px; font-size: 14px }
+    code.addr { display: block; word-break: break-all; background: #0d1117; padding: 8px; border-radius: 8px; margin: 4px 0 }
+    
     /* luxury motion layer */
-    nav.top { position:sticky; top:0; z-index:40; backdrop-filter:blur(12px); background:rgba(13,17,23,.8); border-bottom:1px solid var(--line) }
-    nav.top .in { max-width:960px; margin:auto; padding:12px 16px; display:flex; align-items:center; justify-content:space-between }
-    nav.top a.l { color:var(--txt); text-decoration:none; font-weight:700 }
-    nav.top a.n { color:var(--dim); text-decoration:none; margin-left:16px; font-size:14px }
-    .orbs { position:fixed; inset:0; z-index:-1; overflow:hidden }
-    .orb { position:absolute; width:480px; height:480px; border-radius:50%; filter:blur(120px); opacity:.28 }
-    .orb.a { background:#1f6feb; top:-160px; left:-120px; animation:drift 14s ease-in-out infinite alternate }
-    .orb.b { background:#8957e5; bottom:-200px; right:-140px; animation:drift 18s ease-in-out infinite alternate-reverse }
-    @keyframes drift { to { transform:translate(60px,40px) scale(1.12) } }
-    @keyframes floaty { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-12px) } }
-    .hero img { animation:floaty 5s ease-in-out infinite }
-    .marquee { overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--panel) }
-    .marquee .track { display:inline-flex; gap:32px; white-space:nowrap; padding:12px 0; animation:slide 28s linear infinite; color:var(--dim) }
-    @keyframes slide { to { transform:translateX(-50%) } }
-    .stats { display:flex; gap:32px; justify-content:center; margin-top:24px; flex-wrap:wrap }
-    .stats b { font-size:28px; display:block } .stats span { color:var(--dim); font-size:13px }
-    @media (prefers-reduced-motion: reduce) { .orb,.hero img,.marquee .track { animation:none !important } }
+    nav.top { position: sticky; top: 0; z-index: 40; backdrop-filter: blur(12px); background: rgba(13,17,23,.8); border-bottom: 1px solid var(--line) }
+    nav.top .in { max-width: 980px; margin: auto; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between }
+    nav.top a.l { color: var(--txt); text-decoration: none; font-weight: 700 }
+    nav.top a.n { color: var(--dim); text-decoration: none; margin-left: 16px; font-size: 14px }
+    .orbs { position: fixed; inset: 0; z-index: -1; overflow: hidden }
+    .orb { position: absolute; width: 480px; height: 480px; border-radius: 50%; filter: blur(120px); opacity: .28 }
+    .orb.a { background: #1f6feb; top: -160px; left: -120px; animation: drift 14s ease-in-out infinite alternate }
+    .orb.b { background: #8957e5; bottom: -200px; right: -140px; animation: drift 18s ease-in-out infinite alternate-reverse }
+    @keyframes drift { to { transform: translate(60px,40px) scale(1.12) } }
+    @keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+    .hero img { animation: floaty 5s ease-in-out infinite }
+    .marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--panel) }
+    .marquee .track { display: inline-flex; gap: 32px; white-space: nowrap; padding: 12px 0; animation: slide 28s linear infinite; color: var(--dim) }
+    @keyframes slide { to { transform: translateX(-50%) } }
+    .stats { display: flex; gap: 32px; justify-content: center; margin-top: 24px; flex-wrap: wrap }
+    .stats b { font-size: 28px; display: block }
+    .stats span { color: var(--dim); font-size: 13px }
   </style>
 </head>
 <body>
@@ -136,11 +358,249 @@ const faqs = [
   <section id="showcase">
     <h2 data-reveal>See it in action</h2>
     <div class="shots">
-      <div class="frame" data-side="left" style="--i:0">Home<br />(screenshot lands here)</div>
-      <div class="frame" data-side="near-left" style="--i:1">Search<br />(screenshot lands here)</div>
-      <div class="frame" data-side="center" style="--i:2">Downloads<br />(screenshot lands here)</div>
-      <div class="frame" data-side="near-right" style="--i:3">Queue<br />(screenshot lands here)</div>
-      <div class="frame" data-side="right" style="--i:4">Settings<br />(screenshot lands here)</div>
+      <!-- Frame 0: Home -->
+      <div class="frame" data-side="left" style="--i:0">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="screen-status">
+            <span>09:41</span>
+            <span>5G 98%</span>
+          </div>
+          <div class="screen-body">
+            <div class="m-head">
+              <b>TrueStream</b>
+              <span class="m-pill-tag">v0.0.1</span>
+            </div>
+            <div class="m-input">
+              <span>🔗</span>
+              <span style="color:#8b949e; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">https://youtu.be/dQw4w9WgXcQ</span>
+            </div>
+            <div class="m-chips">
+              <span class="m-chip active">All</span>
+              <span class="m-chip">Video</span>
+              <span class="m-chip">Audio</span>
+              <span class="m-chip">Playlist</span>
+            </div>
+            <div class="m-card">
+              <div class="m-thumb" style="color:#58a6ff;background:#0d1117;border:1px solid #30363d;">▶</div>
+              <div class="m-meta">
+                <div class="m-title">Lofi Chill Beats 2026</div>
+                <div class="m-sub">1080p60 • Opus 160k</div>
+              </div>
+            </div>
+            <div class="m-card">
+              <div class="m-thumb" style="color:#bc8cff;background:#0d1117;border:1px solid #30363d;">♪</div>
+              <div class="m-meta">
+                <div class="m-title">Synthwave Radio Live</div>
+                <div class="m-sub">SoundCloud • 320kbps</div>
+              </div>
+            </div>
+            <div class="m-btn-mini">Paste &amp; Extract</div>
+          </div>
+          <div class="screen-nav">
+            <span class="active">Home</span>
+            <span>Search</span>
+            <span>Queue</span>
+            <span>Settings</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frame 1: Search -->
+      <div class="frame" data-side="near-left" style="--i:1">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="screen-status">
+            <span>09:41</span>
+            <span>5G 98%</span>
+          </div>
+          <div class="screen-body">
+            <div class="m-head">
+              <b>Search</b>
+              <span class="m-pill-tag">1,000+ SITES</span>
+            </div>
+            <div class="m-input">
+              <span>🔍</span>
+              <span style="color:#c9d1d9;">Hans Zimmer Live</span>
+            </div>
+            <div class="m-chips">
+              <span class="m-chip active">YouTube</span>
+              <span class="m-chip">SoundCloud</span>
+              <span class="m-chip">Bilibili</span>
+            </div>
+            <div class="m-card">
+              <div class="m-thumb" style="color:#58a6ff;background:#0d1117;border:1px solid #30363d;">4K</div>
+              <div class="m-meta">
+                <div class="m-title">Interstellar Main Theme</div>
+                <div class="m-sub">04:22 • 4K AV1 60fps</div>
+              </div>
+            </div>
+            <div class="m-card">
+              <div class="m-thumb" style="color:#bc8cff;background:#0d1117;border:1px solid #30363d;">FLAC</div>
+              <div class="m-meta">
+                <div class="m-title">Dune Part Two OST</div>
+                <div class="m-sub">WaterTower • Lossless</div>
+              </div>
+            </div>
+            <div class="m-card">
+              <div class="m-thumb" style="color:#3fb950;background:#0d1117;border:1px solid #30363d;">LIVE</div>
+              <div class="m-meta">
+                <div class="m-title">Prague Concert Full</div>
+                <div class="m-sub">02:18:40 • 1080p</div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-nav">
+            <span>Home</span>
+            <span class="active">Search</span>
+            <span>Queue</span>
+            <span>Settings</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frame 2: Format Picker Hero -->
+      <div class="frame" data-side="center" style="--i:2">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="screen-status">
+            <span>09:41</span>
+            <span>5G 98%</span>
+          </div>
+          <div class="screen-body">
+            <div class="m-head">
+              <b>Select Stream</b>
+              <span class="m-pill-tag" style="background:#238636;color:#fff;">BEST</span>
+            </div>
+            <div class="m-card" style="background:#161b22;border-color:rgba(88,166,255,0.3);">
+              <div class="m-thumb" style="color:#58a6ff;background:#0d1117;border:1px solid #388bfd;">HDR</div>
+              <div class="m-meta">
+                <div class="m-title">Cyberpunk City 2077</div>
+                <div class="m-sub">HDR10 • 60 FPS • 2160p</div>
+              </div>
+            </div>
+            <div class="m-seg">
+              <div class="active">Video + Audio</div>
+              <div>Audio Only</div>
+            </div>
+            <div class="m-fmt sel">
+              <span><b style="color:var(--acc)">AV1</b> 2160p60 HDR</span>
+              <span style="color:var(--acc)">1.4 GB</span>
+            </div>
+            <div class="m-fmt">
+              <span><b>VP9</b> 1440p60</span>
+              <span style="color:var(--dim)">840 MB</span>
+            </div>
+            <div class="m-fmt">
+              <span><b>Opus</b> 160kbps (HQ)</span>
+              <span style="color:var(--dim)">48 MB</span>
+            </div>
+            <div class="m-btn-mini" style="background:var(--acc);color:#04121f;">Start Download</div>
+          </div>
+          <div class="screen-nav">
+            <span>Home</span>
+            <span>Search</span>
+            <span class="active">Queue</span>
+            <span>Settings</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frame 3: Active Queue -->
+      <div class="frame" data-side="near-right" style="--i:3">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="screen-status">
+            <span>09:41</span>
+            <span>5G 98%</span>
+          </div>
+          <div class="screen-body">
+            <div class="m-head">
+              <b>Active Queue</b>
+              <span class="m-pill-tag" style="background:#1f6feb;color:#fff;">2 ACTIVE</span>
+            </div>
+            <div class="m-card" style="flex-direction:column;align-items:stretch;gap:3px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span class="m-title">Interstellar_4k.mkv</span>
+                <span class="m-sub" style="color:var(--acc);font-weight:700;">78%</span>
+              </div>
+              <div class="m-bar-prog"><div class="m-bar-fill" style="width:78%"></div></div>
+              <div class="m-row"><span>18.4 MB/s</span><span>ETA 14s</span></div>
+            </div>
+            <div class="m-card" style="flex-direction:column;align-items:stretch;gap:3px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span class="m-title">Soundtrack_HQ.opus</span>
+                <span class="m-sub" style="color:var(--ok);font-weight:700;">Muxing</span>
+              </div>
+              <div class="m-bar-prog"><div class="m-bar-fill" style="width:100%;background:var(--ok);"></div></div>
+              <div class="m-row"><span>ffmpeg libopus</span><span>99%</span></div>
+            </div>
+            <div class="m-card" style="flex-direction:column;align-items:stretch;gap:3px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span class="m-title">Live_Concert_1080p.mp4</span>
+                <span class="m-sub">Queued</span>
+              </div>
+              <div class="m-bar-prog"><div class="m-bar-fill" style="width:0%"></div></div>
+              <div class="m-row"><span>Pending slot</span><span>Standby</span></div>
+            </div>
+          </div>
+          <div class="screen-nav">
+            <span>Home</span>
+            <span>Search</span>
+            <span class="active">Queue</span>
+            <span>Settings</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frame 4: Settings -->
+      <div class="frame" data-side="right" style="--i:4">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="screen-status">
+            <span>09:41</span>
+            <span>5G 98%</span>
+          </div>
+          <div class="screen-body">
+            <div class="m-head">
+              <b>Engine Settings</b>
+              <span class="m-pill-tag">CONFIG</span>
+            </div>
+            <div class="m-card">
+              <div class="m-meta">
+                <div class="m-title">JavaScript Runtime</div>
+                <div class="m-sub">Deno (Native Rust / ARM64)</div>
+              </div>
+              <span style="color:var(--ok);font-size:10px;">●</span>
+            </div>
+            <div class="m-card">
+              <div class="m-meta">
+                <div class="m-title">yt-dlp Core</div>
+                <div class="m-sub">Chaquopy 3.11 • Up to date</div>
+              </div>
+              <span class="m-pill-tag" style="background:#238636;color:#fff;">AUTO</span>
+            </div>
+            <div class="m-card">
+              <div class="m-meta">
+                <div class="m-title">Download Path</div>
+                <div class="m-sub">/storage/emulated/0/Movies/</div>
+              </div>
+            </div>
+            <div class="m-card">
+              <div class="m-meta">
+                <div class="m-title">Parallel Chunks</div>
+                <div class="m-sub">8 connections (aria2c)</div>
+              </div>
+            </div>
+          </div>
+          <div class="screen-nav">
+            <span>Home</span>
+            <span>Search</span>
+            <span>Queue</span>
+            <span class="active">Settings</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
