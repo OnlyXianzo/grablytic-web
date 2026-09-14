@@ -1,5 +1,5 @@
 ---
-// src/sections/Showcase.astro — Tactile Hardware Screenshot Showcase (Anti-AI Earth Aesthetic)
+// src/sections/Showcase.astro — Fluid Center-Magnifying 3D Screenshot Showcase (Anti-AI Earth Aesthetic)
 ---
 
 <section id="showcase" class="text-center py-20 px-4 overflow-hidden relative scroll-mt-24">
@@ -16,50 +16,62 @@
   </div>
 
   <div class="shots-container relative w-full overflow-hidden">
-    <div class="shots flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth py-10 px-4 sm:px-8 justify-start sm:justify-center items-center flex-nowrap">
+    <!-- Fluid drag & scroll track -->
+    <div id="showcase-track" class="shots flex gap-4 sm:gap-6 overflow-x-auto py-12 px-4 justify-start items-center flex-nowrap" role="region" aria-label="TrueStream screen tour carousel" tabindex="0">
       <!-- Frame 0: Home -->
-      <div class="frame" data-side="left" style="--i:0" tabindex="0">
-        <div class="frame-tag">HOME</div>
-        <img src="/shots/optimized/home-screen.webp" alt="TrueStream Home — empty state" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+      <div class="frame" data-index="0" tabindex="0" role="group" aria-label="Home screen">
+        <div class="frame-inner">
+          <div class="frame-tag">HOME</div>
+          <img src="/shots/optimized/home-screen.webp" alt="TrueStream Home — empty state" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+        </div>
       </div>
 
       <!-- Frame 1: Search -->
-      <div class="frame" data-side="near-left" style="--i:1" tabindex="0">
-        <div class="frame-tag">LOGIN & COOKIES</div>
-        <img src="/shots/optimized/cookies-screen.webp" alt="TrueStream Cookies and site logins" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+      <div class="frame" data-index="1" tabindex="0" role="group" aria-label="Cookies and logins">
+        <div class="frame-inner">
+          <div class="frame-tag">LOGIN & COOKIES</div>
+          <img src="/shots/optimized/cookies-screen.webp" alt="TrueStream Cookies and site logins" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+        </div>
       </div>
 
       <!-- Frame 2: Format Picker Hero -->
-      <div class="frame" data-side="center" style="--i:2" tabindex="0">
-        <div class="frame-tag frame-tag-hero">16K HDR PICKER</div>
-        <img src="/shots/optimized/format-picker-16k.webp" alt="TrueStream Format Picker — 16K HDR streams" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+      <div class="frame is-active" data-index="2" tabindex="0" role="group" aria-label="16K HDR Format Picker">
+        <div class="frame-inner">
+          <div class="frame-tag frame-tag-hero">16K HDR PICKER</div>
+          <img src="/shots/optimized/format-picker-16k.webp" alt="TrueStream Format Picker — 16K HDR streams" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+        </div>
       </div>
 
       <!-- Frame 3: Queue -->
-      <div class="frame" data-side="near-right" style="--i:3" tabindex="0">
-        <div class="frame-tag">LIVE QUEUE</div>
-        <img src="/shots/optimized/library-downloads.webp" alt="TrueStream Library — live downloads" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+      <div class="frame" data-index="3" tabindex="0" role="group" aria-label="Live downloads queue">
+        <div class="frame-inner">
+          <div class="frame-tag">LIVE QUEUE</div>
+          <img src="/shots/optimized/library-downloads.webp" alt="TrueStream Library — live downloads" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+        </div>
       </div>
 
       <!-- Frame 4: Settings -->
-      <div class="frame" data-side="right" style="--i:4" tabindex="0">
-        <div class="frame-tag">SETTINGS</div>
-        <img src="/shots/optimized/settings-general.webp" alt="TrueStream Settings" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+      <div class="frame" data-index="4" tabindex="0" role="group" aria-label="Application settings">
+        <div class="frame-inner">
+          <div class="frame-tag">SETTINGS</div>
+          <img src="/shots/optimized/settings-general.webp" alt="TrueStream Settings" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Interactive Pagination Dots -->
   <div class="showcase-dots flex justify-center items-center gap-2 mt-4" aria-label="Showcase carousel navigation">
-    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-6 bg-[#FFB4A3]" data-index="0" aria-label="Slide 1: Home"></button>
+    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="0" aria-label="Slide 1: Home"></button>
     <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="1" aria-label="Slide 2: Cookies"></button>
-    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="2" aria-label="Slide 3: Format Picker"></button>
+    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-6 bg-[#FFB4A3]" data-index="2" aria-label="Slide 3: Format Picker" aria-current="true"></button>
     <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="3" aria-label="Slide 4: Downloads"></button>
     <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="4" aria-label="Slide 5: Settings"></button>
   </div>
 
-  <p class="text-xs text-[#A28C87] mt-3 tracking-wide flex items-center justify-center gap-1.5 sm:hidden" aria-hidden="true">
-    <span>←</span> swipe horizontally to explore <span>→</span>
+  <p class="text-xs text-[#A28C87] mt-3 tracking-wide flex items-center justify-center gap-1.5" aria-hidden="true">
+    <span class="hidden sm:inline">← drag or scroll horizontally to explore →</span>
+    <span class="sm:hidden">← swipe horizontally to explore →</span>
   </p>
 </section>
 
@@ -67,20 +79,30 @@
   .shots-container {
     perspective: 1200px;
     perspective-origin: center center;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
 
   .shots {
     scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-hairline) transparent;
-    transform-style: preserve-3d;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-y pinch-zoom;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    scroll-behavior: smooth;
+    padding-inline: calc(50% - 86px);
+    scroll-padding-inline: calc(50% - 86px);
   }
   .shots::-webkit-scrollbar {
-    height: 6px;
+    display: none;
   }
-  .shots::-webkit-scrollbar-thumb {
-    background: var(--color-hairline);
-    border-radius: 6px;
+  .shots.is-grabbing {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    scroll-behavior: auto;
   }
 
   .frame {
@@ -88,69 +110,32 @@
     width: 172px;
     flex: 0 0 auto;
     aspect-ratio: 9/19;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .frame-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 28px;
     border: 1px solid rgba(84, 67, 63, 0.45);
-    background: var(--color-tile-low);
+    background: var(--color-tile-low, #181514);
     padding: 5px;
     display: flex;
     flex-direction: column;
-    opacity: 0;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
-    scroll-snap-align: center;
-    cursor: pointer;
-    transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1), 
-                opacity 550ms cubic-bezier(0.16, 1, 0.3, 1), 
-                box-shadow 350ms ease, 
-                border-color 350ms ease;
-    transition-delay: calc(var(--i, 0) * 80ms);
-    outline: none;
-  }
-
-  /* Ephemeral layer promotion: only promote during active transition */
-  #showcase.inview:not(.settled) .frame {
+    transform-origin: center center;
     will-change: transform, opacity;
+    transition: box-shadow 300ms ease, border-color 300ms ease;
   }
 
-  /* Initial Pre-scroll Entrance Positions */
-  .frame[data-side="left"] { transform: translateX(-100px) rotateY(20deg) scale(0.85); }
-  .frame[data-side="near-left"] { transform: translateX(-50px) rotateY(10deg) scale(0.9); }
-  .frame[data-side="center"] { transform: translateY(40px) scale(0.92); }
-  .frame[data-side="near-right"] { transform: translateX(50px) rotateY(-10deg) scale(0.9); }
-  .frame[data-side="right"] { transform: translateX(100px) rotateY(-20deg) scale(0.85); }
-
-  /* Settled 3D Physical Fan State */
-  #showcase.inview .frame[data-side="left"] { 
-    transform: rotateY(10deg) scale(0.93) translateY(6px); 
-    opacity: 0.9;
-  }
-  #showcase.inview .frame[data-side="near-left"] { 
-    transform: rotateY(5deg) scale(0.97) translateY(2px); 
-    opacity: 0.95;
-  }
-  #showcase.inview .frame[data-side="center"] { 
-    transform: scale(1.05) translateY(-6px); 
-    opacity: 1;
-    z-index: 5;
-    border-color: rgba(255, 180, 163, 0.45);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(155, 80, 62, 0.2);
-  }
-  #showcase.inview .frame[data-side="near-right"] { 
-    transform: rotateY(-5deg) scale(0.97) translateY(2px); 
-    opacity: 0.95;
-  }
-  #showcase.inview .frame[data-side="right"] { 
-    transform: rotateY(-10deg) scale(0.93) translateY(6px); 
-    opacity: 0.9;
-  }
-
-  /* Interactive Hover & Focus Elevation (Brings card forward into focus) */
-  #showcase.inview .frame:hover,
-  #showcase.inview .frame:focus-visible {
-    transform: translateY(-14px) scale(1.08) rotateY(0deg) !important;
-    opacity: 1 !important;
-    z-index: 25 !important;
-    border-color: rgba(255, 180, 163, 0.7) !important;
-    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.85), 0 0 28px rgba(155, 80, 62, 0.35) !important;
+  /* SSR fallback for active card */
+  .frame.is-active .frame-inner {
+    border-color: rgba(255, 180, 163, 0.65);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 28px rgba(155, 80, 62, 0.3);
   }
 
   /* Tactile Frame Caption Tag */
@@ -172,33 +157,32 @@
     color: #D9C1BC;
     pointer-events: none;
     white-space: nowrap;
+    transition: background 300ms ease, border-color 300ms ease, color 300ms ease;
   }
 
+  .frame.is-active .frame-tag,
   .frame-tag-hero {
-    background: rgba(155, 80, 62, 0.65);
-    border-color: rgba(255, 180, 163, 0.4);
+    background: rgba(155, 80, 62, 0.75);
+    border-color: rgba(255, 180, 163, 0.5);
     color: #FFFFFF;
   }
 
-  /* Tactile Hardware Rim Light (Warm ceramic/terracotta edge reflection) */
-  .frame::before {
+  /* Tactile Hardware Rim Light */
+  .frame-inner::before {
     content: "";
     position: absolute;
     inset: -1px;
     border-radius: 29px;
     opacity: 0;
     box-shadow: inset 0 0 0 1px rgba(255, 180, 163, 0.35), 0 8px 24px rgba(125, 57, 41, 0.15);
-    transition: opacity 700ms ease-out 150ms;
+    transition: opacity 400ms ease-out;
     pointer-events: none;
     z-index: 10;
   }
 
-  .frame[data-side="center"]::before {
-    box-shadow: inset 0 0 0 1.5px rgba(255, 180, 163, 0.55), 0 12px 32px rgba(125, 57, 41, 0.25);
-  }
-
-  #showcase.inview .frame::before {
+  .frame.is-active .frame-inner::before {
     opacity: 1;
+    box-shadow: inset 0 0 0 1.5px rgba(255, 180, 163, 0.6), 0 14px 36px rgba(125, 57, 41, 0.3);
   }
 
   .screen-img {
@@ -209,27 +193,22 @@
     display: block;
     user-select: none;
     -webkit-user-drag: none;
-  }
-
-  @media (max-width: 900px) {
-    .frame { width: 148px; }
+    pointer-events: none;
   }
 
   @media (max-width: 640px) {
-    .frame { width: 190px; }
-    .frame[data-side] { transform: translateY(40px); }
-    #showcase.inview .frame[data-side] { 
-      transform: none; 
-      opacity: 1; 
+    .frame {
+      width: 190px;
     }
-    #showcase.inview .frame[data-side="center"] {
-      border-color: rgba(255, 180, 163, 0.45);
+    .shots {
+      padding-inline: calc(50% - 95px);
+      scroll-padding-inline: calc(50% - 95px);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .frame, .frame::before {
-      animation: none !important;
+    .frame-inner {
+      will-change: auto !important;
       transition: none !important;
       transform: none !important;
       opacity: 1 !important;
@@ -242,60 +221,231 @@
     const showcase = document.getElementById('showcase');
     if (!showcase) return;
 
-    const frames = showcase.querySelectorAll<HTMLElement>('.frame');
-    const dots = showcase.querySelectorAll<HTMLButtonElement>('.dot-btn');
-    const shotsContainer = showcase.querySelector<HTMLElement>('.shots');
+    const track = document.getElementById('showcase-track') as HTMLElement | null;
+    if (!track) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-      showcase.classList.add('inview', 'settled');
-      return;
+    const frames = Array.from(track.querySelectorAll<HTMLElement>('.frame'));
+    const frameInners = frames.map(f => f.querySelector<HTMLElement>('.frame-inner')).filter(Boolean) as HTMLElement[];
+    const dots = Array.from(showcase.querySelectorAll<HTMLButtonElement>('.dot-btn'));
+
+    if (frames.length === 0 || frameInners.length === 0) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Immutable geometry cache — updated strictly via ResizeObserver
+    let containerWidth = 0;
+    let frameWidth = 0;
+    let pitch = 0;
+    let frameCenters: number[] = [];
+    let isTicking = false;
+
+    function measureGeometry() {
+      if (!track) return;
+      containerWidth = track.clientWidth;
+      frameWidth = frames[0].offsetWidth;
+      pitch = frames.length > 1 ? (frames[1].offsetLeft - frames[0].offsetLeft) : frameWidth;
+      frameCenters = frames.map(f => f.offsetLeft + frameWidth / 2);
     }
 
-    // Scroll reveal observer
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        showcase.classList.add('inview');
-        setTimeout(() => {
-          showcase.classList.add('settled');
-        }, 1100);
-        observer.disconnect();
+    // Mathematical Coverflow Transform (Zero Layout Queries in Loop)
+    function updateCoverflow() {
+      isTicking = false;
+      if (!track || containerWidth === 0 || pitch === 0) return;
+
+      const scrollCenter = track.scrollLeft + (containerWidth / 2);
+      let nearestIdx = 0;
+      let minDistance = Infinity;
+
+      for (let i = 0; i < frames.length; i++) {
+        const frame = frames[i];
+        const inner = frameInners[i];
+        const center = frameCenters[i] || (frame.offsetLeft + frameWidth / 2);
+        const dist = (center - scrollCenter) / pitch;
+        const absDist = Math.abs(dist);
+
+        if (absDist < minDistance) {
+          minDistance = absDist;
+          nearestIdx = i;
+        }
+
+        if (reducedMotion) {
+          inner.style.transform = 'none';
+          inner.style.opacity = '1';
+          continue;
+        }
+
+        // Cosine bell-curve: 1.0 at center, smoothly tapering to 0.0 at |dist| >= 1.0
+        const clampedDist = Math.min(1.0, absDist);
+        const weight = (1 + Math.cos(Math.PI * clampedDist)) / 2;
+
+        // Dynamic properties:
+        // Scale: 0.88 -> 1.08 (active center magnification)
+        const scale = 0.88 + weight * 0.20;
+        // Inward 3D tilt: left cards tilt right, right cards tilt left
+        const rotateY = -Math.max(-1, Math.min(1, dist)) * 14;
+        // Z-depth: active card floats forward in 3D
+        const translateZ = (weight - 1) * 60;
+        // Opacity: 0.75 -> 1.0
+        const opacity = 0.75 + weight * 0.25;
+        // Elevation: center card always floats on top of siblings
+        const zIndex = Math.round(weight * 50) + 1;
+
+        inner.style.transform = `perspective(1000px) translateZ(${translateZ.toFixed(1)}px) scale(${scale.toFixed(4)}) rotateY(${rotateY.toFixed(2)}deg)`;
+        inner.style.opacity = opacity.toFixed(3);
+        frame.style.zIndex = zIndex.toString();
+
+        if (weight > 0.55) {
+          frame.classList.add('is-active');
+        } else {
+          frame.classList.remove('is-active');
+        }
       }
-    }, { threshold: 0.15 });
 
-    observer.observe(showcase);
+      // Update Pagination Dots
+      dots.forEach((dot, idx) => {
+        if (idx === nearestIdx) {
+          dot.classList.remove('w-2', 'bg-[#54433F]/60');
+          dot.classList.add('w-6', 'bg-[#FFB4A3]');
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.classList.remove('w-6', 'bg-[#FFB4A3]');
+          dot.classList.add('w-2', 'bg-[#54433F]/60');
+          dot.removeAttribute('aria-current');
+        }
+      });
+    }
 
-    // Interactive dots navigation
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const idx = parseInt(dot.dataset.index || '0', 10);
-        if (frames[idx] && shotsContainer) {
-          frames[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    function requestUpdate() {
+      if (!isTicking) {
+        requestAnimationFrame(updateCoverflow);
+        isTicking = true;
+      }
+    }
+
+    // Scroll listener for real-time mobile swipe & trackpad scroll
+    track.addEventListener('scroll', requestUpdate, { passive: true });
+
+    // Center specific slide
+    function scrollToSlide(idx: number, smooth: boolean = true) {
+      if (!track || idx < 0 || idx >= frames.length) return;
+      const targetCenter = frameCenters[idx] || (frames[idx].offsetLeft + frameWidth / 2);
+      const targetScroll = targetCenter - (containerWidth / 2);
+      track.scrollTo({
+        left: targetScroll,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+    }
+
+    // Unified Pointer Drag (Fluid PC Mouse Drag + Seamless Touch Fallthrough)
+    let isPointerDown = false;
+    let isDragging = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let hasMoved = false;
+    let activePointerId: number | null = null;
+
+    track.addEventListener('pointerdown', (e: PointerEvent) => {
+      // Only capture primary mouse button (touch uses native scroll-snap with touch-action: pan-y)
+      if (e.pointerType === 'mouse') {
+        if (e.button !== 0) return;
+        isPointerDown = true;
+        isDragging = false;
+        hasMoved = false;
+        startX = e.clientX;
+        startScrollLeft = track.scrollLeft;
+        activePointerId = e.pointerId;
+        track.setPointerCapture(e.pointerId);
+        track.classList.add('is-grabbing');
+      }
+    });
+
+    track.addEventListener('pointermove', (e: PointerEvent) => {
+      if (!isPointerDown || e.pointerId !== activePointerId) return;
+      const deltaX = e.clientX - startX;
+      if (Math.abs(deltaX) > 6) {
+        isDragging = true;
+        hasMoved = true;
+      }
+      if (isDragging) {
+        track.scrollLeft = startScrollLeft - deltaX;
+        requestUpdate();
+      }
+    });
+
+    function endPointer(e: PointerEvent) {
+      if (!track || e.pointerId !== activePointerId) return;
+      isPointerDown = false;
+      track.classList.remove('is-grabbing');
+      if (track.hasPointerCapture(e.pointerId)) {
+        track.releasePointerCapture(e.pointerId);
+      }
+      activePointerId = null;
+
+      if (isDragging) {
+        isDragging = false;
+        // Snap to nearest frame
+        const currentScrollCenter = track.scrollLeft + (containerWidth / 2);
+        let closestIdx = 0;
+        let minDiff = Infinity;
+        for (let i = 0; i < frameCenters.length; i++) {
+          const diff = Math.abs(frameCenters[i] - currentScrollCenter);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = i;
+          }
+        }
+        scrollToSlide(closestIdx, true);
+      }
+    }
+
+    track.addEventListener('pointerup', endPointer);
+    track.addEventListener('pointercancel', endPointer);
+
+    // Frame click to focus
+    frames.forEach((frame, idx) => {
+      frame.addEventListener('click', (e) => {
+        if (hasMoved) {
+          e.preventDefault();
+          return;
+        }
+        scrollToSlide(idx, true);
+      });
+
+      frame.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          scrollToSlide(idx, true);
         }
       });
     });
 
-    // Active slide indicator tracking via IntersectionObserver
-    if (shotsContainer && 'IntersectionObserver' in window) {
-      const slideObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            const idx = Array.from(frames).indexOf(entry.target as HTMLElement);
-            if (idx !== -1) {
-              dots.forEach((d, i) => {
-                if (i === idx) {
-                  d.classList.remove('w-2', 'bg-[#54433F]/60');
-                  d.classList.add('w-6', 'bg-[#FFB4A3]');
-                } else {
-                  d.classList.remove('w-6', 'bg-[#FFB4A3]');
-                  d.classList.add('w-2', 'bg-[#54433F]/60');
-                }
-              });
-            }
-          }
-        });
-      }, { root: shotsContainer, threshold: 0.5 });
+    // Dot navigation
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        scrollToSlide(idx, true);
+      });
+    });
 
-      frames.forEach((f) => slideObserver.observe(f));
+    // ResizeObserver to recalibrate cached coordinates
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(() => {
+        measureGeometry();
+        updateCoverflow();
+      });
+      ro.observe(track);
+    }
+
+    // Initial setup: measure and center Format Picker (index 2)
+    function init() {
+      measureGeometry();
+      scrollToSlide(2, false);
+      updateCoverflow();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
     }
   })();
 </script>
