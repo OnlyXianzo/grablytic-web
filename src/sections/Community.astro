@@ -3,7 +3,7 @@
 import stats from '../data/stats.json';
 ---
 
-<section id="community" class="py-20 px-4 max-w-4xl mx-auto text-center section-contain">
+<section id="community" class="py-20 px-4 max-w-4xl mx-auto text-center">
   <div class="max-w-2xl mx-auto mb-10">
     <span class="eyebrow mb-2 inline-block" data-reveal>
       Open Source · Copyleft
@@ -13,20 +13,21 @@ import stats from '../data/stats.json';
     </h2>
   </div>
 
-  <div class="flex justify-center gap-6 sm:gap-12 flex-wrap mb-10 py-6 px-8 rounded-2xl bg-[#1C1B1B] border border-[#54433F]/40 max-w-xl mx-auto" data-reveal>
-    <div class="text-center">
-      <b class="primary-value text-3xl sm:text-4xl block">
-        ★ <span id="gh-stars" data-count={stats.stars}>{stats.stars}</span>
+  <div class="flex justify-center gap-6 sm:gap-12 flex-wrap mb-10 py-6 px-8 rounded-2xl bg-[#1C1B1B] border border-[#54433F]/40 max-w-xl mx-auto shadow-md" data-reveal-group>
+    <div class="text-center" data-reveal>
+      <b class="primary-value text-3xl sm:text-4xl block flex items-center justify-center gap-1">
+        <span class="text-2xl text-[#FFB4A3]">★</span>
+        <span id="gh-stars" data-count={stats.stars}>{stats.stars}</span>
       </b>
       <span class="eyebrow-muted text-[11px] block mt-1">stars</span>
     </div>
-    <div class="text-center">
+    <div class="text-center" data-reveal>
       <b class="primary-value text-3xl sm:text-4xl block">
         <span id="gh-forks" data-count={stats.forks}>{stats.forks}</span>
       </b>
       <span class="eyebrow-muted text-[11px] block mt-1">forks</span>
     </div>
-    <div class="text-center">
+    <div class="text-center" data-reveal>
       <b class="primary-value text-3xl sm:text-4xl block">
         <span id="gh-watchers" data-count={stats.watchers}>{stats.watchers}</span>
       </b>

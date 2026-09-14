@@ -6,8 +6,11 @@ import { TAG, REL, REPO } from '../data/downloads';
 
 <header class="pt-32 pb-16 px-4 max-w-5xl mx-auto text-center flex flex-col items-center" id="top">
   <div class="mb-4 inline-flex flex-wrap items-center justify-center gap-2" data-hero="badges">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1B1B] border border-[#54433F]/40">
-      <span class="w-2 h-2 rounded-full bg-[#B7CCB9]" aria-hidden="true"></span>
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1B1B] border border-[#54433F]/40 shadow-sm">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B7CCB9] opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#B7CCB9]"></span>
+      </span>
       <span class="eyebrow-muted text-[11px]">LOCAL MEDIA EXTRACTION · ZERO TELEMETRY · GPL-3.0</span>
     </div>
     <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1C1B1B] border border-[#54433F]/40 text-[11px] font-semibold text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#FFB4A3]/50 transition">
@@ -16,8 +19,8 @@ import { TAG, REL, REPO } from '../data/downloads';
     </a>
   </div>
 
-  <div class="mb-6 relative" data-hero="logo">
-    <img src="/logo.png" alt="TrueStream Logo" width="104" height="104" class="w-24 h-24 sm:w-26 sm:h-26 rounded-3xl border border-[#54433F]/50 shadow-md" />
+  <div class="mb-6 relative group cursor-pointer transition-transform duration-300 hover:scale-105" data-hero="logo">
+    <img src="/logo.png" alt="TrueStream Logo" width="104" height="104" class="w-24 h-24 sm:w-26 sm:h-26 rounded-3xl border border-[#54433F]/50 shadow-md group-hover:border-[#FFB4A3]/50 transition-colors" />
   </div>
 
   <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#E5E2E1] max-w-3xl leading-[1.12]" data-hero="title">

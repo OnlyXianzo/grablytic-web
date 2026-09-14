@@ -7,7 +7,7 @@ function formatMB(bytes: number): string {
 }
 ---
 
-<section id="downloads" class="py-20 px-4 max-w-4xl mx-auto section-contain">
+<section id="downloads" class="py-20 px-4 max-w-4xl mx-auto">
   <div class="text-center max-w-2xl mx-auto mb-12">
     <span class="eyebrow mb-2 inline-block" data-reveal>
       Target Matrix · 15 Binaries
@@ -133,7 +133,11 @@ function formatMB(bytes: number): string {
               }
               const old = btn.textContent;
               btn.textContent = 'Copied ✓';
-              setTimeout(() => { btn.textContent = old; }, 1500);
+              btn.classList.add('text-[#B7CCB9]', 'border-[#B7CCB9]/60', 'scale-105');
+              setTimeout(() => {
+                btn.textContent = old;
+                btn.classList.remove('text-[#B7CCB9]', 'border-[#B7CCB9]/60', 'scale-105');
+              }, 1600);
             });
           });
         </script>

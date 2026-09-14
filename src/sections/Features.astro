@@ -3,7 +3,7 @@
 import { features } from '../data/features';
 ---
 
-<section id="features" class="py-20 px-4 max-w-6xl mx-auto section-contain">
+<section id="features" class="py-20 px-4 max-w-6xl mx-auto">
   <div class="text-center max-w-2xl mx-auto mb-12">
     <span class="eyebrow mb-2 inline-block" data-reveal>
       Philosophy & Engine
@@ -16,9 +16,9 @@ import { features } from '../data/features';
     </p>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal-group>
     {features.map((feat) => (
-      <div class="paper-tile p-6 flex flex-col justify-between group" data-reveal>
+      <div class="paper-tile p-6 flex flex-col justify-between group hover:border-[#FFB4A3]/40 hover:-translate-y-1.5 transition-all duration-300" data-reveal>
         <div>
           <div class="mb-3">
             <span class="eyebrow-muted text-[10px]">

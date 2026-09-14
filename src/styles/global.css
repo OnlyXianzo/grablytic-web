@@ -53,6 +53,22 @@
     position: relative;
   }
 
+  /* Tactile Earth Ambient Lighting (Compositor-safe, non-re-rendering depth) */
+  body::before {
+    content: "";
+    position: fixed;
+    top: -8vw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 900px;
+    height: 480px;
+    background: radial-gradient(ellipse at center, rgba(155, 80, 62, 0.13) 0%, rgba(125, 57, 41, 0.04) 45%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(50px);
+  }
+
   code, pre {
     font-family: 'JetBrains Mono', monospace;
   }
@@ -208,20 +224,24 @@ details.faq-item summary::-webkit-details-marker {
 
 details.faq-item summary::after {
   content: "+";
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 1;
   color: var(--color-ink-faint);
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
 }
 
 details.faq-item[open] summary::after {
-  content: "−";
+  transform: rotate(45deg);
   color: var(--color-terracotta);
 }
 
-/* Performance: Off-screen Subtree Virtualization (Skips layout & paint until near viewport) */
-.section-contain {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
+/* Tactile Active Press (Universal spring feedback for touch and click) */
+.btn-primary:active,
+.btn-secondary:active,
+.paper-tile:active,
+details.faq-item:active {
+  transform: scale(0.98);
+  transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Reduced Motion Guard — Instant Static Display */

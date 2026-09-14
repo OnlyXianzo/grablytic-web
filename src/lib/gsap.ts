@@ -19,7 +19,7 @@ export function isReducedMotion(): boolean {
 }
 
 /**
- * Hero entrance timeline (title rise, badge pop, button entrance).
+ * Hero entrance timeline with spring bounce and staggered beats.
  */
 export function initHeroAnimation(container: HTMLElement | null = null): void {
   if (typeof window === 'undefined' || isReducedMotion()) return;
@@ -28,19 +28,20 @@ export function initHeroAnimation(container: HTMLElement | null = null): void {
   const ctx = gsap.context(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.from('[data-hero="logo"]', { scale: 0.5, opacity: 0, duration: 0.7, ease: 'back.out(1.6)' })
-      .from('[data-hero="title"]', { y: 40, opacity: 0, duration: 0.8 }, '-=0.35')
-      .from('[data-hero="sub"]', { y: 24, opacity: 0, duration: 0.6 }, '-=0.45')
-      .from('[data-hero="cta"] a, [data-hero="cta"] button', { y: 20, opacity: 0, stagger: 0.08, duration: 0.5 }, '-=0.3')
-      .from('[data-hero="badges"] span, [data-hero="badges"] a', { y: 12, opacity: 0, stagger: 0.06, duration: 0.4 }, '-=0.25')
-      .from('[data-hero="stats"]', { opacity: 0, duration: 0.5 }, '-=0.2');
+    tl.from('[data-hero="badges"]', { y: -16, opacity: 0, duration: 0.6, ease: 'power2.out' })
+      .from('[data-hero="logo"]', { scale: 0.7, opacity: 0, rotation: -6, duration: 0.8, ease: 'back.out(1.8)' }, '-=0.3')
+      .from('[data-hero="title"]', { y: 35, opacity: 0, duration: 0.85, ease: 'power3.out' }, '-=0.45')
+      .from('[data-hero="sub"]', { y: 20, opacity: 0, duration: 0.7 }, '-=0.55')
+      .from('[data-hero="cta"] a, [data-hero="cta"] button', { y: 22, opacity: 0, scale: 0.95, stagger: 0.1, duration: 0.6, ease: 'back.out(1.5)' }, '-=0.4')
+      .from('[data-hero="cta2"] a, [data-hero="cta2"] button', { y: 15, opacity: 0, stagger: 0.08, duration: 0.5 }, '-=0.3')
+      .from('[data-hero="stats"] > div', { y: 20, opacity: 0, stagger: 0.08, duration: 0.6, ease: 'power2.out' }, '-=0.3');
   }, scope);
 
   return () => ctx.revert();
 }
 
 /**
- * Scroll-triggered element reveals powered by native IntersectionObserver.
+ * Scroll-triggered element reveals powered by native IntersectionObserver with rhythmic staggering.
  * Runs off-thread, eliminates main-thread JS bounds loops, and cleans up will-change.
  */
 export function initScrollReveals(rootSelector: string = '[data-reveal]'): void {
@@ -57,42 +58,82 @@ export function initScrollReveals(rootSelector: string = '[data-reveal]'): void 
     return;
   }
 
-  // Initialize elements to hidden rest state
-  elements.forEach((el) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translate3d(0, 24px, 0)';
-  });
+  // Handle grouped reveals (e.g. grids of cards) for coordinated liquid stagger
+  const groups = document.querySelectorAll<HTMLElement>('[data-reveal-group]');
+  const handledElements = new Set<HTMLElement>();
 
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          obs.unobserve(el);
+  groups.forEach((group) => {
+    const groupItems = group.querySelectorAll<HTMLElement>(rootSelector);
+    if (groupItems.length === 0) return;
 
-          // Ephemeral layer promotion
-          el.style.willChange = 'transform, opacity';
-          gsap.to(el, {
+    groupItems.forEach((el) => {
+      handledElements.add(el);
+      el.style.opacity = '0';
+      el.style.transform = 'translate3d(0, 30px, 0) scale(0.97)';
+    });
+
+    const groupObserver = new IntersectionObserver(
+      (entries, obs) => {
+        if (entries[0].isIntersecting) {
+          obs.unobserve(group);
+          gsap.to(Array.from(groupItems), {
             y: 0,
+            scale: 1,
             opacity: 1,
-            duration: 0.6,
+            duration: 0.7,
+            stagger: 0.08,
             ease: 'power3.out',
-            onComplete: () => {
-              el.style.willChange = 'auto'; // Release GPU backing store immediately
-            },
+            clearProps: 'willChange',
           });
         }
-      });
-    },
-    { rootMargin: '0px 0px -8% 0px', threshold: 0.1 }
-  );
+      },
+      { rootMargin: '0px 0px -6% 0px', threshold: 0.1 }
+    );
 
-  elements.forEach((el) => observer.observe(el));
+    groupObserver.observe(group);
+  });
+
+  // Handle standalone reveals
+  const standaloneElements: HTMLElement[] = [];
+  elements.forEach((el) => {
+    if (!handledElements.has(el)) {
+      standaloneElements.push(el);
+      el.style.opacity = '0';
+      el.style.transform = 'translate3d(0, 24px, 0)';
+    }
+  });
+
+  if (standaloneElements.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            obs.unobserve(el);
+
+            el.style.willChange = 'transform, opacity';
+            gsap.to(el, {
+              y: 0,
+              opacity: 1,
+              duration: 0.65,
+              ease: 'power3.out',
+              onComplete: () => {
+                el.style.willChange = 'auto';
+              },
+            });
+          }
+        });
+      },
+      { rootMargin: '0px 0px -6% 0px', threshold: 0.1 }
+    );
+
+    standaloneElements.forEach((el) => observer.observe(el));
+  }
 }
 
 /**
  * Animated number counter using native IntersectionObserver.
- * Avoids per-counter ScrollTrigger instances on low-end CPUs.
+ * Features a celebratory spring bounce on completion for tactile delight.
  */
 export function initCountUps(): void {
   if (typeof window === 'undefined') return;
@@ -119,11 +160,18 @@ export function initCountUps(): void {
           const state = { val: 0 };
           gsap.to(state, {
             val: end,
-            duration: 1.4,
+            duration: 1.5,
             ease: 'power2.out',
             onUpdate: () => {
               el.textContent = Math.round(state.val).toString();
             },
+            onComplete: () => {
+              // Celebratory spring bounce when number completes
+              gsap.fromTo(el, 
+                { scale: 1.25, color: '#FFDAD2' }, 
+                { scale: 1, color: '', duration: 0.45, ease: 'back.out(2)' }
+              );
+            }
           });
         }
       });
@@ -164,5 +212,3 @@ export function initMagneticButtons(selector: string = '.btn-magnetic'): void {
     });
   });
 }
-
-
