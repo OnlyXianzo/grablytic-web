@@ -107,19 +107,4 @@ export function initMagneticButtons(selector: string = '.btn-magnetic'): void {
   });
 }
 
-/**
- * Subtle parallax orbs following mouse movement on desktop.
- */
-export function initOrbParallax(): void {
-  if (typeof window === 'undefined' || isReducedMotion()) return;
 
-  // Only enable on pointer fine devices (desktop mouse)
-  if (!window.matchMedia('(pointer: fine)').matches) return;
-
-  window.addEventListener('mousemove', (e: MouseEvent) => {
-    const x = (e.clientX / window.innerWidth - 0.5);
-    const y = (e.clientY / window.innerHeight - 0.5);
-    gsap.to('.ambient-orb-a', { x: x * 50, y: y * 40, duration: 1.2, ease: 'power1.out' });
-    gsap.to('.ambient-orb-b', { x: x * -60, y: y * -50, duration: 1.4, ease: 'power1.out' });
-  });
-}
