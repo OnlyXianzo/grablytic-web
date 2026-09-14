@@ -74,10 +74,62 @@ function formatMB(bytes: number): string {
             </a>
           </div>
         ))}
-        <div class="p-3.5 rounded-lg bg-[#0E0E0E] border border-[#353534] text-xs text-[#D9C1BC]">
-          <p class="font-mono text-[#A28C87] mb-1"># Arch Linux installation (AUR submission pending):</p>
-          <code class="text-[#FFB4A3] block overflow-x-auto select-all">sudo pacman -U truestream-0.0.1-1-x86_64.pkg.tar.zst</code>
+        <div class="p-3.5 rounded-lg bg-[#0E0E0E] border border-[#353534] text-xs text-[#D9C1BC] space-y-3">
+          <p class="font-semibold text-[#E5E2E1]">One-command install — pick your family:</p>
+          <div>
+            <p class="font-mono text-[#A28C87] mb-1"># Debian / Ubuntu / Mint (x64 — apt resolves dependencies):</p>
+            <div class="flex items-start gap-2">
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">curl -LO {REL}/truestream_0.0.1_amd64.deb && sudo apt install ./truestream_0.0.1_amd64.deb</code>
+              <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy Debian install command">Copy</button>
+            </div>
+            <p class="font-mono text-[#A28C87] mt-2 mb-1"># ARM64 variant:</p>
+            <div class="flex items-start gap-2">
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">curl -LO {REL}/truestream_0.0.1_arm64.deb && sudo apt install ./truestream_0.0.1_arm64.deb</code>
+              <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy ARM64 Debian install command">Copy</button>
+            </div>
+          </div>
+          <div>
+            <p class="font-mono text-[#A28C87] mb-1"># Fedora / RHEL / openSUSE (x64 — direct URL install):</p>
+            <div class="flex items-start gap-2">
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo dnf install {REL}/truestream-0.0.1-1.x86_64.rpm</code>
+              <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy Fedora install command">Copy</button>
+            </div>
+            <div class="flex items-start gap-2 mt-2">
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo zypper install {REL}/truestream-0.0.1-1.x86_64.rpm</code>
+              <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy openSUSE install command">Copy</button>
+            </div>
+          </div>
+          <div>
+            <p class="font-mono text-[#A28C87] mb-1"># Arch / Manjaro / EndeavourOS (x64 — today; AUR submission pending):</p>
+            <div class="flex items-start gap-2">
+              <code class="text-[#FFB4A3] block overflow-x-auto select-all flex-1 font-mono">sudo pacman -U {REL}/truestream-0.0.1-1-x86_64.pkg.tar.zst</code>
+              <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-[#54433F]/40 hover:border-[#FFB4A3]/50 transition" aria-label="Copy Arch install command">Copy</button>
+            </div>
+            <p class="font-mono text-[#A28C87] mt-2">With helpers: <code class="text-[#FFB4A3]">yay -U {REL}/truestream-0.0.1-1-x86_64.pkg.tar.zst</code> or <code class="text-[#FFB4A3]">paru -U {REL}/truestream-0.0.1-1-x86_64.pkg.tar.zst</code> — after AUR ingestion: <code class="text-[#FFB4A3]">paru -S truestream-bin</code></p>
+          </div>
         </div>
+
+        <script>
+          // Copy-to-clipboard for one-command install boxes (with fallback).
+          document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+            btn.addEventListener('click', async () => {
+              const code = btn.parentElement?.querySelector('code')?.innerText ?? '';
+              try {
+                await navigator.clipboard.writeText(code);
+              } catch {
+                const ta = document.createElement('textarea');
+                ta.value = code;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                ta.remove();
+              }
+              const old = btn.textContent;
+              btn.textContent = 'Copied ✓';
+              setTimeout(() => { btn.textContent = old; }, 1500);
+            });
+          });
+        </script>
       </div>
     </details>
 
