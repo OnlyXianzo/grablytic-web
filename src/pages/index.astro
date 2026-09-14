@@ -70,19 +70,51 @@ const faqs = [
     dialog { background:var(--panel); color:var(--txt); border:1px solid var(--line); border-radius:12px; max-width:520px }
     .demo { background:#3b2f04; border:1px solid #9e6a03; border-radius:8px; padding:8px 12px; font-size:14px }
     code.addr { display:block; word-break:break-all; background:#0d1117; padding:8px; border-radius:8px; margin:4px 0 }
+    /* luxury motion layer */
+    nav.top { position:sticky; top:0; z-index:40; backdrop-filter:blur(12px); background:rgba(13,17,23,.8); border-bottom:1px solid var(--line) }
+    nav.top .in { max-width:960px; margin:auto; padding:12px 16px; display:flex; align-items:center; justify-content:space-between }
+    nav.top a.l { color:var(--txt); text-decoration:none; font-weight:700 }
+    nav.top a.n { color:var(--dim); text-decoration:none; margin-left:16px; font-size:14px }
+    .orbs { position:fixed; inset:0; z-index:-1; overflow:hidden }
+    .orb { position:absolute; width:480px; height:480px; border-radius:50%; filter:blur(120px); opacity:.28 }
+    .orb.a { background:#1f6feb; top:-160px; left:-120px; animation:drift 14s ease-in-out infinite alternate }
+    .orb.b { background:#8957e5; bottom:-200px; right:-140px; animation:drift 18s ease-in-out infinite alternate-reverse }
+    @keyframes drift { to { transform:translate(60px,40px) scale(1.12) } }
+    @keyframes floaty { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-12px) } }
+    .hero img { animation:floaty 5s ease-in-out infinite }
+    .marquee { overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--panel) }
+    .marquee .track { display:inline-flex; gap:32px; white-space:nowrap; padding:12px 0; animation:slide 28s linear infinite; color:var(--dim) }
+    @keyframes slide { to { transform:translateX(-50%) } }
+    .stats { display:flex; gap:32px; justify-content:center; margin-top:24px; flex-wrap:wrap }
+    .stats b { font-size:28px; display:block } .stats span { color:var(--dim); font-size:13px }
+    @media (prefers-reduced-motion: reduce) { .orb,.hero img,.marquee .track { animation:none !important } }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <img src="/logo.png" alt="TrueStream logo" />
-    <h1>Media that moves you.<br />No ads. No tracking.</h1>
-    <p>TrueStream is a free, privacy-first media extractor for Android, Linux and Windows — highest fidelity from 1,000+ platforms, 100% local processing.</p>
-    <p><a id="dl-primary" class="btn btn-p" href={`${REL}/truestream-v0.0.1-arm64-deno.apk`}>Download</a>
+  <div class="orbs" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div></div>
+  <nav class="top"><div class="in">
+    <a class="l" href="#top">TrueStream</a>
+    <div><a class="n" href="#downloads">Downloads</a><a class="n" href="#features">Features</a><a class="n" href="#faq">FAQ</a></div>
+  </div></nav>
+  <header class="hero" id="top">
+    <img src="/logo.png" alt="TrueStream logo" data-hero="logo" />
+    <h1 data-hero="title">Media that moves you.<br />No ads. No tracking.</h1>
+    <p data-hero="sub">TrueStream is a free, privacy-first media extractor for Android, Linux and Windows — highest fidelity from 1,000+ platforms, 100% local processing.</p>
+    <p data-hero="cta"><a id="dl-primary" class="btn btn-p" href={`${REL}/truestream-v0.0.1-arm64-deno.apk`}>Download</a>
        <a class="btn btn-s" href={REPO}>View Source</a></p>
-    <p><a class="btn btn-s" href="obtainium://app/https://github.com/OnlyXianzo/TrueStream">Add to Obtainium</a>
+    <p data-hero="cta2"><a class="btn btn-s" href="obtainium://app/https://github.com/OnlyXianzo/TrueStream">Add to Obtainium</a>
        <button class="btn btn-s" onclick="document.getElementById('donate').showModal()">Support TrueStream</button></p>
-    <div class="badges"><span>100% Open Source (GPL-3.0)</span><span>Zero Telemetry</span><span>v0.0.1 Beta</span></div>
+    <div class="badges" data-hero="badges"><span>100% Open Source (GPL-3.0)</span><span>Zero Telemetry</span><span>v0.0.1 Beta</span></div>
+    <div class="stats" data-hero="stats">
+      <div><b><span data-count="1000">0</span>+</b><span>platforms via yt-dlp</span></div>
+      <div><b><span data-count="15">0</span></b><span>release binaries</span></div>
+      <div><b><span data-count="3">0</span></b><span>operating systems</span></div>
+    </div>
   </header>
+
+  <div class="marquee" aria-hidden="true"><div class="track" id="marquee-track">
+    <span>YouTube 4K/8K/HDR ✦ SoundCloud 320k ✦ Twitch ✦ TikTok ✦ Instagram ✦ Twitter/X ✦ Bilibili ✦ Bandcamp ✦ 1,000+ more via yt-dlp ✦&nbsp;</span><span>YouTube 4K/8K/HDR ✦ SoundCloud 320k ✦ Twitch ✦ TikTok ✦ Instagram ✦ Twitter/X ✦ Bilibili ✦ Bandcamp ✦ 1,000+ more via yt-dlp ✦&nbsp;</span>
+  </div></div>
 
   <section>
     <h2>See it in action</h2>
@@ -95,15 +127,15 @@ const faqs = [
     </div>
   </section>
 
-  <section>
-    <h2>Why TrueStream</h2>
+  <section id="features">
+    <h2 data-reveal>Why TrueStream</h2>
     <div class="grid">
-      {features.map(([t, d]) => <div class="card"><h3>{t}</h3><p>{d}</p></div>)}
+      {features.map(([t, d]) => <div class="card" data-reveal><h3>{t}</h3><p>{d}</p></div>)}
     </div>
   </section>
 
-  <section class="dl">
-    <h2>Other architectures &amp; platforms</h2>
+  <section class="dl" id="downloads">
+    <h2 data-reveal>Other architectures &amp; platforms</h2>
     <details open><summary>Android</summary><ul>{android.map(a => <li><a href={`${REL}/${a.f}`}>{a.label}</a></li>)}</ul></details>
     <details><summary>Linux</summary><ul>{linux.map(a => <li><a href={`${REL}/${a.f}`}>{a.label}</a></li>)}</ul>
       <p>Arch (AUR submission pending): <code>sudo pacman -U truestream-0.0.1-1-&lt;arch&gt;.pkg.tar.zst</code> · Flatpak &amp; WinGet listings in progress.</p></details>
@@ -111,13 +143,13 @@ const faqs = [
       <p>WinGet (after store approval): <code>winget install OnlyXianzo.TrueStream</code></p></details>
   </section>
 
-  <section>
-    <h2>Straight answers</h2>
-    {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+  <section id="faq">
+    <h2 data-reveal>Straight answers</h2>
+    {faqs.map(([q, a]) => <details data-reveal><summary>{q}</summary><p>{a}</p></details>)}
   </section>
 
   <footer>
-    <p>TrueStream extracts publicly available streams and hosts no content. <a href={`${REPO}/blob/main/DMCA.md`}>DMCA</a> · <a href={`${REPO}/blob/main/LICENSE`}>License (GPL-3.0)</a> · <a href={`${REPO}/blob/main/SECURITY.md`}>Security</a> · Contact: xianzo.help@gmail.com · VirusTotal scan: pending first APK scan (TODO).</p>
+    <p>TrueStream extracts publicly available streams and hosts no content. <a href={`${REPO}/blob/main/DMCA.md`}>DMCA</a> · <a href={`${REPO}/blob/main/LICENSE`}>License (GPL-3.0)</a> · <a href={`${REPO}/blob/main/SECURITY.md`}>Security</a> · Contact: truestream.support@gmail.com · VirusTotal scan: pending first APK scan (TODO).</p>
   </footer>
 
   <dialog id="donate">
@@ -130,6 +162,36 @@ const faqs = [
     <button onclick="document.getElementById('donate').close()">Close</button>
   </dialog>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  // Luxury motion: hero timeline, scroll reveals, counters, magnetic buttons, orb parallax.
+  (function(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!window.gsap)return;
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.timeline({defaults:{ease:'power3.out'}})
+    .from('[data-hero="logo"]',{scale:.4,opacity:0,duration:.7,ease:'back.out(1.6)'})
+    .from('[data-hero="title"]',{y:44,opacity:0,duration:.8},'-=.35')
+    .from('[data-hero="sub"]',{y:28,opacity:0,duration:.6},'-=.5')
+    .from('[data-hero="cta"] .btn',{y:20,opacity:0,stagger:.1,duration:.5},'-=.35')
+    .from('[data-hero="cta2"] .btn',{y:16,opacity:0,stagger:.1,duration:.45},'-=.3')
+    .from('[data-hero="badges"] span',{y:12,opacity:0,stagger:.08,duration:.4},'-=.3')
+    .from('[data-hero="stats"]',{opacity:0,duration:.5},'-=.2');
+  gsap.utils.toArray('[data-reveal]').forEach(function(el){
+    gsap.from(el,{y:36,opacity:0,duration:.7,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 88%',once:true}});});
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var end=+el.dataset.count,o={v:0};
+    ScrollTrigger.create({trigger:el,start:'top 92%',once:true,onEnter:function(){
+      gsap.to(o,{v:end,duration:1.4,ease:'power2.out',onUpdate:function(){el.textContent=Math.round(o.v);}});}});});
+  document.querySelectorAll('.btn-p').forEach(function(b){
+    b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();
+      gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.28,duration:.3});});
+    b.addEventListener('mouseleave',function(){gsap.to(b,{x:0,y:0,duration:.5,ease:'elastic.out(1,.5)'});});});
+  window.addEventListener('mousemove',function(e){
+    var x=(e.clientX/window.innerWidth-.5),y=(e.clientY/window.innerHeight-.5);
+    gsap.to('.orb.a',{x:x*50,y:y*40,duration:1.2});gsap.to('.orb.b',{x:x*-60,y:y*-50,duration:1.4});});
+  })();
+  </script>
   <script>
   // <2KB OS/arch router (userAgentData + userAgent fallback)
   (function(){var b=document.getElementById('dl-primary'),d=navigator.userAgentData||{},ua=navigator.userAgent||'';
