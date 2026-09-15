@@ -38,6 +38,10 @@ export const faqGroups: FaqGroup[] = [
         q: 'Can I contribute to development or packaging?',
         a: 'Absolutely — issues, feature requests, and pull requests are welcome on GitHub. Packaging manifests live in the distribution/ and fastlane/ directories of the repository.',
       },
+      {
+        q: 'Is there a full manual for every setting?',
+        a: 'Yes — the usage guide walks through every screen and setting: Format Picker, audio, playlists, subtitles, SponsorBlock, queue, speed tuning, cookies, schedules, and updates. Start at the docs hub.',
+      },
     ],
   },
   {

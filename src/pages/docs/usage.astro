@@ -1,0 +1,268 @@
+---
+// src/pages/docs/usage.astro — The complete manual: every screen and setting,
+// distilled from the app's docs/features.md and README (user-facing only).
+import Nav from '../../sections/Nav.astro';
+import Footer from '../../sections/Footer.astro';
+import { REPO } from '../../data/downloads';
+import '../../styles/global.css';
+
+interface ManualSection { id: string; eyebrow: string; title: string; intro: string; bullets: string[] }
+
+const sections: ManualSection[] = [
+  {
+    id: 'first-download',
+    eyebrow: 'Start here',
+    title: 'Your first download',
+    intro: 'The whole app is this loop: paste, pick, save. Everything else is refinement.',
+    bullets: [
+      'Paste any supported link on the Home tab — video, song, playlist, or podcast URL from 1,000+ platforms.',
+      'The Format Picker opens with a preview header (thumbnail, duration, stream counts) so you know what you found before committing.',
+      'Choose a quality or tap download to accept your preset. The queue card shows live speed, ETA sparkline, and progress.',
+      'Streaming progress caps at 99% by design — the final 100% lands when merging and tagging finish. Never restart a 99% item; watch its log instead.',
+    ],
+  },
+  {
+    id: 'format-picker',
+    eyebrow: 'Quality control',
+    title: 'Format Picker deep-dive',
+    intro: 'Where fidelity is decided. Defaults are smart; overrides are total.',
+    bullets: [
+      'Quality ceiling (default 4K): the ladder cascades AV1 → VP9 → H264 and stops at your ceiling — set it in Settings and never think about codecs again.',
+      'Explicit format override: pick a stream by ID when the ladder is not what you want (e.g. a smaller H264 for an old tablet).',
+      'Muxed badge: non-YouTube sites often offer pre-merged streams — badged in the picker, fastest to save since no merging is needed.',
+      'Audio-only toggle: one tap flips the job to sound-only (Opus default, FLAC lossless, or a compact preset) without leaving the picker.',
+      'Container choice: MKV default, MP4 where you need device compatibility. Never combined with remux in one job — the app guards this for you.',
+    ],
+  },
+  {
+    id: 'audio',
+    eyebrow: 'Music & podcasts',
+    title: 'Audio extraction',
+    intro: 'Full songs, podcast episodes, and rips — without video weight.',
+    bullets: [
+      'One-tap audio-only from any video: Opus default for quality-per-byte, FLAC for lossless archives, compact presets for small files.',
+      'Dedicated audio presets plus site recipes like Podcast Audio and Opus Compact in the Profile Editor.',
+      'Audio re-fetch from any item overflow menu: grabbed video but want the track too? Fetch just the audio afterwards.',
+      'Subtitles and thumbnails can ride along with audio jobs — embedded, not sidecar litter.',
+    ],
+  },
+  {
+    id: 'playlists-batch',
+    eyebrow: 'Volume work',
+    title: 'Playlists & batch',
+    intro: 'Whole channels and multi-link jobs without babysitting.',
+    bullets: [
+      'Playlist Selection screen: multi-select entries, reverse/shuffle order, ranges like 1-10, single-item mode, and unavailable-video marking.',
+      'Set one format, download path, and filename template for every item in the playlist before starting.',
+      'Batch importer: paste many URLs at once, or import from clipboard or a text file — one link per line.',
+      'Concurrency 1–5 (default 2) in Settings → Simultaneous downloads; per-item status shows queued, active, or done.',
+      'Download archive skips repeats automatically; per-folder archives keep series and channels tidy across sessions.',
+    ],
+  },
+  {
+    id: 'subtitles',
+    eyebrow: 'Understand everything',
+    title: 'Subtitles',
+    intro: 'Real embedded subtitles — not separate files to lose.',
+    bullets: [
+      'Download subtitles in your languages (English default) plus auto-generated subs where the platform offers them.',
+      'Embed switch writes them into the video file with the real subtitle post-processor — or keep sidecars if you prefer.',
+      'Language list, auto-subs toggle, and embed control all live in Settings → Subtitles.',
+      'If subs download but are missing from the file, embedding is off — flip it on and confirm FFmpeg is healthy in Diagnostics.',
+    ],
+  },
+  {
+    id: 'sponsorblock',
+    eyebrow: 'Skip the filler',
+    title: 'SponsorBlock',
+    intro: 'Community-marked segments, removed or chaptered automatically.',
+    bullets: [
+      'Mark mode flags segments as chapters; cut mode removes them with frame-aware cutting after subtitles are embedded.',
+      'Seven toggleable categories: Sponsor, Intro/Interstitial, Endcards/Credits, Unpaid Promotion, Interaction Reminder, Preview/Recap, and Music.',
+      'Enabled by default for the Sponsor category only — add more in Settings → SponsorBlock.',
+      'Nothing selected means nothing cut: if chapters are not being cut, check that at least one category is on.',
+    ],
+  },
+  {
+    id: 'media-finish',
+    eyebrow: 'Files worth keeping',
+    title: 'Thumbnails, metadata & chapters',
+    intro: 'Downloads arrive library-ready.',
+    bullets: [
+      'Cover art embedded into the file, plus tags and chapters written in the canonical order (subtitles → chapters → metadata).',
+      'Split-by-chapters mode turns one long video into separate files per chapter.',
+      'Output templates name everything: default is "uploader - title", fully customizable in Settings → Templates.',
+      'Media Preview screen shows the finished file with thumbnail and metadata, and opens it in your system player.',
+    ],
+  },
+  {
+    id: 'cutting',
+    eyebrow: 'Save only the part',
+    title: 'Section cutting & live streams',
+    intro: 'Surgical slices without editing software.',
+    bullets: [
+      'Download just a slice with timestamp syntax like *10:15-20:00 (Advanced settings) — FFmpeg-only, no extra runtime needed.',
+      'Bad timestamps warn and skip instead of failing the whole job.',
+      'Livestreams can be captured from the start while they are still live.',
+    ],
+  },
+  {
+    id: 'presets-profiles',
+    eyebrow: 'Save your setup',
+    title: 'Presets & site profiles',
+    intro: 'Configure once, reuse forever.',
+    bullets: [
+      '7 built-in presets bundling format, container, and output template — plus unlimited custom presets you define.',
+      'Per-site profiles: YouTube 1080p, YouTube 4K, Podcast Audio, Lossless FLAC, Opus Compact, Twitter/X — tuned in the Profile Editor.',
+      'Presets apply from the Format Picker, so a saved recipe is one tap away on every download.',
+    ],
+  },
+  {
+    id: 'queue',
+    eyebrow: 'In flight',
+    title: 'Managing the queue',
+    intro: 'Every download is inspectable and controllable.',
+    bullets: [
+      'FIFO engine queue with queued status on every card — enforced at every entry point, including share intents and watchlists.',
+      'Per-item overflow menu: redownload, audio re-fetch, delete (file + history), and that item\'s own live log view.',
+      'Live speed sparkline with smoothed ETA on active cards; completion and error alerts when jobs finish.',
+      'Per-download logs survive completion — tap any queue card, history row, or overflow menu to read what happened.',
+    ],
+  },
+  {
+    id: 'speed',
+    eyebrow: 'Slow connection?',
+    title: 'Speed & network tuning',
+    intro: 'Squeeze more out of bad networks — all in Settings → Network.',
+    bullets: [
+      'aria2c parallel fetching splits progressive downloads into up to 16 chunks (default 5) — enable it on Wi-Fi. DASH/HLS streams always use the native downloader by design.',
+      'Rate limits, 10x retries with fragment retries, sleep intervals between requests, and connection timeouts tame flaky networks.',
+      'HTTP/SOCKS proxy support, geo-bypass, and Wi-Fi-only gating for metered connections.',
+      'Blocked content gets per-download VPN hints on its error card — follow the hint instead of retrying blindly.',
+    ],
+  },
+  {
+    id: 'cookies',
+    eyebrow: 'Private content',
+    title: 'Cookies & logins',
+    intro: 'Age-gated, member, and private videos — without pasting cookie files.',
+    bullets: [
+      'In-app Cookie WebView: sign in normally and the app exports the session — no manual cookie handling.',
+      'Per-site login flags (YouTube, Instagram, Twitter/X, Bilibili, Twitch) in Accounts; anonymous-first means cookies are only touched when the download actually needs them.',
+      'Sessions are stored app-private with strict permissions, excluded from cloud backups, and never transmitted anywhere except the platform itself.',
+      'Wipe everything anytime from Settings — app data, logs, and cookies.',
+    ],
+  },
+  {
+    id: 'automation-usage',
+    eyebrow: 'Set and forget',
+    title: 'Schedules & watchlists',
+    intro: 'Downloads that happen while you sleep.',
+    bullets: [
+      'Schedule windows gate the queue to times and weekdays — e.g. only overnight on unmetered Wi-Fi (Settings → Schedule).',
+      'Observed sources poll your channels in the background (feed first, extractor fallback), deduplicate seen uploads, and auto-queue new videos.',
+      'Combine both: new uploads queue silently and download inside your cheapest window.',
+    ],
+  },
+  {
+    id: 'upkeep',
+    eyebrow: 'Maintenance-free',
+    title: 'Updates, engine & health',
+    intro: 'Three tracks, zero homework.',
+    bullets: [
+      'Update channels stable / nightly / master in Settings → Updates — the engine (yt-dlp plus its solver scripts) refreshes with SHA-256 integrity checks.',
+      'Desktop updates the engine silently; Android bundles engine binaries into app updates because the OS forbids executing downloaded files.',
+      'Diagnostics & Logs is your dashboard: FFmpeg, download helper, and JS runtime health, yt-dlp version, and a live filterable log stream (level, tag, text, source).',
+      'Bug to report? Export log file attaches a redacted tail (or the full log via the switch) — tokens are scrubbed automatically.',
+    ],
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The complete Grablytic manual: Format Picker, audio, playlists, subtitles, SponsorBlock, presets, queue, speed tuning, cookies, schedules, and updates." />
+  <title>Grablytic Usage Guide — The Complete Manual</title>
+  <link rel="canonical" href="https://grablytic.vercel.app/docs/usage/" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta name="theme-color" content="#0D1117" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Grablytic" />
+  <meta property="og:url" content="https://grablytic.vercel.app/docs/usage/" />
+  <meta property="og:title" content="Grablytic Usage Guide — The Complete Manual" />
+  <meta property="og:description" content="Every screen and setting explained: quality, audio, playlists, subtitles, SponsorBlock, queue, speed, cookies, and automation." />
+  <meta property="og:image" content="https://grablytic.vercel.app/og-image.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://grablytic.vercel.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://grablytic.vercel.app/docs/" },
+      { "@type": "ListItem", "position": 3, "name": "Usage", "item": "https://grablytic.vercel.app/docs/usage/" }
+    ]
+  }
+  </script>
+  <link rel="icon" href="/logo.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" /></noscript>
+</head>
+<body class="bg-(--color-paper-base) text-(--color-ink) antialiased selection:bg-(--color-terracotta-container)/30 selection:text-(--color-terracotta)">
+  <Nav />
+  <main id="main-content" class="pt-28 pb-20 px-4 max-w-4xl mx-auto">
+    <nav aria-label="Breadcrumb" class="text-xs text-(--color-ink-faint) mb-6">
+      <a href="/" class="hover:text-(--color-ink) transition-colors">Home</a>
+      <span aria-hidden="true" class="mx-1.5">/</span>
+      <a href="/docs/" class="hover:text-(--color-ink) transition-colors">Docs</a>
+      <span aria-hidden="true" class="mx-1.5">/</span>
+      <span aria-current="page" class="text-(--color-ink-muted)">Usage</span>
+    </nav>
+
+    <span class="eyebrow mb-2 inline-block">The complete manual</span>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Using Grablytic</h1>
+    <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3 max-w-2xl">
+      Everything the app can do, screen by screen. Settings paths refer to tabs
+      inside the app unless noted. New here? Start with
+      <a href="/docs/install/" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">installing</a>,
+      then come back.
+    </p>
+
+    <nav aria-label="On this page" class="paper-tile p-5 mt-8">
+      <p class="eyebrow-muted text-[10px] mb-3">On this page</p>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-xs sm:text-sm">
+        {sections.map((s) => (
+          <li><a href={`#${s.id}`} class="text-(--color-terracotta) hover:text-white transition-colors">{s.title}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    {sections.map((s) => (
+      <section id={s.id} class="mt-12 scroll-mt-28">
+        <span class="eyebrow mb-2 inline-block">{s.eyebrow}</span>
+        <h2 class="text-2xl font-extrabold tracking-tight">{s.title}</h2>
+        <p class="text-sm text-(--color-ink-muted) mt-2">{s.intro}</p>
+        <div class="paper-tile p-5 sm:p-6 mt-4">
+          <ul class="text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed space-y-2.5 list-disc pl-5">
+            {s.bullets.map((b) => (<li>{b}</li>))}
+          </ul>
+        </div>
+      </section>
+    ))}
+
+    <p class="mt-12 text-xs text-(--color-ink-faint)">
+      Stuck? <a href="/docs/troubleshooting/" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">Troubleshoot it</a>
+      · <a href="/docs/faq/" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">read the FAQ</a>
+      · <a href={`${REPO}/issues`} class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">request a feature on GitHub</a>.
+    </p>
+  </main>
+  <Footer />
+</body>
+</html>
