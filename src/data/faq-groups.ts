@@ -103,4 +103,37 @@ export const faqGroups: FaqGroup[] = [
       },
     ],
   },
+  {
+    heading: 'Engine & runtimes',
+    items: [
+      {
+        q: 'What is yt-dlp, exactly?',
+        a: 'yt-dlp is the open-source download engine inside Grablytic — a battle-tested tool that understands 1,000+ sites and extracts the best available streams. Grablytic is the friendly app wrapped around it: the interface, queue, Format Picker, merging, tagging, and updates. When sites change their layouts, engine updates (silent on desktop, riding app updates on Android) keep downloads working without you doing anything.',
+      },
+      {
+        q: 'Why does a downloader need JavaScript?',
+        a: 'Because YouTube fights downloaders with JavaScript puzzles. Streams are protected by signature-scrambling and proof-of-origin challenges that change regularly — the only reliable way through is to run the site\'s own puzzle code, which is written in JavaScript. yt-dlp executes those solver scripts in a small JS runtime on your device. No working JS runtime means YouTube downloads fail with signature or challenge errors — which is why Settings → Diagnostics & Logs shows your runtime health front and center.',
+      },
+      {
+        q: 'What are Deno, Node.js, and QuickJS doing in my app?',
+        a: 'They are three JavaScript runners, any one of which can solve the video-site puzzles — and they do nothing else. Deno (currently v2.7.7) is the default: it is yt-dlp\'s recommended runtime, sandboxed, and the fastest at challenge solving. Node.js (currently v25.3.0) solves the same puzzles in a ~40 MB smaller download. QuickJS is a tiny built-in fallback that is always there. Only allowlisted puzzle scripts ever run; your browsing and files are never touched by them.',
+      },
+      {
+        q: 'Why ship two runtimes (dual) instead of one?',
+        a: 'Coverage and resilience. No single runtime fits every device: Deno ships no 32-bit ARM build, so budget 32-bit phones need Node.js, while modern phones get the faster Deno default. And runtimes form an automatic fallback chain — Deno, then Node.js, then QuickJS — so if one is missing or unhealthy, the next quietly takes over instead of your download failing. You pick the bundle that matches your phone at install time; the app handles the rest.',
+      },
+      {
+        q: 'Why is the Android APK so big?',
+        a: 'Because Android forces everything to ship inside the box. Three heavy things must be bundled: the FFmpeg video toolkit compiled separately for each phone chip (arm64, 32-bit ARM, x86_64), a full JavaScript runtime (Deno ≈ 91 MB, Node.js ≈ 50 MB), and the app itself — all verified by checksum at build time. Android forbids apps from executing anything downloaded later, so unlike desktop, nothing can be fetched on first launch. The fix is choice: the recommended arm64 + Deno APK downloads only your chip and one runtime, while the 458 MB universal APK (every chip + both runtimes) exists so nobody has to think at all.',
+      },
+      {
+        q: 'Why is the Windows download so small then?',
+        a: 'Because desktops are allowed to finish setup after install. The portable .zip stays lean (≈ 30 MB class): on first launch a bootstrapper fetches FFmpeg and the Deno runtime automatically, each SHA-256 verified before it is trusted. Same verified components as Android — just delivered on first run instead of inside the download, which is exactly what Android\'s security rules forbid.',
+      },
+      {
+        q: 'How does Grablytic handle YouTube blocks and members-only videos?',
+        a: 'In layers, from least to most invasive. First it tries anonymously — no login, no cookies — using multiple player clients so a single blocked route never kills the download. Proof-of-origin tokens are generated locally by the bundled runtime. Only if the video genuinely requires it (age-gated, private, member content) do you sign in through the in-app browser, and those cookies stay on your device, opt-in, never uploaded. If a region or IP block remains, the error card says so plainly and suggests the fix (VPN, proxy, or cookies) instead of dumping a stack trace.',
+      },
+    ],
+  },
 ];
