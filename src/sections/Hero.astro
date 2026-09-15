@@ -33,7 +33,7 @@ import { TAG, REL, REPO } from '../data/downloads';
   </p>
 
   <div class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-3 w-full max-w-lg" data-hero="cta">
-    <a id="dl-primary" class="btn-primary btn-magnetic w-full sm:w-auto" href={`${REL}/grablytic-v0.0.1-arm64-deno.apk`}>
+    <a id="dl-primary" class="btn-primary btn-magnetic w-full sm:w-auto" href={`${REL}/grablytic-v0.0.2-arm64-deno.apk`}>
       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
       </svg>
@@ -111,7 +111,7 @@ import { TAG, REL, REPO } from '../data/downloads';
     const ua = navigator.userAgent || '';
     const mob = d.mobile || /Android|Mobile/i.test(ua);
     const plat = (d.platform || '').toLowerCase();
-    const tag = 'v0.0.1';
+    const tag = 'v0.0.2';
     const base = `https://github.com/OnlyXianzo/Grablytic/releases/download/${tag}/`;
 
     const icons = {
@@ -157,20 +157,20 @@ import { TAG, REL, REPO } from '../data/downloads';
 
     if (mob || /android/i.test(ua)) {
       if (/armv7|armeabi/i.test(ua)) {
-        setBtn('grablytic-v0.0.1-armv7-node.apk', 'Download for Android (32-bit)', 'android');
+        setBtn('grablytic-v0.0.2-armv7-node.apk', 'Download for Android (32-bit)', 'android');
         setObtainium('armv7-node');
       } else if (/x86_64|x86/i.test(ua)) {
-        setBtn('grablytic-v0.0.1-x86_64-deno.apk', 'Download for Android (x86_64)', 'android');
+        setBtn('grablytic-v0.0.2-x86_64-deno.apk', 'Download for Android (x86_64)', 'android');
         setObtainium('x86_64-deno');
       } else {
-        setBtn('grablytic-v0.0.1-arm64-deno.apk', 'Download for Android (arm64)', 'android');
+        setBtn('grablytic-v0.0.2-arm64-deno.apk', 'Download for Android (arm64)', 'android');
         setObtainium('arm64-deno');
       }
     } else if (/win/i.test(plat) || /windows/i.test(ua)) {
       setBtn('grablytic-windows-x64.zip', 'Download for Windows (x64)', 'windows');
       setObtainium(null);
     } else if (/linux/i.test(plat) || /linux/i.test(ua)) {
-      setBtn('grablytic-0.0.1-linux-x64.tar.gz', 'Download for Linux (x64)', 'linux');
+      setBtn('grablytic-0.0.2-linux-x64.tar.gz', 'Download for Linux (x64)', 'linux');
       setObtainium(null);
     } else {
       setBtn('https://github.com/OnlyXianzo/Grablytic/releases/latest', 'Download (All Platforms)', 'generic');
