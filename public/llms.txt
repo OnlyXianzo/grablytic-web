@@ -20,3 +20,9 @@
 - Downloads: https://grablytic.vercel.app/#downloads
 - FAQ: https://grablytic.vercel.app/#faq
 - Community: https://grablytic.vercel.app/#community
+- Docs hub: https://grablytic.vercel.app/docs/
+- Install guide: https://grablytic.vercel.app/docs/install/
+- Docs FAQ (17 Q&As): https://grablytic.vercel.app/docs/faq/
+- Capability tour: https://grablytic.vercel.app/docs/features/
+- Troubleshooting: https://grablytic.vercel.app/docs/troubleshooting/
+- Nightly builds: https://grablytic.vercel.app/nightly/
