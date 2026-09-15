@@ -1,0 +1,173 @@
+---
+// src/pages/nightly.astro — Bleeding-edge builds status (snapshot from scripts/fetch-nightly.mjs)
+import Nav from '../sections/Nav.astro';
+import Footer from '../sections/Footer.astro';
+import nightly from '../data/nightly.json';
+import '../styles/global.css';
+
+const hasNightly = nightly.available === true && typeof nightly.tag === 'string' && nightly.tag.length > 0;
+const shortSha = typeof nightly.commit_sha === 'string' && nightly.commit_sha.length >= 7
+  ? nightly.commit_sha.slice(0, 7)
+  : null;
+const publishedLabel = typeof nightly.published_at === 'string' && nightly.published_at
+  ? new Date(nightly.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  : null;
+const assets = Array.isArray(nightly.assets) ? nightly.assets : [];
+
+function formatMB(bytes) {
+  if (!Number.isFinite(bytes)) return '';
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Try the latest Grablytic nightly: bleeding-edge Android APK and Linux/Windows builds from main. May break — roll back to stable anytime." />
+  <title>Grablytic Nightly Builds — Bleeding-Edge APK &amp; Desktop Binaries</title>
+  <link rel="canonical" href="https://grablytic.vercel.app/nightly/" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta name="theme-color" content="#0D1117" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Grablytic" />
+  <meta property="og:url" content="https://grablytic.vercel.app/nightly/" />
+  <meta property="og:title" content="Grablytic Nightly Builds — Bleeding-Edge APK & Desktop Binaries" />
+  <meta property="og:description" content="Bleeding-edge Grablytic builds from main. Latest features first, may break — roll back to stable anytime." />
+  <meta property="og:image" content="https://grablytic.vercel.app/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@OnlyXianzo" />
+  <meta name="twitter:title" content="Grablytic Nightly Builds — Bleeding-Edge APK & Desktop Binaries" />
+  <meta name="twitter:description" content="Bleeding-edge Grablytic builds from main. May break — roll back to stable anytime." />
+  <meta name="twitter:image" content="https://grablytic.vercel.app/og-image.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://grablytic.vercel.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Nightly Builds", "item": "https://grablytic.vercel.app/nightly/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Grablytic Nightly",
+    applicationCategory: "MultimediaApplication",
+    operatingSystem: ["Android", "Linux", "Windows"],
+    softwareVersion: hasNightly ? nightly.tag : "nightly",
+    description: "Bleeding-edge Grablytic nightly builds from main. Unstable preview — roll back to stable anytime.",
+    url: "https://grablytic.vercel.app/nightly/",
+    downloadUrl: nightly.html_url || "https://github.com/OnlyXianzo/Grablytic/releases",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    author: { "@type": "Organization", name: "OnlyXianzo", url: "https://github.com/OnlyXianzo" },
+  })} />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
+  <link rel="icon" href="/logo.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+</head>
+<body class="bg-[#131313] text-[#E5E2E1] antialiased selection:bg-[#9B503E]/30 selection:text-[#FFB4A3]">
+  <Nav />
+  <main id="main-content" class="pt-28 pb-20 px-4 max-w-4xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <span class="eyebrow mb-2 inline-block">Nightly builds · bleeding edge</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[#E5E2E1] tracking-tight">Nightly builds</h1>
+      <p class="text-sm sm:text-base text-[#D9C1BC] mt-3">
+        Fresh builds from <code class="font-mono text-[#FFB4A3]">main</code> — newest features first, least testing first.
+        For daily use, prefer <a href="/#downloads" class="text-[#FFB4A3] hover:underline">stable releases</a>.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4 mb-8">
+      <div class="paper-tile p-5">
+        <h2 class="text-sm font-bold text-[#E5E2E1] mb-1.5">What nightly is</h2>
+        <p class="text-xs text-[#D9C1BC] leading-relaxed">Automated snapshot of the latest commit on <code class="font-mono text-[#FFB4A3]">main</code>. Same yt-dlp core, newest fixes and experiments hours after they land.</p>
+      </div>
+      <div class="paper-tile p-5">
+        <h2 class="text-sm font-bold text-[#E5E2E1] mb-1.5">May break</h2>
+        <p class="text-xs text-[#D9C1BC] leading-relaxed">Nightlies skip release QA. Expect crashes, broken formats, or missing binaries. Back up your config and don't use nightly for critical downloads.</p>
+      </div>
+      <div class="paper-tile p-5">
+        <h2 class="text-sm font-bold text-[#E5E2E1] mb-1.5">Roll back to stable</h2>
+        <p class="text-xs text-[#D9C1BC] leading-relaxed">Uninstall the nightly, then reinstall from <a href="/#downloads" class="text-[#FFB4A3] hover:underline">stable downloads</a> or <a href="https://github.com/OnlyXianzo/Grablytic/releases/latest" class="text-[#FFB4A3] hover:underline">latest release</a>. Your media library is untouched.</p>
+      </div>
+    </div>
+
+    {hasNightly ? (
+      <section class="paper-tile p-6 sm:p-8" aria-live="polite">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4">
+          <span class="primary-value">{nightly.tag}</span>
+          <span class="text-xs text-[#A28C87]">
+            {publishedLabel ? `published ${publishedLabel}` : 'published date unknown'}
+            {shortSha ? ` · commit ${shortSha}` : ''}
+            {` · ${nightly.asset_count} assets`}
+          </span>
+        </div>
+        {shortSha && nightly.commit_sha && /^[0-9a-f]{7,40}$/i.test(nightly.commit_sha) ? (
+          <p class="text-xs font-mono text-[#A28C87] mb-4">
+            commit <a href={`https://github.com/OnlyXianzo/Grablytic/commit/${nightly.commit_sha}`} class="text-[#FFB4A3] hover:underline">{nightly.commit_sha}</a>
+          </p>
+        ) : null}
+        {nightly.highlights && nightly.highlights.length > 0 ? (
+          <div class="mb-6">
+            <h2 class="text-sm font-bold text-[#E5E2E1] mb-2">Commit highlights</h2>
+            <ul class="text-xs text-[#D9C1BC] space-y-1.5 list-disc pl-5">
+              {nightly.highlights.map((line) => (<li>{line}</li>))}
+            </ul>
+          </div>
+        ) : null}
+        {assets.length > 0 ? (
+          <div class="space-y-3">
+            <h2 class="text-sm font-bold text-[#E5E2E1]">Nightly assets</h2>
+            {assets.map((a) => (
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-[#1C1B1B] border border-[#54433F]/30 hover:border-[#54433F]/60 transition gap-2">
+                <div class="min-w-0">
+                  <span class="text-sm font-semibold text-[#E5E2E1] block truncate">{a.name}</span>
+                  <span class="text-xs text-[#D9C1BC]">{a.size ? formatMB(a.size) : ''}</span>
+                </div>
+                <a href={a.download_url} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E] hover:text-white transition w-fit shrink-0">Download</a>
+              </div>
+            ))}
+            <p class="text-xs text-[#A28C87] pt-2">
+              Full notes on <a href={nightly.html_url} class="text-[#FFB4A3] hover:underline">GitHub Releases</a> · snapshot taken {nightly.fetched_at ? new Date(nightly.fetched_at).toLocaleString('en-US') : 'recently'}.
+            </p>
+          </div>
+        ) : (
+          <p class="text-xs text-[#D9C1BC]">No downloadable assets on this nightly yet — see <a href={nightly.html_url} class="text-[#FFB4A3] hover:underline">release notes</a>.</p>
+        )}
+      </section>
+    ) : (
+      <section class="paper-tile p-6 sm:p-8 text-center" aria-live="polite">
+        <h2 class="text-lg font-bold text-[#E5E2E1] mb-2">Nightly not published yet</h2>
+        <p class="text-sm text-[#D9C1BC] max-w-xl mx-auto">
+          The Grablytic nightly/rolling release is not published yet — watch
+          <a href="https://github.com/OnlyXianzo/Grablytic/releases" class="text-[#FFB4A3] hover:underline"> releases</a> for the first nightly drop.
+          Meanwhile, grab <a href="/#downloads" class="text-[#FFB4A3] hover:underline">stable v0.0.2</a>.
+        </p>
+        <div class="mt-5 flex flex-wrap justify-center gap-3">
+          <a href="https://github.com/OnlyXianzo/Grablytic/releases" class="btn-primary">Watch releases</a>
+          <a href="/#downloads" class="btn-secondary">Get stable instead</a>
+        </div>
+        {nightly.fetched_at ? (
+          <p class="text-[11px] text-[#A28C87] mt-4">Last checked {new Date(nightly.fetched_at).toLocaleString('en-US')}.</p>
+        ) : null}
+      </section>
+    )}
+
+    <p class="text-center text-xs text-[#A28C87] mt-8">
+      <a href="/" class="hover:text-[#E5E2E1] transition-colors">← Back home</a>
+      <span class="mx-2" aria-hidden="true">•</span>
+      <a href="https://github.com/OnlyXianzo/Grablytic/releases" class="hover:text-[#E5E2E1] transition-colors">All releases</a>
+    </p>
+  </main>
+  <Footer />
+</body>
+</html>

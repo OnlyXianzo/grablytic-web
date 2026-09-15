@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node node_modules/astro/astro.js dev",
-    "prebuild": "node scripts/fetch-stats.mjs",
+    "prebuild": "node scripts/fetch-stats.mjs && node scripts/fetch-nightly.mjs",
     "shots": "node scripts/generate-screenshots.mjs",
     "build": "node node_modules/astro/astro.js build",
     "preview": "node node_modules/astro/astro.js preview"
