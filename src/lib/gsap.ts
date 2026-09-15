@@ -271,6 +271,20 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
 
     let isAnimating = false;
 
+    // offsetHeight is border-box but style.height sets content-box
+    // (.faq-item has padding + border). Assigning one to the other adds
+    // ~34px instantly — the visible open/close jump. Subtract the box
+    // extras so pinned heights match the natural box exactly.
+    const boxExtras = (): number => {
+      const cs = getComputedStyle(details);
+      return (
+        parseFloat(cs.paddingTop) +
+        parseFloat(cs.paddingBottom) +
+        parseFloat(cs.borderTopWidth) +
+        parseFloat(cs.borderBottomWidth)
+      );
+    };
+
     summary.addEventListener('click', (e) => {
       e.preventDefault();
       if (isAnimating) return;
@@ -283,7 +297,9 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
         // and scrub inline styles on finish AND cancel (no stuck height/
         // overflow, no 0.92-opacity snap on re-open).
         isAnimating = true;
-        const startHeight = details.offsetHeight;
+        const extra = boxExtras();
+        const startHeight = details.offsetHeight - extra;
+        // Closed box = summary + the details' own padding/border.
         const endHeight = summary.offsetHeight;
 
         details.style.height = `${startHeight}px`;
@@ -313,9 +329,10 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
       } else {
         // Smooth opening
         isAnimating = true;
+        const extra = boxExtras();
         const startHeight = summary.offsetHeight;
         details.setAttribute('open', '');
-        const endHeight = details.offsetHeight;
+        const endHeight = details.offsetHeight - extra;
 
         details.style.overflow = 'hidden';
         const anim = details.animate({
