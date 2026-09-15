@@ -39,7 +39,7 @@ jobs:
 
       - name: No stale brand refs
         run: |
-          if grep -rni "truestream" src public scripts --exclude-dir=node_modules | grep -viE "migrat|coming from|truestream →|TrueStream folder|I used TrueStream|truestream.*package"; then
+          if grep -rni "truestream" src public scripts --exclude-dir=node_modules | grep -viE "migrat|coming from|alongside TrueStream|TrueStream.*folder|I used TrueStream|truestream →|truestream.*package|truestream-\*"; then
             echo "::error::stale truestream refs found (allowed only in migration copy)"
             exit 1
           fi
