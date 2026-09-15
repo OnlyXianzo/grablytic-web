@@ -1,23 +1,26 @@
 ---
 // src/sections/Nav.astro — Directional auto-hiding floating paper pill navbar
+// `base` prefixes landing anchors so docs pages link back home (e.g. base="/").
 import stats from '../data/stats.json';
 import ThemeToggle from '../components/ThemeToggle.astro';
+
+const { base = '' } = Astro.props;
 ---
 
 <nav id="site-nav" class="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] inset-x-0 z-50 flex justify-center px-4 transition-transform duration-300 ease-out" aria-label="Main Navigation">
   <div class="navbar-pill max-w-4xl w-full mx-auto px-4 sm:px-5 py-2.5 sm:py-3 rounded-full flex items-center justify-between flex-nowrap min-h-[3.25rem]">
-    <a href="#top" class="flex items-center gap-2.5 text-(--color-ink) font-bold tracking-tight hover:opacity-90 transition-opacity shrink-0">
+    <a href={`${base}#top`} class="flex items-center gap-2.5 text-(--color-ink) font-bold tracking-tight hover:opacity-90 transition-opacity shrink-0">
       <img src="/logo.png" alt="Grablytic" width="24" height="24" class="w-6 h-6 rounded-md shrink-0" />
       <span class="text-sm font-semibold tracking-wide">Grablytic</span>
     </a>
     
     <div class="flex items-center gap-2.5 sm:gap-5 text-xs sm:text-sm font-medium flex-nowrap shrink-0">
-      <a href="#showcase" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Tour</a>
-      <a href="#features" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Features</a>
-      <a href="#downloads" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Downloads</a>
+      <a href={`${base}#showcase`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Tour</a>
+      <a href={`${base}#features`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Features</a>
+      <a href={`${base}#downloads`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Downloads</a>
       <a href="/nightly" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Nightly</a>
-      <a href="#faq" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden lg:inline-block">FAQ</a>
-      <a href="/docs/" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden lg:inline-block">Docs</a>
+      <a href={`${base}#faq`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden lg:inline-block">FAQ</a>
+      <a href="/docs/" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Docs</a>
       <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" class="text-xs text-(--color-ink-muted) hover:text-(--color-terracotta) transition-colors hidden sm:inline-flex items-center gap-1">
         <span class="text-(--color-ink-faint)">by</span>
         <span>@OnlyXianzo</span>
