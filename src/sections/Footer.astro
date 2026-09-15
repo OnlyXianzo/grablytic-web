@@ -28,7 +28,7 @@ import { REPO } from '../data/downloads';
     <h3 class="text-base font-bold text-[#E5E2E1] flex items-center gap-2">
       <span class="text-[#FFB4A3]">♥</span> Support Grablytic
     </h3>
-    <button onclick="document.getElementById('donate-dialog')?.close()" class="text-[#A28C87] hover:text-[#E5E2E1] p-1 cursor-pointer" aria-label="Close dialog">
+    <button onclick="(window.__closeDonateDialog ?? (() => document.getElementById('donate-dialog')?.close()))()" class="text-[#A28C87] hover:text-[#E5E2E1] p-1 cursor-pointer" aria-label="Close dialog">
       ✕
     </button>
   </div>
@@ -53,7 +53,12 @@ import { REPO } from '../data/downloads';
     </div>
   </div>
 
-  <button onclick="document.getElementById('donate-dialog')?.close()" class="mt-6 w-full py-2.5 rounded-xl bg-[#2A2A2A] hover:bg-[#353534] text-[#E5E2E1] font-medium text-xs transition cursor-pointer border border-[#54433F]/30">
+  <button onclick="(window.__closeDonateDialog ?? (() => document.getElementById('donate-dialog')?.close()))()" class="mt-6 w-full py-2.5 rounded-xl bg-[#2A2A2A] hover:bg-[#353534] text-[#E5E2E1] font-medium text-xs transition cursor-pointer border border-[#54433F]/30">
     Close
   </button>
 </dialog>
+
+<script>
+  import { initDonateDialogClose } from '../lib/gsap';
+  initDonateDialogClose();
+</script>
