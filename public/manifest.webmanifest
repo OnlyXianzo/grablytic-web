@@ -1,0 +1,16 @@
+{
+  "name": "Grablytic",
+  "short_name": "Grablytic",
+  "description": "Private yt-dlp media downloader for Android, Linux & Windows. No ads, no tracking, 100% local.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#131313",
+  "theme_color": "#0D1117",
+  "icons": [
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-32.png", "sizes": "32x32", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-16.png", "sizes": "16x16", "type": "image/png", "purpose": "any" }
+  ]
+}

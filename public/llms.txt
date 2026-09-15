@@ -1,0 +1,22 @@
+# Grablytic
+
+> Private yt-dlp media downloader for Android, Linux & Windows. Highest-fidelity downloads from 1,000+ platforms — no ads, no tracking, 100% local. Free & open source (GPL-3.0).
+
+- Site: https://grablytic.vercel.app/
+- Repo: https://github.com/OnlyXianzo/Grablytic
+- Releases: https://github.com/OnlyXianzo/Grablytic/releases/latest
+- Install (Linux): `curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/Grablytic/main/install.sh | bash`
+- Android: via GitHub Releases (`grablytic-v0.0.2-arm64-deno.apk` recommended) or Obtainium (`https://github.com/OnlyXianzo/Grablytic`)
+- License: GPL-3.0 — https://github.com/OnlyXianzo/Grablytic/blob/main/LICENSE
+- Security: https://github.com/OnlyXianzo/Grablytic/blob/main/SECURITY.md
+- DMCA: https://github.com/OnlyXianzo/Grablytic/blob/main/DMCA.md
+- Contact: xianzo.help@gmail.com
+
+## Key pages
+
+- Home: https://grablytic.vercel.app/#top
+- Tour: https://grablytic.vercel.app/#showcase
+- Features: https://grablytic.vercel.app/#features
+- Downloads: https://grablytic.vercel.app/#downloads
+- FAQ: https://grablytic.vercel.app/#faq
+- Community: https://grablytic.vercel.app/#community
