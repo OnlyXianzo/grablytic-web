@@ -1,0 +1,144 @@
+---
+// src/pages/docs/features.astro — User-facing capability tour distilled from
+// the app's docs/features.md (no internal dev process).
+import Nav from '../../sections/Nav.astro';
+import Footer from '../../sections/Footer.astro';
+import { REPO } from '../../data/downloads';
+import '../../styles/global.css';
+
+interface FeatureSection { id: string; eyebrow: string; title: string; intro: string; bullets: string[] }
+
+const sections: FeatureSection[] = [
+  {
+    id: 'downloading',
+    eyebrow: 'Core engine',
+    title: 'Downloading',
+    intro: 'Paste a link and Grablytic handles the rest — quality selection, queueing, retries, and resume are automatic, with manual control where it matters.',
+    bullets: [
+      'Max-quality ladder (up to 4K): video cascades AV1 → VP9 → H264 under your quality ceiling, or pick an explicit format in the Format Picker.',
+      'Batch URLs: paste many links at once, import from clipboard or file, and track per-item status with up to 5 concurrent downloads.',
+      'Playlists: selection screen with multi-select, reverse/shuffle, unavailable-video marking, ranges (1-10), and single-item mode.',
+      'Automatic resume: progress snapshots recover on startup — even after a reboot. Partial files under 24h old rejoin seamlessly.',
+      'Download archive: already-fetched items are skipped; per-folder archives keep series and channels tidy.',
+      'Scheduling: gate the queue to time windows and weekdays (e.g. overnight on Wi-Fi).',
+      'Live speed & ETA: smoothed speed sparkline and ETA on every active download card.',
+      'Tougher networks: rate limits, 10x retries, proxy support, geo-bypass, and per-download VPN hints on blocked content.',
+    ],
+  },
+  {
+    id: 'media',
+    eyebrow: 'Files worth keeping',
+    title: 'Media & metadata',
+    intro: 'Downloads arrive merged, tagged, and embedded — no post-processing homework.',
+    bullets: [
+      'Lossless merging: direct stream demuxing with Opus/AAC preservation into clean MP4/MKV containers — no re-encoding loss.',
+      'Audio extraction: one-tap audio-only (Opus default, plus FLAC lossless and compact presets) with 7 built-in presets and unlimited custom ones.',
+      'Subtitles: download plus auto-generated subs in your languages, embedded right into the file.',
+      'SponsorBlock: mark or cut sponsor/intro/outro segments automatically.',
+      'Thumbnails, tags & chapters: cover art embedded, metadata and chapters written, optional chapter splitting.',
+      'Site profiles: one-tap recipes — YouTube 1080p / 4K, Podcast Audio, Lossless FLAC, Opus Compact, Twitter/X.',
+      'Output templates: default "uploader - title" naming, fully customizable.',
+    ],
+  },
+  {
+    id: 'access',
+    eyebrow: 'It just works',
+    title: 'Access & sign-in challenges',
+    intro: 'Platform countermeasures are handled for you — no terminal, no scripts.',
+    bullets: [
+      'In-app cookie login: a built-in WebView signs you in and exports cookies for age-gated or member content — stored app-private, opt-in only.',
+      'Automatic challenge solving: the bundled JS runtime (Deno → Node → QuickJS) resolves YouTube signature and proof-of-origin challenges with zero setup.',
+      'Multi-client extraction with anonymous-first privacy: tries no-auth before ever touching your cookies.',
+      'Share from anywhere: Android share sheet sends links straight into Grablytic with an optional auto-start.',
+    ],
+  },
+  {
+    id: 'reliability',
+    eyebrow: 'When things go wrong',
+    title: 'Reliability & diagnostics',
+    intro: 'Failures arrive classified with a suggested fix — not a stack trace.',
+    bullets: [
+      'Typed error cards: geo-blocks, rate limits, and auth failures each explain the cause and suggest the fix (VPN, proxy, cookies).',
+      'Per-download logs: every item keeps its own live and post-completion log view.',
+      'Engine health at a glance: Settings → Diagnostics & Logs shows FFmpeg, runtime, and yt-dlp status plus a live, filterable log stream.',
+      'Update channels: stable, nightly, or master — check for engine updates without touching the app.',
+    ],
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Grablytic features guide: max-quality ladders, batch & playlists, audio extraction, subtitles, SponsorBlock, profiles, cookie login, and automatic resume." />
+  <title>Grablytic Features Guide — Downloads, Media, Access & Reliability</title>
+  <link rel="canonical" href="https://grablytic.vercel.app/docs/features/" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta name="theme-color" content="#0D1117" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Grablytic" />
+  <meta property="og:url" content="https://grablytic.vercel.app/docs/features/" />
+  <meta property="og:title" content="Grablytic Features Guide — Downloads, Media, Access & Reliability" />
+  <meta property="og:description" content="What Grablytic can do and where to find it: quality, playlists, audio, subtitles, SponsorBlock, and diagnostics." />
+  <meta property="og:image" content="https://grablytic.vercel.app/og-image.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://grablytic.vercel.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://grablytic.vercel.app/docs/" },
+      { "@type": "ListItem", "position": 3, "name": "Features", "item": "https://grablytic.vercel.app/docs/features/" }
+    ]
+  }
+  </script>
+  <link rel="icon" href="/logo.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+</head>
+<body class="bg-[#131313] text-[#E5E2E1] antialiased selection:bg-[#9B503E]/30 selection:text-[#FFB4A3]">
+  <Nav />
+  <main id="main-content" class="pt-28 pb-20 px-4 max-w-4xl mx-auto">
+    <nav aria-label="Breadcrumb" class="text-xs text-[#A28C87] mb-6">
+      <a href="/" class="hover:text-[#E5E2E1] transition-colors">Home</a>
+      <span aria-hidden="true" class="mx-1.5">/</span>
+      <a href="/docs/" class="hover:text-[#E5E2E1] transition-colors">Docs</a>
+      <span aria-hidden="true" class="mx-1.5">/</span>
+      <span aria-current="page" class="text-[#D9C1BC]">Features</span>
+    </nav>
+
+    <span class="eyebrow mb-2 inline-block">Capability tour</span>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Features guide</h1>
+    <p class="text-sm sm:text-base text-[#D9C1BC] mt-3 max-w-2xl">
+      What Grablytic can do and where each control lives. Settings paths refer to tabs
+      inside the app unless noted.
+    </p>
+
+    {sections.map((s) => (
+      <section id={s.id} class="mt-12 scroll-mt-28">
+        <span class="eyebrow mb-2 inline-block">{s.eyebrow}</span>
+        <h2 class="text-2xl font-extrabold tracking-tight">{s.title}</h2>
+        <p class="text-sm text-[#D9C1BC] mt-2">{s.intro}</p>
+        <div class="paper-tile p-5 sm:p-6 mt-4">
+          <ul class="text-xs sm:text-sm text-[#D9C1BC] leading-relaxed space-y-2.5 list-disc pl-5">
+            {s.bullets.map((b) => (<li>{b}</li>))}
+          </ul>
+        </div>
+      </section>
+    ))}
+
+    <p class="mt-12 text-xs text-[#A28C87]">
+      Something misbehaving? <a href="/docs/troubleshooting/" class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">Troubleshoot it</a>
+      · Missing something? <a href={`${REPO}/issues`} class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">Request it on GitHub</a>.
+    </p>
+  </main>
+  <Footer />
+</body>
+</html>

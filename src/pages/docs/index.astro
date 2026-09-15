@@ -1,0 +1,172 @@
+---
+// src/pages/docs/index.astro — Docs hub: getting started, install, features,
+// FAQ, troubleshooting, privacy/security + license summaries.
+import Nav from '../../sections/Nav.astro';
+import Footer from '../../sections/Footer.astro';
+import { REPO } from '../../data/downloads';
+import '../../styles/global.css';
+
+const guides = [
+  {
+    href: '/docs/install/',
+    eyebrow: 'Per-OS walkthrough',
+    title: 'Install Grablytic',
+    body: 'Pick the right APK variant, .deb/.rpm/Arch package, or Windows zip. Verify SHA-256 checksums and finish first-launch setup.',
+  },
+  {
+    href: '/docs/features/',
+    eyebrow: 'Capability tour',
+    title: 'Features guide',
+    body: 'Quality ladders, playlists, batch queues, audio extraction, subtitles, SponsorBlock, profiles, and presets — what each does and where to find it.',
+  },
+  {
+    href: '/docs/faq/',
+    eyebrow: 'Long-form answers',
+    title: 'FAQ',
+    body: 'Is it free? Which devices work? Do I need an account? JS runtimes, updates, contributing — answered in depth.',
+  },
+  {
+    href: '/docs/troubleshooting/',
+    eyebrow: 'Symptom → fix',
+    title: 'Troubleshooting',
+    body: 'YouTube failures, slow fragments, stuck-at-99%, geo-blocks, resume, and log export — diagnosed step by step.',
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Grablytic user docs: install guides for Android, Linux & Windows, feature walkthroughs, long-form FAQ, and troubleshooting. Free, private, open-source media downloader." />
+  <title>Grablytic Docs — Install, Features, FAQ & Troubleshooting</title>
+  <link rel="canonical" href="https://grablytic.vercel.app/docs/" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta name="theme-color" content="#0D1117" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Grablytic" />
+  <meta property="og:url" content="https://grablytic.vercel.app/docs/" />
+  <meta property="og:title" content="Grablytic Docs — Install, Features, FAQ & Troubleshooting" />
+  <meta property="og:description" content="User guides for the private yt-dlp media downloader: per-OS install, features, FAQ, and troubleshooting." />
+  <meta property="og:image" content="https://grablytic.vercel.app/og-image.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://grablytic.vercel.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://grablytic.vercel.app/docs/" }
+    ]
+  }
+  </script>
+  <link rel="icon" href="/logo.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+</head>
+<body class="bg-[#131313] text-[#E5E2E1] antialiased selection:bg-[#9B503E]/30 selection:text-[#FFB4A3]">
+  <Nav />
+  <main id="main-content" class="pt-28 pb-20 px-4 max-w-4xl mx-auto">
+    <nav aria-label="Breadcrumb" class="text-xs text-[#A28C87] mb-6">
+      <a href="/" class="hover:text-[#E5E2E1] transition-colors">Home</a>
+      <span aria-hidden="true" class="mx-1.5">/</span>
+      <span aria-current="page" class="text-[#D9C1BC]">Docs</span>
+    </nav>
+
+    <span class="eyebrow mb-2 inline-block">Documentation</span>
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Grablytic Docs</h1>
+    <p class="text-sm sm:text-base text-[#D9C1BC] mt-3 max-w-2xl">
+      Everything a user needs: install the right binary, learn the features,
+      get straight answers, and fix common problems. Grablytic is free forever,
+      works fully offline after setup, and sends zero telemetry.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
+      {guides.map((g) => (
+        <a href={g.href} class="paper-tile p-6 flex flex-col group">
+          <span class="eyebrow-muted text-[10px] mb-2">{g.eyebrow}</span>
+          <span class="text-base sm:text-lg font-bold group-hover:text-[#FFB4A3] transition-colors">{g.title} →</span>
+          <span class="text-xs sm:text-sm text-[#D9C1BC] leading-relaxed mt-2">{g.body}</span>
+        </a>
+      ))}
+    </div>
+
+    <section id="getting-started" class="mt-14 scroll-mt-28">
+      <span class="eyebrow mb-2 inline-block">Getting started</span>
+      <h2 class="text-2xl font-extrabold tracking-tight">Three steps to your first download</h2>
+      <ol class="mt-6 space-y-4 list-none p-0">
+        <li class="paper-tile p-5">
+          <p class="font-bold text-sm sm:text-base"><span class="text-[#FFB4A3] mr-2">1.</span>Install the right binary</p>
+          <p class="text-xs sm:text-sm text-[#D9C1BC] mt-1.5 leading-relaxed">
+            Android: grab the APK matching your ABI and preferred JS runtime (arm64 + Deno is the
+            recommended default). Linux: .deb, .rpm, Arch package, or portable tarball. Windows: portable zip.
+            Full per-OS walkthrough in the <a href="/docs/install/" class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">install guide</a>.
+          </p>
+        </li>
+        <li class="paper-tile p-5">
+          <p class="font-bold text-sm sm:text-base"><span class="text-[#FFB4A3] mr-2">2.</span>Let first-launch setup finish</p>
+          <p class="text-xs sm:text-sm text-[#D9C1BC] mt-1.5 leading-relaxed">
+            On first run Grablytic verifies its engine (FFmpeg, JS runtime, yt-dlp) with SHA-256
+            integrity checks. On Android everything ships inside the APK; on desktop missing
+            components are fetched automatically. Wait for the ready status before downloading.
+          </p>
+        </li>
+        <li class="paper-tile p-5">
+          <p class="font-bold text-sm sm:text-base"><span class="text-[#FFB4A3] mr-2">3.</span>Paste a link and pick a format</p>
+          <p class="text-xs sm:text-sm text-[#D9C1BC] mt-1.5 leading-relaxed">
+            Paste any supported URL on the Home tab, open the Format Picker to choose quality
+            (up to 4K where the platform offers it), then download. For whole channels or
+            multi-link jobs see <a href="/docs/features/" class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">playlists &amp; batch</a> in the features guide.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="privacy" class="mt-14 scroll-mt-28">
+      <span class="eyebrow mb-2 inline-block">Privacy &amp; security</span>
+      <h2 class="text-2xl font-extrabold tracking-tight">Private by architecture, not by promise</h2>
+      <div class="paper-tile p-5 sm:p-6 mt-6">
+        <ul class="text-xs sm:text-sm text-[#D9C1BC] leading-relaxed space-y-2.5 list-disc pl-5">
+          <li><strong class="text-[#E5E2E1]">Zero telemetry:</strong> no accounts, no ads, no analytics SDKs. All extraction and processing happens on your device.</li>
+          <li><strong class="text-[#E5E2E1]">Sandboxed secrets:</strong> session cookies are stored app-private (0600) and never leave your device; logs redact tokens automatically.</li>
+          <li><strong class="text-[#E5E2E1]">Verified binaries:</strong> every engine component is SHA-256 integrity-checked; dangerous yt-dlp execution flags are disabled.</li>
+          <li><strong class="text-[#E5E2E1]">TLS everywhere,</strong> parameterized storage queries, and hardened archive extraction (Zip-Slip / Tar-Slip guards).</li>
+        </ul>
+        <p class="text-xs sm:text-sm text-[#D9C1BC] mt-4">
+          Read the full policy at <a href={`${REPO}/blob/main/SECURITY.md`} class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">SECURITY.md on GitHub</a>.
+          Found a vulnerability? Report it privately via
+          <a href={`${REPO}/security/advisories/new`} class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">GitHub Security Advisories</a> — never in a public issue.
+        </p>
+      </div>
+    </section>
+
+    <section id="license" class="mt-14 scroll-mt-28">
+      <span class="eyebrow mb-2 inline-block">License &amp; DMCA</span>
+      <h2 class="text-2xl font-extrabold tracking-tight">Open source, with respect for creators</h2>
+      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-[#D9C1BC] leading-relaxed space-y-3">
+        <p>
+          Grablytic is 100% open source under the
+          <a href={`${REPO}/blob/main/LICENSE`} class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">GNU General Public License v3.0</a> —
+          inspect, audit, and improve every line. It hosts no media: all streams are fetched
+          directly from public platform sources onto your own device via yt-dlp.
+        </p>
+        <p>
+          Rights holders: takedown inquiries and contact details live in the
+          <a href={`${REPO}/blob/main/DMCA.md`} class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">DMCA notice on GitHub</a>.
+        </p>
+      </div>
+    </section>
+
+    <p class="mt-12 text-xs text-[#A28C87]">
+      Still stuck? <a href="/docs/troubleshooting/" class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">Troubleshoot a problem</a>
+      or <a href={`${REPO}/issues`} class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">file an issue on GitHub</a>.
+    </p>
+  </main>
+  <Footer />
+</body>
+</html>
