@@ -278,11 +278,15 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
       const isOpen = details.hasAttribute('open');
 
       if (isOpen) {
-        // Smooth closing
+        // Smooth closing — pin layout height first so the WAAPI shrink tracks
+        // a fixed box (no auto-layout fighting / jump), then detach `open`
+        // and scrub inline styles on finish AND cancel (no stuck height/
+        // overflow, no 0.92-opacity snap on re-open).
         isAnimating = true;
         const startHeight = details.offsetHeight;
         const endHeight = summary.offsetHeight;
 
+        details.style.height = `${startHeight}px`;
         details.style.overflow = 'hidden';
         const anim = details.animate({
           height: [`${startHeight}px`, `${endHeight}px`],
@@ -292,13 +296,18 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
           easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
         });
 
+        const scrubCloseStyles = () => {
+          details.style.height = '';
+          details.style.overflow = '';
+        };
+
         anim.onfinish = () => {
           details.removeAttribute('open');
-          details.style.overflow = '';
+          scrubCloseStyles();
           isAnimating = false;
         };
         anim.oncancel = () => {
-          details.style.overflow = '';
+          scrubCloseStyles();
           isAnimating = false;
         };
       } else {
@@ -327,5 +336,77 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
         };
       }
     });
+  });
+}
+
+declare global {
+  interface Window {
+    __closeDonateDialog?: () => void;
+  }
+}
+
+/**
+ * Glitch-free close path for #donate-dialog.
+ * Open stays native instant showModal(); close fades the dialog out (~170ms)
+ * before .close() so the blurred backdrop doesn't vanish in a single frame.
+ * Escape (`cancel`) and backdrop clicks route through the same fade; repeat
+ * close requests while fading are idempotent; reduced-motion closes instantly.
+ */
+export function initDonateDialogClose(dialogId: string = 'donate-dialog'): void {
+  if (typeof window === 'undefined') return;
+  const dialog = document.getElementById(dialogId) as HTMLDialogElement | null;
+  if (!dialog) return;
+
+  let closing = false;
+
+  const scrubDialogStyles = () => {
+    dialog.style.opacity = '';
+    dialog.style.transform = '';
+  };
+
+  const requestClose = () => {
+    if (!dialog.open || closing) return;
+    if (isReducedMotion() || !('animate' in dialog)) {
+      dialog.close();
+      return;
+    }
+    closing = true;
+    const anim = dialog.animate(
+      [
+        { opacity: '1', transform: 'translateY(0) scale(1)' },
+        { opacity: '0', transform: 'translateY(6px) scale(0.985)' },
+      ],
+      { duration: 170, easing: 'ease-out' }
+    );
+    anim.onfinish = () => {
+      scrubDialogStyles();
+      closing = false;
+      if (dialog.open) dialog.close();
+    };
+    anim.oncancel = () => {
+      // Interrupted mid-fade: leave the dialog open, scrub inline styles.
+      scrubDialogStyles();
+      closing = false;
+    };
+  };
+
+  window.__closeDonateDialog = requestClose;
+
+  // Escape key: native `cancel` would close instantly (flash) — fade instead.
+  dialog.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    requestClose();
+  });
+
+  // Backdrop click: native <dialog> ignores it — route through the same fade.
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) requestClose();
+  });
+
+  // Safety reset: however the dialog actually closes, drop pending close state
+  // so a rapid re-open starts from clean flags and scrubbed inline styles.
+  dialog.addEventListener('close', () => {
+    closing = false;
+    scrubDialogStyles();
   });
 }
