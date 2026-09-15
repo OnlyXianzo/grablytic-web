@@ -25,6 +25,21 @@ const rows: Row[] = [
     fix: 'By design: streaming progress caps at 99% and only the terminal finished event reports 100%. Watch the live log for the post-processing stage instead of restarting.',
   },
   {
+    symptom: 'Video engine (FFmpeg) reports missing on Android',
+    cause: 'Incomplete install — the APK on your device lacks bundled native binaries.',
+    fix: 'Reinstall the full APK from GitHub Releases (all variants ship FFmpeg inside — never copy library files around manually). Alternatively set a custom FFmpeg path in Settings if you maintain your own build.',
+  },
+  {
+    symptom: 'A finished download never completes',
+    cause: 'Stale app version missing the completion-event fix.',
+    fix: 'Update to the latest release — completion events are now delivered reliably even when the app polls slowly. Then check the per-download log to confirm the file landed.',
+  },
+  {
+    symptom: 'Chapters are not cut after SponsorBlock runs',
+    cause: 'Empty SponsorBlock categories, or embedding order confusion.',
+    fix: 'Make sure at least one SponsorBlock category (sponsor, intro, outro…) is enabled — with none selected there is nothing to cut. The cutter order (subtitles → chapters → metadata) is automatic; just re-run the item.',
+  },
+  {
     symptom: 'Geo-blocked / rate-limited errors',
     cause: 'Region restriction or IP throttling.',
     fix: 'The error card says when a VPN helps — follow its hint. Alternatives: a proxy, geo-bypass, a sleep interval between requests, or cookie login for your region.',
@@ -114,6 +129,22 @@ const rows: Row[] = [
         </details>
       ))}
     </div>
+
+    <section class="mt-12">
+      <span class="eyebrow mb-2 inline-block">Where logs live</span>
+      <h2 class="text-2xl font-extrabold tracking-tight">Log locations</h2>
+      <div class="paper-tile p-5 sm:p-6 mt-4 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed space-y-3">
+        <p>
+          The app keeps two persistent logs: the interface log (flushed every 30 seconds, instantly on
+          errors) and the engine log (rotating file). Both are viewable live with level and text filters
+          in <strong class="text-(--color-ink)">Settings → Diagnostics &amp; Logs → Live Stream</strong>.
+        </p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong class="text-(--color-ink)">Android exports</strong> land in the app's external <code class="font-mono text-(--color-terracotta)">log-exports/</code> folder — no extra permission needed.</li>
+          <li><strong class="text-(--color-ink)">Desktop exports</strong> land in <code class="font-mono text-(--color-terracotta)">~/Downloads/Grablytic-logs/</code>.</li>
+        </ul>
+      </div>
+    </section>
 
     <section class="mt-12">
       <span class="eyebrow mb-2 inline-block">Reporting a bug</span>

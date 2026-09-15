@@ -45,4 +45,24 @@ export const features: FeatureItem[] = [
     body: 'A clean interface that stays smooth at 120Hz — readable on phones, foldables, tablets and desktop alike.',
     guideAnchor: '/docs/features/',
   },
+  {
+    title: 'One-Tap Presets & Profiles',
+    body: '7 built-in recipes (YouTube 4K, Podcast Audio, Lossless FLAC…) plus unlimited custom presets and per-site profiles — save your setup once, reuse forever.',
+    guideAnchor: '/docs/features/#media',
+  },
+  {
+    title: 'Share From Any App',
+    body: 'Send a link from YouTube, your browser, or chat straight into Grablytic. A choice sheet confirms quality first — or auto-start and skip it.',
+    guideAnchor: '/docs/features/#access',
+  },
+  {
+    title: 'Schedules & Watchlists',
+    body: 'Gate downloads to overnight Wi-Fi windows, or let background watchlists poll your channels and auto-queue new uploads while you sleep.',
+    guideAnchor: '/docs/features/#automation',
+  },
+  {
+    title: 'Clip Sections, Keep Chapters',
+    body: 'Download just 10:15–20:00 of a 3-hour stream with FFmpeg section cutting — bad timestamps warn and skip instead of failing the job.',
+    guideAnchor: '/docs/features/#downloading',
+  },
 ];

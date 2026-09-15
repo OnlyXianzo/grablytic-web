@@ -26,3 +26,7 @@
 - Capability tour: https://grablytic.vercel.app/docs/features/
 - Troubleshooting: https://grablytic.vercel.app/docs/troubleshooting/
 - Nightly builds: https://grablytic.vercel.app/nightly/
+- Automation (schedules & watchlists): https://grablytic.vercel.app/docs/features/#automation
+- Obtainium setup steps: https://grablytic.vercel.app/docs/install/#obtainium
+- Staying updated: https://grablytic.vercel.app/docs/install/#updates
+- Inside the app (screen tour): https://grablytic.vercel.app/docs/#screens

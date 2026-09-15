@@ -77,10 +77,15 @@ function formatMB(bytes: number): string {
           and emulators take x86_64. Unsure? The <strong class="text-(--color-ink)">universal</strong> APK
           bundles every ABI and both runtimes (458 MB).
         </p>
-        <p id="obtainium" class="mt-3 scroll-mt-28">
-          Tip (Android-only): install via <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fapp%2Fhttps%3A%2F%2Fgithub.com%2FOnlyXianzo%2FGrablytic" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">Obtainium</a>
-          for seamless automated updates straight from GitHub Releases. On desktop browsers the button on the homepage links here instead — Obtainium itself runs on Android only.
-        </p>
+        <div id="obtainium" class="mt-3 scroll-mt-28 rounded-lg border border-(--color-line)/30 bg-(--color-tile)/60 p-4">
+          <p class="font-semibold text-(--color-ink)">Easiest path (Android-only): Obtainium</p>
+          <ol class="mt-2 space-y-1.5 list-decimal pl-5">
+            <li>Install <a href="https://github.com/ImranR98/Obtainium/releases" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">Obtainium</a> on your phone first.</li>
+            <li>On your phone, tap <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fapp%2Fhttps%3A%2F%2Fgithub.com%2FOnlyXianzo%2FGrablytic" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">add Grablytic to Obtainium</a> and confirm — or in Obtainium use Add App and paste <code class="font-mono text-(--color-terracotta)">https://github.com/OnlyXianzo/Grablytic</code>.</li>
+            <li>Done: future releases arrive as automatic updates, straight from GitHub — no store, no account.</li>
+          </ol>
+          <p class="mt-2 text-(--color-ink-faint)">On a desktop browser? This button links here instead — Obtainium itself runs on Android only.</p>
+        </div>
       </div>
       <div class="mt-4 space-y-3">
         {androidDownloads.map((item) => (
@@ -98,12 +103,18 @@ function formatMB(bytes: number): string {
         <li class="paper-tile p-5"><strong class="text-(--color-ink)">1. Allow installs.</strong> Open the APK — Android will ask you to allow installs from your browser or file manager. Grant it once.</li>
         <li class="paper-tile p-5"><strong class="text-(--color-ink)">2. Install &amp; open.</strong> FFmpeg and the JS runtime ship inside the APK, so there is nothing else to download. Grant storage/media access when asked.</li>
         <li class="paper-tile p-5"><strong class="text-(--color-ink)">3. Check readiness.</strong> Open Settings → Diagnostics &amp; Logs and confirm the engine reports healthy before your first download.</li>
+        <li class="paper-tile p-5"><strong class="text-(--color-ink)">4. Exempt from battery optimization.</strong> So background downloads survive screen lock: system Settings → Apps → Grablytic → Battery → Unrestricted (wording varies by vendor).</li>
       </ol>
     </section>
 
     <section id="linux" class="mt-12 scroll-mt-28">
       <span class="eyebrow mb-2 inline-block">Linux · x64 &amp; arm64</span>
       <h2 class="text-2xl font-extrabold tracking-tight">Install on Linux</h2>
+      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed space-y-3">
+        <p class="font-semibold text-(--color-ink)">Zero decisions — one command:</p>
+        <code class="text-(--color-terracotta) block overflow-x-auto select-all font-mono">curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/Grablytic/main/install.sh | bash</code>
+        <p>The script auto-detects your distro (apt/dnf/zypper/pacman) and architecture (x64/arm64), verifies SHA-256 checksums, and installs natively. Prefer manual control? The per-family equivalents below fetch the same assets.</p>
+      </div>
       <div class="mt-4 space-y-3">
         {linuxDownloads.map((item) => (
           <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-(--color-tile) border border-(--color-line)/30">
@@ -155,6 +166,16 @@ function formatMB(bytes: number): string {
       </div>
     </section>
 
+    <section id="updates" class="mt-12 scroll-mt-28">
+      <span class="eyebrow mb-2 inline-block">Never fall behind</span>
+      <h2 class="text-2xl font-extrabold tracking-tight">Staying updated</h2>
+      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed space-y-3">
+        <p><strong class="text-(--color-ink)">Android:</strong> Obtainium updates the app automatically from GitHub Releases. Engine binaries (FFmpeg, JS runtime) ride app updates — Android forbids executing downloaded files, so there is no separate engine updater.</p>
+        <p><strong class="text-(--color-ink)">Desktop:</strong> yt-dlp and engine components update silently with integrity checks. Feeling adventurous? Switch tracks (stable / nightly / master) in Settings → Updates.</p>
+        <p><strong class="text-(--color-ink)">Linux packages:</strong> re-run the one-command installer or your manager's upgrade path to move to a new release.</p>
+      </div>
+    </section>
+
     <section id="verify" class="mt-12 scroll-mt-28">
       <span class="eyebrow mb-2 inline-block">Trust, then run</span>
       <h2 class="text-2xl font-extrabold tracking-tight">Verify your download</h2>
@@ -170,7 +191,12 @@ function formatMB(bytes: number): string {
       <span class="eyebrow mb-2 inline-block">TrueStream → Grablytic</span>
       <h2 class="text-2xl font-extrabold tracking-tight">Coming from TrueStream?</h2>
       <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed space-y-3">
-        <p>Android treats Grablytic as a new app, so install it alongside TrueStream, verify it works, then uninstall the old app. Your existing <code class="font-mono text-(--color-terracotta)">Download/TrueStream</code> folder keeps being used automatically — nothing is moved or deleted. App-private settings and history do not carry over. On Linux, remove any manually installed v0.0.1 <code class="font-mono text-(--color-terracotta)">truestream</code> package if your manager doesn't replace it automatically.</p>
+        <p>Android treats Grablytic as a new app, so install it alongside TrueStream, verify it works, then uninstall the old app. App-private settings and history do not carry over — but your files are safe:</p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong class="text-(--color-ink)">Your downloads stay put.</strong> Fresh installs default to <code class="font-mono text-(--color-terracotta)">Download/Grablytic</code>, but if a legacy <code class="font-mono text-(--color-terracotta)">Download/TrueStream</code> folder already exists it keeps being used automatically — nothing is moved or deleted.</li>
+          <li><strong class="text-(--color-ink)">Linux upgrades cleanly.</strong> The <code class="font-mono text-(--color-terracotta)">.deb</code> replaces the old <code class="font-mono text-(--color-terracotta)">truestream</code> package automatically; remove any manually installed v0.0.1 package yourself only if your manager doesn't.</li>
+          <li><strong class="text-(--color-ink)">Old release files keep working.</strong> v0.0.1 assets intentionally keep their original <code class="font-mono text-(--color-terracotta)">truestream-*</code> names and checksums; new releases use <code class="font-mono text-(--color-terracotta)">grablytic-*</code> names.</li>
+        </ul>
       </div>
     </section>
 
