@@ -1,0 +1,151 @@
+---
+// src/components/ThemeToggle.astro — Stream C (light mode) toggle.
+// Zero-dependency. Do NOT import into Nav.astro directly; the integrator
+// places it (see snippet in the stream report).
+// Restore script runs at parse time (before first paint of content below
+// it) so there is no flash-of-wrong-theme. No-JS default stays dark.
+---
+<script is:inline>
+  (function () {
+    try {
+      var stored = localStorage.getItem("grablytic-theme");
+      var theme =
+        stored === "light" || stored === "dark"
+          ? stored
+          : window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark";
+      document.documentElement.dataset.theme = theme;
+    } catch (e) {
+      /* private mode / no storage: stay on dark default */
+    }
+  })();
+</script>
+<button
+  id="theme-toggle"
+  type="button"
+  class="theme-toggle"
+  aria-label="Switch to light mode"
+  aria-pressed="false"
+  title="Toggle color theme"
+>
+  <svg
+    class="icon-sun"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+  </svg>
+  <svg
+    class="icon-moon"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+  </svg>
+</button>
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background-color: var(--color-tile-low);
+    color: var(--color-ink);
+    border: 1px solid var(--color-hairline);
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    background-color: var(--color-tile-high);
+    border-color: var(--accent-border);
+    transform: translateY(-1px);
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.96);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 2px;
+  }
+
+  /* Icon swap driven by pressed state (synced to theme in wiring script),
+     so no :global() ancestor selector is needed for scoped styles. */
+  .theme-toggle .icon-moon {
+    display: none;
+  }
+
+  .theme-toggle[aria-pressed="true"] .icon-sun {
+    display: none;
+  }
+
+  .theme-toggle[aria-pressed="true"] .icon-moon {
+    display: block;
+  }
+
+  /* Reduced-motion: no transition animation on the toggle. */
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle,
+    .theme-toggle * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+<script is:inline>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+
+    function current() {
+      return document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    }
+
+    function sync() {
+      var isLight = current() === "light";
+      btn.setAttribute("aria-pressed", isLight ? "true" : "false");
+      btn.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark mode" : "Switch to light mode"
+      );
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", isLight ? "#FDF9F6" : "#131313");
+    }
+
+    btn.addEventListener("click", function () {
+      document.documentElement.dataset.theme = current() === "light" ? "dark" : "light";
+      try {
+        localStorage.setItem("grablytic-theme", document.documentElement.dataset.theme);
+      } catch (e) {
+        /* private mode: theme still toggles for the session */
+      }
+      sync();
+    });
+
+    sync();
+  })();
+</script>
