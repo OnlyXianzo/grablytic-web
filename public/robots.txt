@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://truestream-nine.vercel.app/sitemap-index.xml
+Sitemap: https://grablytic.vercel.app/sitemap-index.xml
