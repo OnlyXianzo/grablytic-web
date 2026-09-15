@@ -7,20 +7,20 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 const { base = '' } = Astro.props;
 ---
 
-<nav id="site-nav" class="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] inset-x-0 z-50 flex justify-center px-4 transition-transform duration-300 ease-out" aria-label="Main Navigation">
+<nav id="site-nav" class="fixed top-[calc(1rem+env(safe-area-inset-top,0px))] inset-x-0 z-50 flex flex-col items-center px-4 transition-transform duration-300 ease-out" aria-label="Main Navigation">
   <div class="navbar-pill max-w-4xl w-full mx-auto px-4 sm:px-5 py-2.5 sm:py-3 rounded-full flex items-center justify-between flex-nowrap min-h-[3.25rem]">
     <a href={`${base}#top`} class="flex items-center gap-2.5 text-(--color-ink) font-bold tracking-tight hover:opacity-90 transition-opacity shrink-0">
       <img src="/logo.png" alt="Grablytic" width="24" height="24" class="w-6 h-6 rounded-md shrink-0" />
       <span class="text-sm font-semibold tracking-wide">Grablytic</span>
     </a>
     
-    <div class="flex items-center gap-2.5 sm:gap-5 text-xs sm:text-sm font-medium flex-nowrap shrink-0">
+    <div class="flex items-center gap-1.5 sm:gap-5 text-xs sm:text-sm font-medium flex-nowrap shrink-0">
       <a href={`${base}#showcase`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Tour</a>
       <a href={`${base}#features`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Features</a>
-      <a href={`${base}#downloads`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Downloads</a>
+      <a href={`${base}#downloads`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Downloads</a>
       <a href="/nightly" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Nightly</a>
       <a href={`${base}#faq`} class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden lg:inline-block">FAQ</a>
-      <a href="/docs/" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Docs</a>
+      <a href="/docs/" class="text-(--color-ink-muted) hover:text-(--color-ink) transition-colors hidden md:inline-block">Docs</a>
       <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" class="text-xs text-(--color-ink-muted) hover:text-(--color-terracotta) transition-colors hidden sm:inline-flex items-center gap-1">
         <span class="text-(--color-ink-faint)">by</span>
         <span>@OnlyXianzo</span>
@@ -30,9 +30,21 @@ const { base = '' } = Astro.props;
         <svg class="w-3.5 h-3.5 text-(--color-terracotta) shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
         </svg>
-        <span class="text-(--color-terracotta)">★</span> <span>{stats.stars}</span> <span>Star</span>
+        <span class="text-(--color-terracotta)">★</span> <span>{stats.stars}</span> <span class="hidden sm:inline">Star</span>
       </a>
+      <button id="nav-menu-btn" type="button" class="md:hidden p-2 -mr-1 rounded-full text-(--color-ink-muted) hover:text-(--color-ink) transition-colors shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
     </div>
+  </div>
+  <div id="nav-menu" class="hidden md:hidden max-w-4xl w-full mx-auto mt-2 rounded-2xl border border-(--color-line)/40 px-2 py-2 shadow-xl" style="background: var(--navbar-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);" role="menu" aria-label="Site menu">
+    <a href={`${base}#showcase`} role="menuitem" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-(--color-ink-muted) hover:text-(--color-ink) hover:bg-(--color-tile) transition-colors">Tour</a>
+    <a href={`${base}#features`} role="menuitem" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-(--color-ink-muted) hover:text-(--color-ink) hover:bg-(--color-tile) transition-colors">Features</a>
+    <a href={`${base}#downloads`} role="menuitem" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-(--color-ink-muted) hover:text-(--color-ink) hover:bg-(--color-tile) transition-colors">Downloads</a>
+    <a href="/nightly" role="menuitem" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-(--color-ink-muted) hover:text-(--color-ink) hover:bg-(--color-tile) transition-colors">Nightly builds</a>
+    <a href={`${base}#faq`} role="menuitem" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-(--color-ink-muted) hover:text-(--color-ink) hover:bg-(--color-tile) transition-colors">FAQ</a>
+    <a href="/docs/" role="menuitem" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-(--color-terracotta) hover:bg-(--color-tile) transition-colors">Docs →</a>
+    <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" role="menuitem" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-(--color-ink-muted) hover:text-(--color-ink) hover:bg-(--color-tile) transition-colors">by @OnlyXianzo</a>
   </div>
 </nav>
 
@@ -43,6 +55,35 @@ const { base = '' } = Astro.props;
 
     let lastScrollY = Math.max(0, window.scrollY);
     let ticking = false;
+
+    const menuBtn = document.getElementById('nav-menu-btn');
+    const menu = document.getElementById('nav-menu');
+
+    const setMenu = (open: boolean) => {
+      if (!menu || !menuBtn) return;
+      menu.classList.toggle('hidden', !open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+
+    menuBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setMenu(menu?.classList.contains('hidden') ?? true);
+    });
+
+    menu?.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => setMenu(false));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target as Node)) {
+        setMenu(false);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setMenu(false);
+    });
 
     window.addEventListener('scroll', () => {
       if (!ticking) {
