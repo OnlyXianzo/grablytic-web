@@ -3,13 +3,25 @@
 // Dumb ordered composer importing modular sections
 import Nav from '../sections/Nav.astro';
 import Hero from '../sections/Hero.astro';
+import HowItWorks from '../sections/HowItWorks.astro';
 import Showcase from '../sections/Showcase.astro';
 import Features from '../sections/Features.astro';
 import Downloads from '../sections/Downloads.astro';
 import Faq from '../sections/Faq.astro';
 import Community from '../sections/Community.astro';
 import Footer from '../sections/Footer.astro';
+import { faqs } from '../data/faqs';
 import '../styles/global.css';
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <!doctype html>
@@ -28,8 +40,8 @@ import '../styles/global.css';
   <meta property="og:url" content="https://grablytic.vercel.app/" />
   <meta property="og:title" content="Grablytic: Private yt-dlp Downloader for Android & Desktop" />
   <meta property="og:description" content="Highest-fidelity media downloads from 1,000+ platforms. No ads, no tracking, 100% local processing. Free & open source (GPL-3.0)." />
-  <meta property="og:image" content="https://grablytic.vercel.app/og-image.png" />
-  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image" content="https://grablytic.vercel.app/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Grablytic — private yt-dlp media downloader for Android, Linux and Windows" />
@@ -38,7 +50,7 @@ import '../styles/global.css';
   <meta name="twitter:site" content="@OnlyXianzo" />
   <meta name="twitter:title" content="Grablytic: Private yt-dlp Downloader for Android & Desktop" />
   <meta name="twitter:description" content="Highest-fidelity media downloads from 1,000+ platforms. No ads, no tracking, 100% local." />
-  <meta name="twitter:image" content="https://grablytic.vercel.app/og-image.png" />
+  <meta name="twitter:image" content="https://grablytic.vercel.app/og-image.jpg" />
   <meta name="twitter:image:alt" content="Grablytic — private yt-dlp media downloader" />
   <script type="application/ld+json">
   {
@@ -61,44 +73,7 @@ import '../styles/global.css';
     }
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Is Grablytic really free?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely. No paid tiers, no ads, no tracking, and no subscriptions. Grablytic is 100% open source under the GNU General Public License v3.0 (GPL-3.0)." }
-      },
-      {
-        "@type": "Question",
-        "name": "Where do I download it?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Right here — this page routes you directly to official GitHub Releases. Android users can also install via Obtainium for seamless automated updates." }
-      },
-      {
-        "@type": "Question",
-        "name": "Does it require an account or login?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No accounts, no email sign-ups, and no cloud registration. Install the binary and start downloading immediately." }
-      },
-      {
-        "@type": "Question",
-        "name": "Which platforms and architectures are supported?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Android (arm64, armv7, x86_64), Linux (x64, arm64: standalone tarball, .deb, .rpm, Arch pkg.tar.zst), and Windows 10/11 (x64 portable zip). iOS is not supported." }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I contribute to development or packaging?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Absolutely — issues, feature requests, and pull requests are welcomed on GitHub. Packaging manifests live in the distribution/ and fastlane/ directories of the repository." }
-      },
-      {
-        "@type": "Question",
-        "name": "Where does the downloaded media come from?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Grablytic extracts publicly available streams directly via yt-dlp. It does not host or store any content. See DMCA for takedown inquiries and contact information." }
-      }
-    ]
-  }
-  </script>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png" />
   <link rel="icon" href="/logo.png" />
@@ -110,11 +85,12 @@ import '../styles/global.css';
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
 </head>
-<body class="bg-[#131313] text-[#E5E2E1] antialiased selection:bg-[#9B503E]/30 selection:text-[#FFB4A3]">
+<body class="bg-(--color-paper-base) text-(--color-ink) antialiased selection:bg-(--color-terracotta-container)/30 selection:text-(--color-terracotta)">
   <!-- Clean Narrative Section Tree -->
   <Nav />
   <main id="main-content">
     <Hero />
+    <HowItWorks />
     <Showcase />
     <Features />
     <Downloads />

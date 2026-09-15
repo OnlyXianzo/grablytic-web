@@ -55,7 +55,7 @@ export function initHeroAnimation(container: HTMLElement | null = null): (() => 
         '-=0.4'
       );
 
-      // Pre-filter cta2 elements to eliminate display:none elements (e.g. Obtainium on desktop).
+      // Pre-filter hidden elements to eliminate display:none stagger gaps.
       // Eliminates the CSSPlugin reparenting forced reflow and phantom stagger gaps.
       const cta2Elements = Array.from(
         scope.querySelectorAll<HTMLElement>('[data-hero="cta2"] a, [data-hero="cta2"] button')
@@ -351,6 +351,8 @@ declare global {
  * before .close() so the blurred backdrop doesn't vanish in a single frame.
  * Escape (`cancel`) and backdrop clicks route through the same fade; repeat
  * close requests while fading are idempotent; reduced-motion closes instantly.
+ * Focus lite: moves focus into the dialog on open, traps Tab inside while
+ * open, and restores focus to the opener on close (a11y half-done fix).
  */
 export function initDonateDialogClose(dialogId: string = 'donate-dialog'): void {
   if (typeof window === 'undefined') return;
@@ -358,6 +360,19 @@ export function initDonateDialogClose(dialogId: string = 'donate-dialog'): void 
   if (!dialog) return;
 
   let closing = false;
+  let opener: HTMLElement | null = null;
+
+  const focusables = (): HTMLElement[] =>
+    Array.from(
+      dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((el) => el.offsetParent !== null);
+
+  const focusFirst = () => {
+    const els = focusables();
+    (els[0] ?? dialog).focus({ preventScroll: true });
+  };
 
   const scrubDialogStyles = () => {
     dialog.style.opacity = '';
@@ -392,6 +407,36 @@ export function initDonateDialogClose(dialogId: string = 'donate-dialog'): void 
 
   window.__closeDonateDialog = requestClose;
 
+  // Capture the opener for every showModal() trigger (inline onclick in
+  // Hero/sections), then move focus inside once the dialog is open.
+  document.querySelectorAll<HTMLElement>("[onclick*='donate-dialog']").forEach((btn) => {
+    btn.addEventListener('click', () => {
+      opener = document.activeElement as HTMLElement | null;
+      requestAnimationFrame(() => {
+        if (dialog.open) focusFirst();
+      });
+    });
+  });
+
+  // Tab trap-lite: cycle focus within the dialog while open.
+  dialog.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const els = focusables();
+    if (els.length === 0) {
+      e.preventDefault();
+      return;
+    }
+    const first = els[0];
+    const last = els[els.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
   // Escape key: native `cancel` would close instantly (flash) — fade instead.
   dialog.addEventListener('cancel', (e) => {
     e.preventDefault();
@@ -405,8 +450,13 @@ export function initDonateDialogClose(dialogId: string = 'donate-dialog'): void 
 
   // Safety reset: however the dialog actually closes, drop pending close state
   // so a rapid re-open starts from clean flags and scrubbed inline styles.
+  // Restore focus to the opener for keyboard / screen-reader continuity.
   dialog.addEventListener('close', () => {
     closing = false;
     scrubDialogStyles();
+    if (opener && document.contains(opener)) {
+      opener.focus({ preventScroll: true });
+    }
+    opener = null;
   });
 }

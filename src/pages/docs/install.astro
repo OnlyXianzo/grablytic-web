@@ -26,7 +26,7 @@ function formatMB(bytes: number): string {
   <meta property="og:url" content="https://grablytic.vercel.app/docs/install/" />
   <meta property="og:title" content="Install Grablytic — Android, Linux & Windows Setup Guide" />
   <meta property="og:description" content="Pick the right APK, Linux package, or Windows zip. Verify checksums and finish first-launch setup." />
-  <meta property="og:image" content="https://grablytic.vercel.app/og-image.png" />
+  <meta property="og:image" content="https://grablytic.vercel.app/og-image.jpg" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,20 +46,20 @@ function formatMB(bytes: number): string {
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
 </head>
-<body class="bg-[#131313] text-[#E5E2E1] antialiased selection:bg-[#9B503E]/30 selection:text-[#FFB4A3]">
+<body class="bg-(--color-paper-base) text-(--color-ink) antialiased selection:bg-(--color-terracotta-container)/30 selection:text-(--color-terracotta)">
   <Nav />
   <main id="main-content" class="pt-28 pb-20 px-4 max-w-4xl mx-auto">
-    <nav aria-label="Breadcrumb" class="text-xs text-[#A28C87] mb-6">
-      <a href="/" class="hover:text-[#E5E2E1] transition-colors">Home</a>
+    <nav aria-label="Breadcrumb" class="text-xs text-(--color-ink-faint) mb-6">
+      <a href="/" class="hover:text-(--color-ink) transition-colors">Home</a>
       <span aria-hidden="true" class="mx-1.5">/</span>
-      <a href="/docs/" class="hover:text-[#E5E2E1] transition-colors">Docs</a>
+      <a href="/docs/" class="hover:text-(--color-ink) transition-colors">Docs</a>
       <span aria-hidden="true" class="mx-1.5">/</span>
-      <span aria-current="page" class="text-[#D9C1BC]">Install</span>
+      <span aria-current="page" class="text-(--color-ink-muted)">Install</span>
     </nav>
 
     <span class="eyebrow mb-2 inline-block">Guide · {TAG}</span>
     <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Install Grablytic</h1>
-    <p class="text-sm sm:text-base text-[#D9C1BC] mt-3 max-w-2xl">
+    <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3 max-w-2xl">
       Grablytic runs on Android 8+, Windows 10/11, and modern Linux. Everything below
       comes from official GitHub Releases — never install APKs or binaries from third-party mirrors.
     </p>
@@ -67,37 +67,37 @@ function formatMB(bytes: number): string {
     <section id="android" class="mt-12 scroll-mt-28">
       <span class="eyebrow mb-2 inline-block">Android 8+ · API 26+</span>
       <h2 class="text-2xl font-extrabold tracking-tight">Choose your APK</h2>
-      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-[#D9C1BC] leading-relaxed">
+      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed">
         <p>
-          <strong class="text-[#E5E2E1]">Most phones (2020+):</strong> pick the
-          <strong class="text-[#E5E2E1]">arm64 + Deno</strong> APK — Deno is yt-dlp's recommended
+          <strong class="text-(--color-ink)">Most phones (2020+):</strong> pick the
+          <strong class="text-(--color-ink)">arm64 + Deno</strong> APK — Deno is yt-dlp's recommended
           JS runtime (sandboxed, fastest challenge solving). The
-          <strong class="text-[#E5E2E1]">arm64 + Node.js</strong> variant does the same job in a
+          <strong class="text-(--color-ink)">arm64 + Node.js</strong> variant does the same job in a
           ~40 MB smaller download. Budget 32-bit devices take the armv7 Node build; Chromebooks
-          and emulators take x86_64. Unsure? The <strong class="text-[#E5E2E1]">universal</strong> APK
+          and emulators take x86_64. Unsure? The <strong class="text-(--color-ink)">universal</strong> APK
           bundles every ABI and both runtimes (458 MB).
         </p>
-        <p class="mt-3">
-          Tip: install via <a href="obtainium://app/https://github.com/OnlyXianzo/Grablytic" class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">Obtainium</a>
-          for seamless automated updates straight from GitHub Releases.
+        <p id="obtainium" class="mt-3 scroll-mt-28">
+          Tip (Android-only): install via <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fapp%2Fhttps%3A%2F%2Fgithub.com%2FOnlyXianzo%2FGrablytic" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">Obtainium</a>
+          for seamless automated updates straight from GitHub Releases. On desktop browsers the button on the homepage links here instead — Obtainium itself runs on Android only.
         </p>
       </div>
       <div class="mt-4 space-y-3">
         {androidDownloads.map((item) => (
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-[#201F1F] border border-[#54433F]/30">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-(--color-tile) border border-(--color-line)/30">
             <div class="mb-2 sm:mb-0">
-              <span class="text-sm font-semibold text-[#E5E2E1] block">{item.label}</span>
-              <span class="text-xs text-[#D9C1BC]">{item.file} · {formatMB(item.size)}</span>
-              <span class="text-[10px] font-mono text-[#A28C87] block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>SHA256: {item.sha256.substring(0, 16)}…</span>
+              <span class="text-sm font-semibold text-(--color-ink) block">{item.label}</span>
+              <span class="text-xs text-(--color-ink-muted)">{item.file} · {formatMB(item.size)}</span>
+              <span class="text-[10px] font-mono text-(--color-ink-faint) block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>SHA256: {item.sha256.substring(0, 16)}…</span>
             </div>
-            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E] hover:text-white transition w-fit">Download .apk</a>
+            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-(--color-terracotta-container)/15 text-(--color-terracotta) border border-(--color-terracotta-container)/30 hover:bg-(--color-terracotta-container) hover:text-white transition w-fit">Download .apk</a>
           </div>
         ))}
       </div>
-      <ol class="mt-6 space-y-3 text-xs sm:text-sm text-[#D9C1BC] leading-relaxed list-none p-0">
-        <li class="paper-tile p-5"><strong class="text-[#E5E2E1]">1. Allow installs.</strong> Open the APK — Android will ask you to allow installs from your browser or file manager. Grant it once.</li>
-        <li class="paper-tile p-5"><strong class="text-[#E5E2E1]">2. Install &amp; open.</strong> FFmpeg and the JS runtime ship inside the APK, so there is nothing else to download. Grant storage/media access when asked.</li>
-        <li class="paper-tile p-5"><strong class="text-[#E5E2E1]">3. Check readiness.</strong> Open Settings → Diagnostics &amp; Logs and confirm the engine reports healthy before your first download.</li>
+      <ol class="mt-6 space-y-3 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed list-none p-0">
+        <li class="paper-tile p-5"><strong class="text-(--color-ink)">1. Allow installs.</strong> Open the APK — Android will ask you to allow installs from your browser or file manager. Grant it once.</li>
+        <li class="paper-tile p-5"><strong class="text-(--color-ink)">2. Install &amp; open.</strong> FFmpeg and the JS runtime ship inside the APK, so there is nothing else to download. Grant storage/media access when asked.</li>
+        <li class="paper-tile p-5"><strong class="text-(--color-ink)">3. Check readiness.</strong> Open Settings → Diagnostics &amp; Logs and confirm the engine reports healthy before your first download.</li>
       </ol>
     </section>
 
@@ -106,32 +106,32 @@ function formatMB(bytes: number): string {
       <h2 class="text-2xl font-extrabold tracking-tight">Install on Linux</h2>
       <div class="mt-4 space-y-3">
         {linuxDownloads.map((item) => (
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-[#201F1F] border border-[#54433F]/30">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-(--color-tile) border border-(--color-line)/30">
             <div class="mb-2 sm:mb-0">
-              <span class="text-sm font-semibold text-[#E5E2E1] block">{item.label}</span>
-              <span class="text-xs text-[#D9C1BC]">{item.file} · {formatMB(item.size)}</span>
+              <span class="text-sm font-semibold text-(--color-ink) block">{item.label}</span>
+              <span class="text-xs text-(--color-ink-muted)">{item.file} · {formatMB(item.size)}</span>
             </div>
-            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E] hover:text-white transition w-fit">Download</a>
+            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-(--color-terracotta-container)/15 text-(--color-terracotta) border border-(--color-terracotta-container)/30 hover:bg-(--color-terracotta-container) hover:text-white transition w-fit">Download</a>
           </div>
         ))}
       </div>
-      <div class="paper-tile p-5 sm:p-6 mt-4 text-xs sm:text-sm text-[#D9C1BC] space-y-4">
+      <div class="paper-tile p-5 sm:p-6 mt-4 text-xs sm:text-sm text-(--color-ink-muted) space-y-4">
         <div>
-          <p class="font-semibold text-[#E5E2E1] mb-1">Debian / Ubuntu / Mint (apt resolves dependencies):</p>
-          <code class="text-[#FFB4A3] block overflow-x-auto select-all font-mono">curl -LO {REL}/grablytic_0.0.2_amd64.deb &amp;&amp; sudo apt install ./grablytic_0.0.2_amd64.deb</code>
-          <p class="font-mono text-[#A28C87] mt-2">arm64: curl -LO {REL}/grablytic_0.0.2_arm64.deb &amp;&amp; sudo apt install ./grablytic_0.0.2_arm64.deb</p>
+          <p class="font-semibold text-(--color-ink) mb-1">Debian / Ubuntu / Mint (apt resolves dependencies):</p>
+          <code class="text-(--color-terracotta) block overflow-x-auto select-all font-mono">curl -LO {REL}/grablytic_0.0.2_amd64.deb &amp;&amp; sudo apt install ./grablytic_0.0.2_amd64.deb</code>
+          <p class="font-mono text-(--color-ink-faint) mt-2">arm64: curl -LO {REL}/grablytic_0.0.2_arm64.deb &amp;&amp; sudo apt install ./grablytic_0.0.2_arm64.deb</p>
         </div>
         <div>
-          <p class="font-semibold text-[#E5E2E1] mb-1">Fedora / RHEL / openSUSE:</p>
-          <code class="text-[#FFB4A3] block overflow-x-auto select-all font-mono">sudo dnf install {REL}/grablytic-0.0.2-1.x86_64.rpm</code>
+          <p class="font-semibold text-(--color-ink) mb-1">Fedora / RHEL / openSUSE:</p>
+          <code class="text-(--color-terracotta) block overflow-x-auto select-all font-mono">sudo dnf install {REL}/grablytic-0.0.2-1.x86_64.rpm</code>
         </div>
         <div>
-          <p class="font-semibold text-[#E5E2E1] mb-1">Arch / Manjaro / EndeavourOS:</p>
-          <code class="text-[#FFB4A3] block overflow-x-auto select-all font-mono">sudo pacman -U {REL}/grablytic-0.0.2-1-x86_64.pkg.tar.zst</code>
+          <p class="font-semibold text-(--color-ink) mb-1">Arch / Manjaro / EndeavourOS:</p>
+          <code class="text-(--color-terracotta) block overflow-x-auto select-all font-mono">sudo pacman -U {REL}/grablytic-0.0.2-1-x86_64.pkg.tar.zst</code>
         </div>
         <div>
-          <p class="font-semibold text-[#E5E2E1] mb-1">Portable tarball (any distro):</p>
-          <code class="text-[#FFB4A3] block overflow-x-auto select-all font-mono">tar xzf grablytic-0.0.2-linux-x64.tar.gz</code>
+          <p class="font-semibold text-(--color-ink) mb-1">Portable tarball (any distro):</p>
+          <code class="text-(--color-terracotta) block overflow-x-auto select-all font-mono">tar xzf grablytic-0.0.2-linux-x64.tar.gz</code>
         </div>
       </div>
     </section>
@@ -141,43 +141,43 @@ function formatMB(bytes: number): string {
       <h2 class="text-2xl font-extrabold tracking-tight">Install on Windows</h2>
       <div class="mt-4 space-y-3">
         {windowsDownloads.map((item) => (
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-[#201F1F] border border-[#54433F]/30">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-lg bg-(--color-tile) border border-(--color-line)/30">
             <div class="mb-2 sm:mb-0">
-              <span class="text-sm font-semibold text-[#E5E2E1] block">{item.label}</span>
-              <span class="text-xs text-[#D9C1BC]">{item.file} · {formatMB(item.size)}</span>
+              <span class="text-sm font-semibold text-(--color-ink) block">{item.label}</span>
+              <span class="text-xs text-(--color-ink-muted)">{item.file} · {formatMB(item.size)}</span>
             </div>
-            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#9B503E]/15 text-[#FFB4A3] border border-[#9B503E]/30 hover:bg-[#9B503E] hover:text-white transition w-fit">Download .zip</a>
+            <a href={`${REL}/${item.file}`} class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg bg-(--color-terracotta-container)/15 text-(--color-terracotta) border border-(--color-terracotta-container)/30 hover:bg-(--color-terracotta-container) hover:text-white transition w-fit">Download .zip</a>
           </div>
         ))}
       </div>
-      <div class="paper-tile p-5 sm:p-6 mt-4 text-xs sm:text-sm text-[#D9C1BC] leading-relaxed">
-        <p>Unzip anywhere (e.g. <code class="font-mono text-[#FFB4A3]">%LOCALAPPDATA%\Grablytic</code>) and run the app — no installer, no admin rights. On first launch the bootstrapper fetches FFmpeg and the Deno runtime automatically, each SHA-256 verified. (WinGet: <code class="font-mono text-[#FFB4A3]">winget install OnlyXianzo.Grablytic</code> — after store ingestion.)</p>
+      <div class="paper-tile p-5 sm:p-6 mt-4 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed">
+        <p>Unzip anywhere (e.g. <code class="font-mono text-(--color-terracotta)">%LOCALAPPDATA%\Grablytic</code>) and run the app — no installer, no admin rights. On first launch the bootstrapper fetches FFmpeg and the Deno runtime automatically, each SHA-256 verified. (WinGet submission for <code class="font-mono text-(--color-terracotta)">OnlyXianzo.Grablytic</code> is pending — not installable yet.)</p>
       </div>
     </section>
 
     <section id="verify" class="mt-12 scroll-mt-28">
       <span class="eyebrow mb-2 inline-block">Trust, then run</span>
       <h2 class="text-2xl font-extrabold tracking-tight">Verify your download</h2>
-      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-[#D9C1BC] leading-relaxed space-y-3">
+      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed space-y-3">
         <p>Every release asset above ships with a published SHA-256 checksum (hover any truncated hash to see the prefix; full values live in the release notes). Compare before installing:</p>
-        <code class="text-[#FFB4A3] block overflow-x-auto select-all font-mono">sha256sum grablytic-*  # Linux · compare against the value shown above</code>
-        <p class="font-mono text-[#A28C87]">Android: check the APK hash in a file manager or via `sha256sum` in Termux. Windows: `Get-FileHash file.zip -Algorithm SHA256` in PowerShell.</p>
-        <p>If a hash mismatches, delete the file and re-download from <a href={`${REPO}/releases/latest`} class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">GitHub Releases</a> — never run it.</p>
+        <code class="text-(--color-terracotta) block overflow-x-auto select-all font-mono">sha256sum grablytic-*  # Linux · compare against the value shown above</code>
+        <p class="font-mono text-(--color-ink-faint)">Android: check the APK hash in a file manager or via `sha256sum` in Termux. Windows: `Get-FileHash file.zip -Algorithm SHA256` in PowerShell.</p>
+        <p>If a hash mismatches, delete the file and re-download from <a href={`${REPO}/releases/latest`} class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">GitHub Releases</a> — never run it.</p>
       </div>
     </section>
 
     <section id="migrate" class="mt-12 scroll-mt-28">
       <span class="eyebrow mb-2 inline-block">TrueStream → Grablytic</span>
       <h2 class="text-2xl font-extrabold tracking-tight">Coming from TrueStream?</h2>
-      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-[#D9C1BC] leading-relaxed space-y-3">
-        <p>Android treats Grablytic as a new app, so install it alongside TrueStream, verify it works, then uninstall the old app. Your existing <code class="font-mono text-[#FFB4A3]">Download/TrueStream</code> folder keeps being used automatically — nothing is moved or deleted. App-private settings and history do not carry over. On Linux, remove any manually installed v0.0.1 <code class="font-mono text-[#FFB4A3]">truestream</code> package if your manager doesn't replace it automatically.</p>
+      <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed space-y-3">
+        <p>Android treats Grablytic as a new app, so install it alongside TrueStream, verify it works, then uninstall the old app. Your existing <code class="font-mono text-(--color-terracotta)">Download/TrueStream</code> folder keeps being used automatically — nothing is moved or deleted. App-private settings and history do not carry over. On Linux, remove any manually installed v0.0.1 <code class="font-mono text-(--color-terracotta)">truestream</code> package if your manager doesn't replace it automatically.</p>
       </div>
     </section>
 
-    <p class="mt-12 text-xs text-[#A28C87]">
-      Next: <a href="/docs/features/" class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">learn the features</a>
-      · <a href="/docs/faq/" class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">read the FAQ</a>
-      · <a href="/docs/troubleshooting/" class="text-[#FFB4A3] hover:text-white transition-colors underline underline-offset-2">fix a problem</a>
+    <p class="mt-12 text-xs text-(--color-ink-faint)">
+      Next: <a href="/docs/features/" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">learn the features</a>
+      · <a href="/docs/faq/" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">read the FAQ</a>
+      · <a href="/docs/troubleshooting/" class="text-(--color-terracotta) hover:text-white transition-colors underline underline-offset-2">fix a problem</a>
     </p>
   </main>
   <Footer />

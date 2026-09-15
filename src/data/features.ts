@@ -12,7 +12,7 @@ export const features: FeatureItem[] = [
   },
   {
     title: 'Dual JS Runtimes',
-    body: 'Deno 2.7.7 for blazingly fast startup, Node.js 25.3.0 for broad script compatibility — selected per device at install.',
+    body: 'Two built-in engines pick the right solver for your device — fast by default, compatible everywhere. Nothing extra to install.',
     guideAnchor: '/docs/install/',
   },
   {
@@ -22,12 +22,12 @@ export const features: FeatureItem[] = [
   },
   {
     title: 'Highest Fidelity',
-    body: 'Direct stream demuxing with Opus/AAC audio preservation and clean MP4/MKV container muxing without re-encoding loss.',
+    body: 'Saves the original quality — crisp video up to 4K/8K/HDR, full-quality audio, subtitles and thumbnails. No re-encoding, no quality loss.',
     guideAnchor: '/docs/features/',
   },
   {
     title: 'Hardware-Optimized',
-    body: 'Native Bionic C FFmpeg compilation targeting each ABI directly: arm64-v8a, armeabi-v7a, and x86_64.',
+    body: 'Tuned builds for every chip — fast downloads and a smooth 120Hz interface on phones, foldables, tablets and desktops.',
     guideAnchor: '/docs/install/',
   },
   {
@@ -37,12 +37,12 @@ export const features: FeatureItem[] = [
   },
   {
     title: 'Batch Playlists',
-    body: 'One-click full playlist downloading with selective filtering, audio-only toggles, and concurrent queue management.',
+    body: 'Download a whole playlist in one tap — pick videos, grab audio-only, and let the queue with auto-skip handle the rest.',
     guideAnchor: '/docs/features/',
   },
   {
     title: 'Fluid Dark UI',
-    body: 'Engineered for responsive 120Hz frame rates across phones, foldables, tablets, and desktop workstations.',
+    body: 'A clean interface that stays smooth at 120Hz — readable on phones, foldables, tablets and desktop alike.',
     guideAnchor: '/docs/features/',
   },
 ];

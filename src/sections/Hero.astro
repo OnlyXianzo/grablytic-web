@@ -6,30 +6,30 @@ import { TAG, REL, REPO } from '../data/downloads';
 
 <header class="pt-[var(--nav-clearance)] pb-16 px-4 max-w-5xl mx-auto text-center flex flex-col items-center scroll-mt-[var(--nav-clearance)]" id="top">
   <div class="mb-4 inline-flex flex-wrap items-center justify-center gap-2" data-hero="badges">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1B1B] border border-[#54433F]/40 shadow-sm">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-(--color-tile-low) border border-(--color-line)/40 shadow-sm">
       <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B7CCB9] opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#B7CCB9]"></span>
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-(--color-sage) opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-(--color-sage)"></span>
       </span>
       <span class="eyebrow-muted text-[11px]">LOCAL MEDIA EXTRACTION · ZERO TELEMETRY · GPL-3.0</span>
     </div>
-    <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1C1B1B] border border-[#54433F]/40 text-[11px] font-semibold text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#FFB4A3]/50 transition">
-      <span class="text-[#A28C87]">by</span>
-      <span class="text-[#FFB4A3]">@OnlyXianzo</span>
+    <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-(--color-tile-low) border border-(--color-line)/40 text-[11px] font-semibold text-(--color-ink-muted) hover:text-(--color-ink) hover:border-(--color-terracotta)/50 transition">
+      <span class="text-(--color-ink-faint)">by</span>
+      <span class="text-(--color-terracotta)">@OnlyXianzo</span>
     </a>
   </div>
 
   <div class="mb-6 relative group cursor-pointer transition-transform duration-300 hover:scale-105" data-hero="logo">
-    <img src="/logo.png" alt="Grablytic Logo" width="104" height="104" fetchpriority="high" class="w-24 h-24 sm:w-26 sm:h-26 rounded-3xl border border-[#54433F]/50 shadow-md group-hover:border-[#FFB4A3]/50 transition-colors" />
+    <img src="/logo.png" alt="Grablytic Logo" width="104" height="104" fetchpriority="high" class="w-24 h-24 sm:w-26 sm:h-26 rounded-3xl border border-(--color-line)/50 shadow-md group-hover:border-(--color-terracotta)/50 transition-colors" />
   </div>
 
-  <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#E5E2E1] max-w-3xl leading-[1.12]" data-hero="title">
+  <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-(--color-ink) max-w-3xl leading-[1.12]" data-hero="title">
     Grablytic — Private yt-dlp Downloader for Android & Desktop<br />
-    <span class="text-[#FFB4A3]">No ads. No tracking.</span>
+    <span class="text-(--color-terracotta)">No ads. No tracking.</span>
   </h1>
 
-  <p class="mt-5 text-base sm:text-lg text-[#D9C1BC] max-w-2xl font-normal leading-relaxed" data-hero="sub">
-    A curated, privacy-first media extractor for Android, Linux, and Windows — highest fidelity Opus/AAC streams from 1,000+ platforms with 100% local device execution.
+  <p class="mt-5 text-base sm:text-lg text-(--color-ink-muted) max-w-2xl font-normal leading-relaxed" data-hero="sub">
+    Paste a link, pick a quality, save the video or song — a free downloader for Android, Linux &amp; Windows that keeps the highest fidelity from 1,000+ platforms, processed 100% on your device.
   </p>
 
   <div class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-3 w-full max-w-lg" data-hero="cta">
@@ -40,51 +40,54 @@ import { TAG, REL, REPO } from '../data/downloads';
       <span>Download for Android (arm64)</span>
     </a>
     <a class="btn-secondary btn-magnetic w-full sm:w-auto flex items-center justify-center gap-2" href={REPO} target="_blank" rel="noopener noreferrer" aria-label={`Star Grablytic on GitHub (${stats.stars} stars)`}>
-      <svg class="w-4 h-4 text-[#FFB4A3]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <svg class="w-4 h-4 text-(--color-terracotta)" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
       </svg>
       <span>Star on GitHub</span>
-      <span class="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-[#9B503E]/25 text-[#FFB4A3] border border-[#9B503E]/40">★ {stats.stars}</span>
+      <span class="ml-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-(--color-terracotta-container)/25 text-(--color-terracotta) border border-(--color-terracotta-container)/40">★ {stats.stars}</span>
     </a>
   </div>
 
   <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5" data-hero="cta2">
-    <a class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#FFB4A3]/50 transition inline-flex items-center gap-1.5" href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer">
-      <svg class="w-3.5 h-3.5 text-[#A28C87]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <a class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-(--color-line)/40 bg-(--color-tile-low) text-(--color-ink-muted) hover:text-(--color-ink) hover:border-(--color-terracotta)/50 transition inline-flex items-center gap-1.5" href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer">
+      <svg class="w-3.5 h-3.5 text-(--color-ink-faint)" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
       </svg>
       <span>+ Follow @OnlyXianzo</span>
     </a>
-    <a id="obtainium-add" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition inline-flex items-center gap-1.5" href="obtainium://app/https://github.com/OnlyXianzo/Grablytic">
+    <a id="obtainium-add" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-(--color-line)/40 bg-(--color-tile-low) text-(--color-ink-muted) hover:text-(--color-ink) hover:border-(--color-line) transition inline-flex items-center gap-1.5" href="obtainium://app/https://github.com/OnlyXianzo/Grablytic">
       <span>✦ Add to Obtainium</span>
     </a>
-    <button class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#54433F]/40 bg-[#1C1B1B] text-[#D9C1BC] hover:text-[#E5E2E1] hover:border-[#54433F] transition cursor-pointer inline-flex items-center gap-1.5" onclick="document.getElementById('donate-dialog')?.showModal()">
+    <a class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-(--color-line)/40 bg-(--color-tile-low) text-(--color-ink-muted) hover:text-(--color-ink) hover:border-(--color-terracotta)/50 transition inline-flex items-center gap-1.5" href="#how">
+      <span>→ See how it works</span>
+    </a>
+    <button class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-(--color-line)/40 bg-(--color-tile-low) text-(--color-ink-muted) hover:text-(--color-ink) hover:border-(--color-line) transition cursor-pointer inline-flex items-center gap-1.5" onclick="document.getElementById('donate-dialog')?.showModal()">
       <span>♥ Support Grablytic</span>
     </button>
   </div>
 
-  <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl w-full pt-8 border-t border-[#353534]" data-hero="stats">
+  <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl w-full pt-8 border-t border-(--color-tile-highest)" data-hero="stats">
     <div class="text-center">
       <b class="primary-value block">1,000+</b>
-      <span class="text-xs text-[#D9C1BC]">supported platforms</span>
+      <span class="text-xs text-(--color-ink-muted)">supported platforms</span>
     </div>
     <div class="text-center">
       <b class="primary-value block">
         <span data-count={stats.binaries}>{stats.binaries}</span>
       </b>
-      <span class="text-xs text-[#D9C1BC]">release binaries ({stats.latest_tag})</span>
+      <span class="text-xs text-(--color-ink-muted)">release binaries ({stats.latest_tag})</span>
     </div>
     <div class="text-center">
       <b class="primary-value block">3</b>
-      <span class="text-xs text-[#D9C1BC]">operating systems</span>
+      <span class="text-xs text-(--color-ink-muted)">operating systems</span>
     </div>
     <div class="text-center">
       <a href="https://github.com/OnlyXianzo/Grablytic" target="_blank" rel="noopener noreferrer" class="group block hover:opacity-90 transition">
         <b class="primary-value block flex items-center justify-center gap-1">
-          <span class="text-lg text-[#FFB4A3]">★</span>
+          <span class="text-lg text-(--color-terracotta)">★</span>
           <span data-count={stats.stars}>{stats.stars}</span>
         </b>
-        <span class="text-xs text-[#D9C1BC] group-hover:text-[#FFB4A3] transition-colors">GitHub stars</span>
+        <span class="text-xs text-(--color-ink-muted) group-hover:text-(--color-terracotta) transition-colors">GitHub stars</span>
       </a>
     </div>
   </div>
@@ -138,10 +141,18 @@ import { TAG, REL, REPO } from '../data/downloads';
 
     // Dynamic Obtainium link: same detected variant as the download button,
     // with apkFilterRegEx so one tap adds the RIGHT APK (Obtainium is Android-only).
+    // Off-Android the button stays visible and links to the docs fallback
+    // (/docs/install/#obtainium) instead of a dead deep-link.
     function setObtainium(filter: string | null) {
       const ob = document.getElementById('obtainium-add');
       if (!ob) return;
-      if (!filter) { (ob as HTMLElement).style.display = 'none'; return; }
+      if (!filter) {
+        ob.setAttribute('href', '/docs/install/#obtainium');
+        (ob as HTMLElement).style.display = '';
+        const label = ob.querySelector('span');
+        if (label) label.textContent = '✦ Obtainium (Android-only)';
+        return;
+      }
       const app = {
         id: 'com.theonly.grablytic',
         url: 'https://github.com/OnlyXianzo/Grablytic',

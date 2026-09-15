@@ -7,11 +7,11 @@
     <span class="eyebrow mb-2 inline-block" data-reveal>
       App Tour · Live Interface
     </span>
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#E5E2E1] tracking-tight" data-reveal>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-(--color-ink) tracking-tight" data-reveal>
       See it in action
     </h2>
-    <p class="text-sm sm:text-base text-[#D9C1BC] mt-3" data-reveal>
-      Authentic screenshots captured directly from the v0.0.1 Flutter engine — explore Home, Search, Format Picker, Queue, and Settings.
+    <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3" data-reveal>
+      Real screenshots from the app — paste a link, pick a quality, watch the queue, tune settings.
     </p>
   </div>
 
@@ -19,57 +19,62 @@
     <!-- Fluid drag & scroll track -->
     <div id="showcase-track" class="shots flex gap-4 sm:gap-6 overflow-x-auto py-12 px-4 justify-start items-center flex-nowrap" role="region" aria-label="Grablytic screen tour carousel" tabindex="0">
       <!-- Frame 0: Home -->
-      <div class="frame" data-index="0" tabindex="0" role="group" aria-label="Home screen">
+      <div class="frame" data-index="0" tabindex="0" role="group" aria-label="Home screen — paste a link to start">
         <div class="frame-inner">
           <div class="frame-tag">HOME</div>
-          <img src="/shots/optimized/home-screen.webp" alt="Grablytic Home — empty state" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+          <img src="/shots/optimized/home-screen.webp" alt="Grablytic Home — paste a link to start a download" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
         </div>
+        <p class="frame-caption">Paste a link → start here</p>
       </div>
 
       <!-- Frame 1: Search -->
-      <div class="frame" data-index="1" tabindex="0" role="group" aria-label="Cookies and logins">
+      <div class="frame" data-index="1" tabindex="0" role="group" aria-label="Cookies and logins — unlock private or age-gated videos">
         <div class="frame-inner">
           <div class="frame-tag">LOGIN & COOKIES</div>
-          <img src="/shots/optimized/cookies-screen.webp" alt="Grablytic Cookies and site logins" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+          <img src="/shots/optimized/cookies-screen.webp" alt="Grablytic logins — unlock private or age-gated videos" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
         </div>
+        <p class="frame-caption">Unlock private videos</p>
       </div>
 
       <!-- Frame 2: Format Picker Hero -->
-      <div class="frame is-active" data-index="2" tabindex="0" role="group" aria-label="16K HDR Format Picker">
+      <div class="frame is-active" data-index="2" tabindex="0" role="group" aria-label="Format picker — choose exact video and audio quality">
         <div class="frame-inner">
           <div class="frame-tag frame-tag-hero">16K HDR PICKER</div>
-          <img src="/shots/optimized/format-picker-16k.webp" alt="Grablytic Format Picker — 16K HDR streams" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+          <img src="/shots/optimized/format-picker-16k.webp" alt="Grablytic Format Picker — choose exact quality up to 16K HDR" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
         </div>
+        <p class="frame-caption">Pick exact quality</p>
       </div>
 
       <!-- Frame 3: Queue -->
-      <div class="frame" data-index="3" tabindex="0" role="group" aria-label="Live downloads queue">
+      <div class="frame" data-index="3" tabindex="0" role="group" aria-label="Live downloads queue — watch progress and resume">
         <div class="frame-inner">
           <div class="frame-tag">LIVE QUEUE</div>
-          <img src="/shots/optimized/library-downloads.webp" alt="Grablytic Library — live downloads" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+          <img src="/shots/optimized/library-downloads.webp" alt="Grablytic queue — watch downloads progress and resume" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
         </div>
+        <p class="frame-caption">Watch it download</p>
       </div>
 
       <!-- Frame 4: Settings -->
-      <div class="frame" data-index="4" tabindex="0" role="group" aria-label="Application settings">
+      <div class="frame" data-index="4" tabindex="0" role="group" aria-label="Application settings — tune updates and engine">
         <div class="frame-inner">
           <div class="frame-tag">SETTINGS</div>
-          <img src="/shots/optimized/settings-general.webp" alt="Grablytic Settings" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
+          <img src="/shots/optimized/settings-general.webp" alt="Grablytic Settings — tune updates, engine and storage" width="400" height="888" class="screen-img" loading="lazy" decoding="async" />
         </div>
+        <p class="frame-caption">Tune updates & engine</p>
       </div>
     </div>
   </div>
 
   <!-- Interactive Pagination Dots -->
   <div class="showcase-dots flex justify-center items-center gap-2 mt-4" aria-label="Showcase carousel navigation">
-    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="0" aria-label="Slide 1: Home"></button>
-    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="1" aria-label="Slide 2: Cookies"></button>
-    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-6 bg-[#FFB4A3]" data-index="2" aria-label="Slide 3: Format Picker" aria-current="true"></button>
-    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="3" aria-label="Slide 4: Downloads"></button>
-    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-[#54433F]/60 hover:bg-[#A28C87]" data-index="4" aria-label="Slide 5: Settings"></button>
+    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-(--color-line)/60 hover:bg-(--color-ink-faint)" data-index="0" aria-label="Slide 1: Home"></button>
+    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-(--color-line)/60 hover:bg-(--color-ink-faint)" data-index="1" aria-label="Slide 2: Cookies"></button>
+    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-6 bg-(--color-terracotta)" data-index="2" aria-label="Slide 3: Format Picker" aria-current="true"></button>
+    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-(--color-line)/60 hover:bg-(--color-ink-faint)" data-index="3" aria-label="Slide 4: Downloads"></button>
+    <button class="dot-btn h-2 rounded-full transition-all duration-300 w-2 bg-(--color-line)/60 hover:bg-(--color-ink-faint)" data-index="4" aria-label="Slide 5: Settings"></button>
   </div>
 
-  <p class="text-xs text-[#A28C87] mt-3 tracking-wide flex items-center justify-center gap-1.5" aria-hidden="true">
+  <p class="text-xs text-(--color-ink-faint) mt-3 tracking-wide flex items-center justify-center gap-1.5" aria-hidden="true">
     <span class="hidden sm:inline">← drag or scroll horizontally to explore →</span>
     <span class="sm:hidden">← swipe horizontally to explore →</span>
   </p>
@@ -121,8 +126,8 @@
     width: 100%;
     height: 100%;
     border-radius: 28px;
-    border: 1px solid rgba(84, 67, 63, 0.45);
-    background: var(--color-tile-low, #181514);
+    border: 1px solid var(--color-hairline);
+    background: var(--color-tile-low);
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -132,13 +137,22 @@
     transition: box-shadow 300ms ease, border-color 300ms ease;
   }
 
+  :root[data-theme="light"] .frame-inner {
+    box-shadow: 0 12px 32px rgba(28, 27, 26, 0.18);
+  }
+
+  :root[data-theme="light"] .frame.is-active .frame-inner {
+    box-shadow: 0 20px 48px rgba(28, 27, 26, 0.22), 0 0 28px rgba(125, 57, 41, 0.25);
+  }
+
   /* SSR fallback for active card */
   .frame.is-active .frame-inner {
     border-color: rgba(255, 180, 163, 0.65);
     box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 28px rgba(155, 80, 62, 0.3);
   }
 
-  /* Tactile Frame Caption Tag */
+  /* Tactile Frame Caption Tag — on-screenshot pill, stays dark in both themes
+     (screenshots are dark UI; pill must contrast the image, not the page). */
   .frame-tag {
     position: absolute;
     top: 10px;
@@ -194,6 +208,19 @@
     user-select: none;
     -webkit-user-drag: none;
     pointer-events: none;
+  }
+
+  .frame-caption {
+    margin-top: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-ink-muted);
+    white-space: nowrap;
+  }
+
+  .frame.is-active .frame-caption {
+    color: var(--color-ink);
   }
 
   @media (max-width: 640px) {
@@ -304,12 +331,12 @@
       // Update Pagination Dots
       dots.forEach((dot, idx) => {
         if (idx === nearestIdx) {
-          dot.classList.remove('w-2', 'bg-[#54433F]/60');
-          dot.classList.add('w-6', 'bg-[#FFB4A3]');
+          dot.classList.remove('w-2', 'bg-(--color-line)/60');
+          dot.classList.add('w-6', 'bg-(--color-terracotta)');
           dot.setAttribute('aria-current', 'true');
         } else {
-          dot.classList.remove('w-6', 'bg-[#FFB4A3]');
-          dot.classList.add('w-2', 'bg-[#54433F]/60');
+          dot.classList.remove('w-6', 'bg-(--color-terracotta)');
+          dot.classList.add('w-2', 'bg-(--color-line)/60');
           dot.removeAttribute('aria-current');
         }
       });
@@ -458,6 +485,30 @@
       dot.addEventListener('click', () => {
         scrollToSlide(idx, true);
       });
+    });
+
+    // Arrow-key carousel: Left/Right moves one slide from track or any frame.
+    function currentIndex(): number {
+      if (!track) return 0;
+      const scrollCenter = track.scrollLeft + (containerWidth / 2);
+      let best = 0;
+      let bestDiff = Infinity;
+      for (let i = 0; i < frameCenters.length; i++) {
+        const diff = Math.abs(frameCenters[i] - scrollCenter);
+        if (diff < bestDiff) { bestDiff = diff; best = i; }
+      }
+      return best;
+    }
+
+    track.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const cur = currentIndex();
+      const next = e.key === 'ArrowRight'
+        ? Math.min(frames.length - 1, cur + 1)
+        : Math.max(0, cur - 1);
+      scrollToSlide(next, true);
+      frames[next]?.focus({ preventScroll: true });
     });
 
     // ResizeObserver to recalibrate cached coordinates

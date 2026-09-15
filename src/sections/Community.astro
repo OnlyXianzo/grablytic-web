@@ -8,15 +8,15 @@ import stats from '../data/stats.json';
     <span class="eyebrow mb-2 inline-block" data-reveal>
       Open Source · Copyleft
     </span>
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#E5E2E1] tracking-tight" data-reveal>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-(--color-ink) tracking-tight" data-reveal>
       Built in the open, backed by people
     </h2>
   </div>
 
-  <div class="flex justify-center gap-6 sm:gap-12 flex-wrap mb-10 py-6 px-8 rounded-2xl bg-[#1C1B1B] border border-[#54433F]/40 max-w-xl mx-auto shadow-md" data-reveal-group>
+  <div class="flex justify-center gap-6 sm:gap-12 flex-wrap mb-10 py-6 px-8 rounded-2xl bg-(--color-tile-low) border border-(--color-line)/40 max-w-xl mx-auto shadow-md" data-reveal-group>
     <div class="text-center" data-reveal>
       <b class="primary-value text-3xl sm:text-4xl block flex items-center justify-center gap-1">
-        <span class="text-2xl text-[#FFB4A3]">★</span>
+        <span class="text-2xl text-(--color-terracotta)">★</span>
         <span id="gh-stars" data-count={stats.stars}>{stats.stars}</span>
       </b>
       <span class="eyebrow-muted text-[11px] block mt-1">stars</span>
@@ -44,7 +44,7 @@ import stats from '../data/stats.json';
     </a>
   </div>
 
-  <p class="text-xs sm:text-sm text-[#D9C1BC] leading-relaxed max-w-2xl mx-auto font-normal" data-reveal>
+  <p class="text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed max-w-2xl mx-auto font-normal" data-reveal>
     Grablytic is free forever — no ads, no paywalls, no tracking. If it saves you even one frustrating evening of hunting downloads, a star costs you one click and keeps us going through the late nights. Every star is a small light that tells us this matters. Thank you for being part of it.
   </p>
 </section>

@@ -44,6 +44,9 @@
     --btn-primary-border-hover: rgba(255, 180, 163, 0.4);
     --btn-secondary-hover-ink: #FFFFFF;
     --btn-secondary-hover-border: rgba(217, 193, 188, 0.3);
+    /* Solid hairline for Tailwind arbitrary borders/decorations
+       (border-(--color-line) etc.): lightOutlineVariant in light mode. */
+    --color-line: #54433F;
     --ambient-glow: radial-gradient(ellipse at center, rgba(155, 80, 62, 0.13) 0%, rgba(125, 57, 41, 0.04) 45%, transparent 70%);
 
     /* Semantic Navigation Clearance */
@@ -70,6 +73,8 @@
        so the darker outline token is used within the same 20–40% band. */
     --color-hairline: rgba(135, 115, 110, 0.38);
     --color-ink-faint: #87736E;               /* lightOutline */
+    /* Solid hairline (borders/decorations): lightOutlineVariant base. */
+    --color-line: #D9C1BC;
 
     --color-terracotta: #7D3929;              /* lightPrimary */
     --color-terracotta-container: #9B503E;    /* same both themes */

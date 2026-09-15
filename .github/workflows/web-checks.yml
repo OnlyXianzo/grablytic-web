@@ -1,0 +1,86 @@
+name: Web checks
+
+# Guards the brutal-teardown regressions:
+# oversized images, missing title/canonical, stale brand refs,
+# unlabelled package commands, unverified scan claims.
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - '.github/workflows/web-checks.yml'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Image budgets (<300 KB)
+        run: |
+          fail=0
+          for f in public/og-image.jpg public/og-image.png; do
+            if [ -f "$f" ]; then
+              size=$(wc -c < "$f")
+              echo "$f: $size bytes"
+              if [ "$size" -gt 307200 ]; then
+                echo "::error file=$f::over 300 KB budget ($size bytes)"
+                fail=1
+              fi
+            fi
+          done
+          exit $fail
+
+      - name: No stale brand refs
+        run: |
+          if grep -rni "truestream" src public scripts --exclude-dir=node_modules | grep -viE "migrat|coming from|truestream →|TrueStream folder|I used TrueStream|truestream.*package"; then
+            echo "::error::stale truestream refs found (allowed only in migration copy)"
+            exit 1
+          fi
+          echo "brand refs clean"
+
+      - name: No unverified scan claims
+        run: |
+          if grep -rni "virustotal\|detections" src public --exclude-dir=node_modules; then
+            echo "::error::scan verdict claims must not ship without manual verification"
+            exit 1
+          fi
+          echo "scan claims clean"
+
+      - name: No unlabelled package commands
+        run: |
+          if grep -rn "paru -S grablytic-bin" src --exclude-dir=node_modules; then
+            echo "::error::paru -S grablytic-bin is not installable yet — keep it out or label pending"
+            exit 1
+          fi
+          fail=0
+          for f in $(grep -rln "winget install" src --exclude-dir=node_modules); do
+            if ! grep -qi "pending" "$f"; then
+              echo "::error file=$f::every winget install mention must carry its pending status"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Pages have title + canonical
+        run: |
+          python3 - <<'EOF'
+          import pathlib, re, sys
+          bad = []
+          for p in pathlib.Path('src/pages').rglob('*.astro'):
+              s = p.read_text()
+              if '<title>' not in s:
+                  bad.append(f'{p}: missing <title>')
+              if 'rel="canonical"' not in s:
+                  bad.append(f'{p}: missing canonical')
+          if bad:
+              print('\n'.join(bad))
+              sys.exit(1)
+          print(f'page heads ok ({len(list(pathlib.Path("src/pages").rglob("*.astro")))} pages)')
+          EOF

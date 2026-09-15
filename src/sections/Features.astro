@@ -8,31 +8,31 @@ import { features } from '../data/features';
     <span class="eyebrow mb-2 inline-block" data-reveal>
       Philosophy & Engine
     </span>
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-[#E5E2E1] tracking-tight" data-reveal>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-(--color-ink) tracking-tight" data-reveal>
       Why Grablytic
     </h2>
-    <p class="text-sm sm:text-base text-[#D9C1BC] mt-3" data-reveal>
+    <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3" data-reveal>
       Engineered from the bionic linker up for absolute privacy, maximum fidelity, and uncompromising speed.
     </p>
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal-group>
     {features.map((feat) => (
-      <div class="paper-tile p-6 flex flex-col justify-between group hover:border-[#FFB4A3]/40 hover:-translate-y-1.5 transition-all duration-300" data-reveal>
+      <div class="paper-tile p-6 flex flex-col justify-between group hover:border-(--color-terracotta)/40 hover:-translate-y-1.5 transition-all duration-300" data-reveal>
         <div>
           <div class="mb-3">
             <span class="eyebrow-muted text-[10px]">
               ARCHITECTURE · VERIFIED
             </span>
           </div>
-          <h3 class="text-base sm:text-lg font-bold text-[#E5E2E1] mb-2 group-hover:text-[#FFB4A3] transition-colors">
+          <h3 class="text-base sm:text-lg font-bold text-(--color-ink) mb-2 group-hover:text-(--color-terracotta) transition-colors">
             {feat.title}
           </h3>
-          <p class="text-xs sm:text-sm text-[#D9C1BC] leading-relaxed mb-5">
+          <p class="text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed mb-5">
             {feat.body}
           </p>
         </div>
-        <a href={feat.guideAnchor} class="inline-flex items-center text-xs font-semibold text-[#FFB4A3] hover:text-white transition-colors pt-3 border-t border-[#353534]">
+        <a href={feat.guideAnchor} class="inline-flex items-center text-xs font-semibold text-(--color-terracotta) hover:text-white transition-colors pt-3 border-t border-(--color-tile-highest)">
           <span>Explore details</span>
           <svg class="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7"></path>

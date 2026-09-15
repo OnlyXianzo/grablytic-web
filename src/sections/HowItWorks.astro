@@ -1,0 +1,48 @@
+---
+// src/sections/HowItWorks.astro — 3-step stranger-readable explainer (answers "what does the app do")
+const steps = [
+  {
+    n: '1',
+    title: 'Paste a link',
+    body: 'Copy any video, song, playlist or podcast URL — YouTube, Twitch, TikTok, SoundCloud and 1,000+ more — and paste it into Grablytic. No account, no sign-up.',
+  },
+  {
+    n: '2',
+    title: 'Pick a quality',
+    body: 'See every available stream before you commit: 4K/8K/HDR video, MP3/Opus/FLAC audio, subtitles and thumbnails. Presets pick the best automatically.',
+  },
+  {
+    n: '3',
+    title: 'Save it offline',
+    body: 'Download to your device with per-file integrity checks. Everything runs locally — no cloud, no ads, no tracking, ever.',
+  },
+];
+---
+
+<section id="how" class="py-16 px-4 scroll-mt-24 max-w-4xl mx-auto">
+  <div class="text-center max-w-2xl mx-auto mb-10">
+    <span class="eyebrow mb-2 inline-block" data-reveal>
+      How it works
+    </span>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-(--color-ink) tracking-tight" data-reveal>
+      Three steps to anything offline
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" data-reveal-group>
+    {steps.map((step) => (
+      <div class="paper-tile p-6" data-reveal>
+        <div class="primary-value mb-2" aria-hidden="true">{step.n}</div>
+        <h3 class="text-base sm:text-lg font-bold text-(--color-ink) mb-2">{step.title}</h3>
+        <p class="text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed">{step.body}</p>
+      </div>
+    ))}
+  </div>
+
+  <p class="text-center mt-8" data-reveal>
+    <a href="/docs/install/" class="inline-flex items-center text-xs font-semibold text-(--color-terracotta) hover:text-white transition-colors">
+      <span>New here? Start with the install guide</span>
+      <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7"></path></svg>
+    </a>
+  </p>
+</section>

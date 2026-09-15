@@ -1,31 +1,21 @@
-export interface FaqItem {
-  q: string;
-  a: string;
+import { faqGroups } from './faq-groups';
+import type { FaqItem } from './faq-groups';
+
+export type { FaqItem };
+
+// Landing short list — references (not copies) of faqGroups entries,
+// so an answer edit in one place updates every surface + JSON-LD.
+function find(q: string): FaqItem {
+  const hit = faqGroups.flatMap((g) => g.items).find((f) => f.q === q);
+  if (!hit) throw new Error(`faqs.ts: question not found in faq-groups: ${q}`);
+  return hit;
 }
 
 export const faqs: FaqItem[] = [
-  {
-    q: 'Is Grablytic really free?',
-    a: 'Yes, completely. No paid tiers, no ads, no tracking, and no subscriptions. Grablytic is 100% open source under the GNU General Public License v3.0 (GPL-3.0).',
-  },
-  {
-    q: 'Where do I download it?',
-    a: 'Right here — this page routes you directly to official GitHub Releases. Android users can also install via Obtainium for seamless automated updates.',
-  },
-  {
-    q: 'Does it require an account or login?',
-    a: 'No accounts, no email sign-ups, and no cloud registration. Install the binary and start downloading immediately.',
-  },
-  {
-    q: 'Which platforms and architectures are supported?',
-    a: 'Android (arm64, armv7, x86_64), Linux (x64, arm64: standalone tarball, .deb, .rpm, Arch pkg.tar.zst), and Windows 10/11 (x64 portable zip). iOS is not supported.',
-  },
-  {
-    q: 'Can I contribute to development or packaging?',
-    a: 'Absolutely — issues, feature requests, and pull requests are welcomed on GitHub. Packaging manifests live in the distribution/ and fastlane/ directories of the repository.',
-  },
-  {
-    q: 'Where does the downloaded media come from?',
-    a: 'Grablytic extracts publicly available streams directly via yt-dlp. It does not host or store any content. See DMCA for takedown inquiries and contact information.',
-  },
+  find('Is Grablytic really free?'),
+  find('Where do I download it?'),
+  find('Does it require an account or login?'),
+  find('Which platforms and architectures are supported?'),
+  find('Can I contribute to development or packaging?'),
+  find('Where does the downloaded media come from?'),
 ];
