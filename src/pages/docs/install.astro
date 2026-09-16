@@ -2,6 +2,7 @@
 // src/pages/docs/install.astro — Per-OS install guide with live release links.
 import Nav from '../../sections/Nav.astro';
 import Footer from '../../sections/Footer.astro';
+import TerminalBlock from '../../components/TerminalBlock.astro';
 import { TAG, REL, REPO, androidDownloads, linuxDownloads, windowsDownloads } from '../../data/downloads';
 import '../../styles/global.css';
 
@@ -113,7 +114,12 @@ function formatMB(bytes: number): string {
       <h2 class="text-2xl font-bold tracking-tight">Install on Linux</h2>
       <div class="paper-tile p-5 sm:p-6 mt-6 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed space-y-3">
         <p class="font-semibold text-(--color-ink)">Zero decisions — one command:</p>
-        <code class="text-(--color-terracotta) block overflow-x-auto select-all font-mono">curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/Grablytic/main/install.sh | bash</code>
+        <TerminalBlock
+          command="curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/Grablytic/main/install.sh | bash"
+          copyLabel="Copy Linux installer command"
+          verifyHref="#verify"
+          verifyText="Verify checksums before running"
+        />
         <p>The script auto-detects your distro (apt/dnf/zypper/pacman) and architecture (x64/arm64), verifies SHA-256 checksums, and installs natively. Prefer manual control? The per-family equivalents below fetch the same assets.</p>
       </div>
       <div class="mt-4 space-y-3">

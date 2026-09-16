@@ -388,6 +388,102 @@ details.faq-item > .faq-panel > .faq-panel-inner {
   min-height: 0;
 }
 
+/* Installer terminal block (TerminalBlock.astro) — frameless one-liner in
+   the docs-platform manner: small label bar, icon-only copy control,
+   horizontal scroll, prompt rendered not authored. */
+.terminal-block {
+  background-color: var(--color-tile-lowest);
+  border: 1px solid var(--color-hairline);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.terminal-note {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+  padding: 12px 16px 0;
+  margin: 0;
+}
+
+.terminal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 16px;
+}
+
+.terminal-copy {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background-color: var(--color-tile-high);
+  color: var(--color-ink-muted);
+  border: 1px solid var(--color-hairline);
+  cursor: pointer;
+  transition: background-color 0.25s var(--ease-premium), border-color 0.25s var(--ease-premium), color 0.25s var(--ease-premium);
+}
+
+.terminal-copy:hover {
+  color: var(--color-ink);
+  border-color: var(--accent-border);
+}
+
+.terminal-copy .icon-check {
+  display: none;
+}
+
+.terminal-copy.is-copied {
+  color: var(--color-sage);
+  border-color: var(--color-sage);
+}
+
+.terminal-copy.is-copied .icon-copy {
+  display: none;
+}
+
+.terminal-copy.is-copied .icon-check {
+  display: block;
+}
+
+.terminal-pre {
+  margin: 0;
+  padding: 4px 16px 12px;
+  overflow-x: auto;
+}
+
+.terminal-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-terracotta);
+  white-space: pre;
+}
+
+/* Presentational prompt: CSS-generated, aria-hidden by nature, and never
+   in the copy payload (copy reads data-command, not DOM text). */
+.terminal-code::before {
+  content: '$ ';
+  color: var(--color-ink-faint);
+  user-select: none;
+}
+
+.terminal-verify {
+  display: inline-block;
+  padding: 0 16px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-terracotta);
+  text-decoration: none;
+}
+
+.terminal-verify:hover {
+  text-decoration: underline;
+}
+
 /* Tactile Active Press (Universal spring feedback for touch and click).
    NOTE: details.faq-item is intentionally excluded — :active fires on the
    same tap that toggles the accordion, scaling the tile while the height

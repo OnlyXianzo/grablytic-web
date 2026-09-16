@@ -1,6 +1,7 @@
 ---
 // src/sections/Downloads.astro — Architecture matrix and platform downloads with checksums and byte sizes
 import { androidDownloads, linuxDownloads, windowsDownloads, REL } from '../data/downloads';
+import TerminalBlock from '../components/TerminalBlock.astro';
 
 function formatMB(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
@@ -18,13 +19,12 @@ function formatMB(bytes: number): string {
     <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3" data-reveal>
       Dedicated native binaries compiled per ABI with embedded Bionic FFmpeg and dual JavaScript runtimes.
     </p>
-    <div class="mt-6 p-3.5 rounded-lg bg-(--color-tile-lowest) border border-(--color-terracotta-container)/40 text-xs text-(--color-ink-muted)" data-reveal>
-      <p class="font-semibold text-(--color-ink) mb-1">Zero decisions — auto-detects your distro, arch & package:</p>
-      <div class="flex items-start gap-2">
-        <code class="text-(--color-terracotta) block overflow-x-auto select-all flex-1 font-mono">curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/Grablytic/main/install.sh | bash</code>
-        <button data-copy class="shrink-0 text-xs px-2 py-1 rounded border border-(--color-line)/40 hover:border-(--color-terracotta)/50 transition" aria-label="Copy universal installer command">Copy</button>
-      </div>
-    </div>
+    <TerminalBlock
+      command="curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/Grablytic/main/install.sh | bash"
+      note="Zero decisions — auto-detects your distro, arch & package:"
+      copyLabel="Copy universal installer command"
+      verifyHref="/docs/install/#verify"
+    />
   </div>
 
   <div class="space-y-4">
@@ -117,26 +117,26 @@ function formatMB(bytes: number): string {
         </div>
 
         <script>
-          // Copy-to-clipboard for one-command install boxes (with fallback).
+          // Copy-to-clipboard for per-family one-command install boxes.
+          // Payload prefers data-command, falls back to the sibling code's
+          // exact bytes (textContent: no reflow, no hidden-node surprises).
+          // Success UI renders only on confirmed write; no motion feedback
+          // so reduced-motion needs no override.
+          import { copyText } from '../lib/copy';
+
           document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+            if (btn.dataset.bound) return;
+            btn.dataset.bound = 'true';
             btn.addEventListener('click', async () => {
-              const code = btn.parentElement?.querySelector('code')?.innerText ?? '';
-              try {
-                await navigator.clipboard.writeText(code);
-              } catch {
-                const ta = document.createElement('textarea');
-                ta.value = code;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                ta.remove();
-              }
+              const code = btn.dataset.command ?? btn.parentElement?.querySelector('code')?.textContent ?? '';
+              if (!code) return;
+              if (!(await copyText(code))) return;
               const old = btn.textContent;
               btn.textContent = 'Copied ✓';
-              btn.classList.add('text-(--color-sage)', 'border-(--color-sage)/60', 'scale-105');
+              btn.classList.add('text-(--color-sage)', 'border-(--color-sage)/60');
               setTimeout(() => {
                 btn.textContent = old;
-                btn.classList.remove('text-(--color-sage)', 'border-(--color-sage)/60', 'scale-105');
+                btn.classList.remove('text-(--color-sage)', 'border-(--color-sage)/60');
               }, 1600);
             });
           });

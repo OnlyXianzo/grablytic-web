@@ -1,0 +1,73 @@
+---
+// src/components/TerminalBlock.astro — famous-grade installer one-liner.
+// pre>code (spec-correct for copyable commands), small Terminal label,
+// $ prompt rendered via CSS (never authored, never in the copy payload),
+// icon-only copy button with check swap + polite live-region announce,
+// horizontal scroll on overflow. Payload copies from data-command.
+interface Props {
+  command: string;
+  note?: string;
+  label?: string;
+  copyLabel?: string;
+  verifyHref?: string;
+  verifyText?: string;
+}
+
+const {
+  command,
+  note,
+  label = 'Terminal',
+  copyLabel = 'Copy installer command',
+  verifyHref,
+  verifyText = 'Verify checksums',
+} = Astro.props;
+---
+
+<div class="terminal-block" data-reveal>
+  {note && <p class="terminal-note">{note}</p>}
+  <div class="terminal-head">
+    <span class="eyebrow-muted text-xs">{label}</span>
+    <button
+      type="button"
+      class="terminal-copy"
+      data-copy-terminal
+      data-command={command}
+      data-copy-label={copyLabel}
+      aria-label={copyLabel}
+    >
+      <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="9" y="9" width="12" height="12" rx="2"></rect>
+        <path d="M5 15V5a2 2 0 0 1 2-2h10"></path>
+      </svg>
+      <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5"></path>
+      </svg>
+    </button>
+  </div>
+  <pre class="terminal-pre"><code class="terminal-code" data-command={command}>{command}</code></pre>
+  <span class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-copy-status></span>
+  {verifyHref && <a class="terminal-verify" href={verifyHref}>{verifyText} →</a>}
+</div>
+
+<script>
+  import { copyText } from '../lib/copy';
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-terminal]').forEach((btn) => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = 'true';
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.command ?? '';
+      if (!text) return;
+      if (!(await copyText(text))) return;
+      btn.classList.add('is-copied');
+      btn.setAttribute('aria-label', 'Copied');
+      const status = btn.closest('.terminal-block')?.querySelector('[data-copy-status]');
+      if (status) status.textContent = 'Installer command copied to clipboard';
+      window.setTimeout(() => {
+        btn.classList.remove('is-copied');
+        btn.setAttribute('aria-label', btn.dataset.copyLabel ?? 'Copy installer command');
+        if (status) status.textContent = '';
+      }, 1600);
+    });
+  });
+</script>
