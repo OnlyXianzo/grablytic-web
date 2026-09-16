@@ -37,7 +37,7 @@
        All hardcoded dark rgba/hex chrome lives here so [data-theme="light"]
        can flip it without touching per-section arbitrary values. */
     --navbar-bg: rgba(28, 27, 27, 0.88);
-    --navbar-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --navbar-shadow: 0 4px 20px rgba(28, 19, 16, 0.55);
     --accent-border: rgba(255, 180, 163, 0.35);        /* tile hover ring */
     --accent-border-soft: rgba(255, 180, 163, 0.3);    /* faq open ring */
     --btn-primary-border: rgba(255, 180, 163, 0.2);
@@ -47,7 +47,7 @@
     /* Solid hairline for Tailwind arbitrary borders/decorations
        (border-(--color-line) etc.): lightOutlineVariant in light mode. */
     --color-line: #54433F;
-    --ambient-glow: radial-gradient(ellipse at center, rgba(155, 80, 62, 0.13) 0%, rgba(125, 57, 41, 0.04) 45%, transparent 70%);
+    --ease-premium: cubic-bezier(0.32, 0.72, 0, 1);
 
     /* Semantic Navigation Clearance */
     --nav-height: 3.5rem;
@@ -98,7 +98,6 @@
     --btn-primary-border-hover: rgba(125, 57, 41, 0.45);
     --btn-secondary-hover-ink: #1C1B1A;
     --btn-secondary-hover-border: rgba(84, 67, 63, 0.35);
-    --ambient-glow: radial-gradient(ellipse at center, rgba(125, 57, 41, 0.1) 0%, rgba(125, 57, 41, 0.04) 45%, transparent 70%);
   }
 
   * {
@@ -125,20 +124,20 @@
     position: relative;
   }
 
-  /* Tactile Earth Ambient Lighting (Compositor-safe, non-re-rendering depth) */
+  /* Flat paper base with fixed grain overlay for tactile depth.
+     No background gradients — depth comes from grain + tonal tiles. */
   body::before {
     content: "";
     position: fixed;
-    top: -8vw;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90vw;
-    max-width: 900px;
-    height: 480px;
-    background: var(--ambient-glow);
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
-    filter: blur(50px);
+    opacity: 0.6;
+  }
+
+  :root[data-theme="light"] body::before {
+    opacity: 0.35;
   }
 
   code, pre {
@@ -152,6 +151,61 @@
 }
 
 @layer components {
+  /* Numeric data stays aligned during count-ups */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1, h2 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Hero heading gradient — text only, ink ramp (DESIGN.md inks).
+     Dark: paper white → muted rose. Light: espresso → muted umber. */
+  .hero-gradient {
+    background: linear-gradient(to right, #FFFFFF, #D9C1BC);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  :root[data-theme="light"] .hero-gradient {
+    background: linear-gradient(to right, #1C1B1A, #54433F);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Skip link — first Tab stop for keyboard users */
+  .skip-link {
+    position: fixed;
+    top: -100px;
+    left: 16px;
+    z-index: 100;
+    background: var(--color-terracotta-container);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: top 0.2s var(--ease-premium);
+  }
+
+  .skip-link:focus-visible {
+    top: 12px;
+  }
+
+  /* Visible focus everywhere — terracotta ring, never removed */
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
   /* Provenance Eyebrow (DESIGN.md Principle 3) */
   .eyebrow {
     font-size: 11px;
@@ -182,7 +236,7 @@
     background-color: var(--color-tile);
     border: 1px solid var(--color-hairline);
     border-radius: 12px;
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.25s var(--ease-premium), border-color 0.25s var(--ease-premium), transform 0.25s var(--ease-premium);
   }
 
   .paper-tile:hover {
@@ -208,12 +262,13 @@
   background-color: var(--color-terracotta-container);
   color: var(--color-on-terracotta);
   font-weight: 600;
-  font-size: 14px;
-  padding: 12px 24px;
+  font-size: 16px;
+  padding: 8px 12px;
+  min-height: 48px;
   border-radius: 12px;
   text-decoration: none;
   border: 1px solid var(--btn-primary-border);
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.25s var(--ease-premium), border-color 0.25s var(--ease-premium), transform 0.25s var(--ease-premium);
 }
 
 .btn-primary:hover {
@@ -228,13 +283,14 @@
   justify-content: center;
   background-color: var(--color-tile-low);
   color: var(--color-ink);
-  font-weight: 500;
-  font-size: 14px;
-  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 12px;
+  min-height: 48px;
   border-radius: 12px;
   text-decoration: none;
   border: 1px solid var(--color-hairline);
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.25s var(--ease-premium), border-color 0.25s var(--ease-premium), color 0.25s var(--ease-premium), transform 0.25s var(--ease-premium);
 }
 
 .btn-secondary:hover {
@@ -276,7 +332,7 @@ details.faq-item {
   border-radius: 12px;
   padding: 16px 20px;
   margin-bottom: 12px;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.25s var(--ease-premium), background-color 0.25s var(--ease-premium);
 }
 
 details.faq-item[open] {
@@ -305,7 +361,7 @@ details.faq-item summary::after {
   font-size: 20px;
   line-height: 1;
   color: var(--color-ink-faint);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  transition: transform 0.3s var(--ease-premium), color 0.25s var(--ease-premium);
 }
 
 details.faq-item[open] summary::after {
@@ -313,11 +369,14 @@ details.faq-item[open] summary::after {
   color: var(--color-terracotta);
 }
 
-/* Tactile Active Press (Universal spring feedback for touch and click) */
+/* Tactile Active Press (Universal spring feedback for touch and click).
+   NOTE: details.faq-item is intentionally excluded — :active fires on the
+   same tap that toggles the accordion, scaling the tile while the height
+   animation starts (close pop-out jank). Accordions give feedback via the
+   plus-to-cross icon rotation instead. */
 .btn-primary:active,
 .btn-secondary:active,
-.paper-tile:active,
-details.faq-item:active {
+.paper-tile:active {
   transform: scale(0.98);
   transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.2, 1);
 }

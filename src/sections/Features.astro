@@ -4,25 +4,25 @@ import { features } from '../data/features';
 ---
 
 <section id="features" class="py-20 px-4 scroll-mt-24 max-w-6xl mx-auto">
-  <div class="text-center max-w-2xl mx-auto mb-12">
+  <div class="max-w-2xl mb-12">
     <span class="eyebrow mb-2 inline-block" data-reveal>
-      Philosophy & Engine
+      Philosophy and engine
     </span>
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-(--color-ink) tracking-tight" data-reveal>
+    <h2 class="text-3xl sm:text-4xl font-bold text-(--color-ink) tracking-tight" data-reveal>
       Why Grablytic
     </h2>
-    <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3" data-reveal>
-      Engineered from the bionic linker up for absolute privacy, maximum fidelity, and uncompromising speed.
+    <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3 max-w-[65ch]" data-reveal>
+      Built from the Bionic linker up for privacy, fidelity, and speed — every download stays on your device.
     </p>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal-group>
-    {features.map((feat) => (
-      <div class="paper-tile p-6 flex flex-col justify-between group hover:border-(--color-terracotta)/40 hover:-translate-y-1.5 transition-all duration-300" data-reveal>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal-group>
+    {features.map((feat, i) => (
+      <div class={`paper-tile p-6 flex flex-col justify-between group hover:border-(--color-terracotta)/40 hover:-translate-y-1.5 transition-all duration-300 ${i === 0 ? 'sm:col-span-2' : ''}`} data-reveal>
         <div>
           <div class="mb-3">
-            <span class="eyebrow-muted text-[10px]">
-              ARCHITECTURE · VERIFIED
+            <span class="eyebrow-muted text-xs">
+              Architecture · verified
             </span>
           </div>
           <h3 class="text-base sm:text-lg font-bold text-(--color-ink) mb-2 group-hover:text-(--color-terracotta) transition-colors">
@@ -32,10 +32,10 @@ import { features } from '../data/features';
             {feat.body}
           </p>
         </div>
-        <a href={feat.guideAnchor} class="inline-flex items-center text-xs font-semibold text-(--color-terracotta) hover:text-white transition-colors pt-3 border-t border-(--color-tile-highest)">
-          <span>Explore details</span>
+        <a href={feat.guideAnchor} class="inline-flex items-center text-xs font-semibold text-(--color-terracotta) hover:underline transition-colors pt-3 border-t border-(--color-tile-highest)">
+          <span>Open the guide</span>
           <svg class="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
         </a>
       </div>

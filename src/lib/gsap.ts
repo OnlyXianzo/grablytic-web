@@ -112,7 +112,8 @@ export function initScrollReveals(rootSelector: string = '[data-reveal]'): void 
     groupItems.forEach((el) => {
       handledElements.add(el);
       el.style.opacity = '0';
-      el.style.transform = 'translate3d(0, 30px, 0) scale(0.97)';
+      el.style.transform = 'translate3d(0, 64px, 0)';
+      el.style.filter = 'blur(6px)';
     });
 
     const groupObserver = new IntersectionObserver(
@@ -121,11 +122,11 @@ export function initScrollReveals(rootSelector: string = '[data-reveal]'): void 
           obs.unobserve(group);
           gsap.to(Array.from(groupItems), {
             y: 0,
-            scale: 1,
             opacity: 1,
-            duration: 0.7,
+            filter: 'blur(0px)',
+            duration: 0.85,
             stagger: 0.08,
-            ease: 'power3.out',
+            ease: 'expo.out',
             clearProps: 'willChange',
           });
         }
@@ -142,7 +143,8 @@ export function initScrollReveals(rootSelector: string = '[data-reveal]'): void 
     if (!handledElements.has(el)) {
       standaloneElements.push(el);
       el.style.opacity = '0';
-      el.style.transform = 'translate3d(0, 24px, 0)';
+      el.style.transform = 'translate3d(0, 64px, 0)';
+      el.style.filter = 'blur(6px)';
     }
   });
 
@@ -154,14 +156,18 @@ export function initScrollReveals(rootSelector: string = '[data-reveal]'): void 
             const el = entry.target as HTMLElement;
             obs.unobserve(el);
 
-            el.style.willChange = 'transform, opacity';
+            el.style.willChange = 'transform, opacity, filter';
             gsap.to(el, {
               y: 0,
               opacity: 1,
-              duration: 0.65,
-              ease: 'power3.out',
+              duration: 0.85,
+              ease: 'expo.out',
+              onStart: () => {
+                gsap.to(el, { filter: 'blur(0px)', duration: 0.85, ease: 'expo.out' });
+              },
               onComplete: () => {
                 el.style.willChange = 'auto';
+                el.style.filter = '';
               },
             });
           }
@@ -294,8 +300,10 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
       if (isOpen) {
         // Smooth closing — pin layout height first so the WAAPI shrink tracks
         // a fixed box (no auto-layout fighting / jump), then detach `open`
+        // with the closed height still pinned so no tall-closed flash paints,
         // and scrub inline styles on finish AND cancel (no stuck height/
-        // overflow, no 0.92-opacity snap on re-open).
+        // overflow). Opacity stays at 1 throughout: fading to 0.92 and back
+        // snaps on effect removal (visible pop on every close).
         isAnimating = true;
         const extra = boxExtras();
         const startHeight = details.offsetHeight - extra;
@@ -306,10 +314,9 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
         details.style.overflow = 'hidden';
         const anim = details.animate({
           height: [`${startHeight}px`, `${endHeight}px`],
-          opacity: [1, 0.92]
         }, {
           duration: 260,
-          easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+          easing: 'cubic-bezier(0.32, 0.72, 0, 1)'
         });
 
         const scrubCloseStyles = () => {
@@ -318,6 +325,7 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
         };
 
         anim.onfinish = () => {
+          details.style.height = `${endHeight}px`;
           details.removeAttribute('open');
           scrubCloseStyles();
           isAnimating = false;
@@ -337,10 +345,9 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
         details.style.overflow = 'hidden';
         const anim = details.animate({
           height: [`${startHeight}px`, `${endHeight}px`],
-          opacity: [0.92, 1]
         }, {
           duration: 300,
-          easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+          easing: 'cubic-bezier(0.32, 0.72, 0, 1)'
         });
 
         anim.onfinish = () => {

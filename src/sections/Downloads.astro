@@ -10,10 +10,10 @@ function formatMB(bytes: number): string {
 <section id="downloads" class="py-20 px-4 scroll-mt-24 max-w-4xl mx-auto">
   <div class="text-center max-w-2xl mx-auto mb-12">
     <span class="eyebrow mb-2 inline-block" data-reveal>
-      Target Matrix · 15 Binaries
+      Target matrix · 15 binaries
     </span>
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-(--color-ink) tracking-tight" data-reveal>
-      All Architectures & Platforms
+    <h2 class="text-3xl sm:text-4xl font-bold text-(--color-ink) tracking-tight" data-reveal>
+      All architectures and platforms
     </h2>
     <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3" data-reveal>
       Dedicated native binaries compiled per ABI with embedded Bionic FFmpeg and dual JavaScript runtimes.
@@ -44,7 +44,7 @@ function formatMB(bytes: number): string {
             <div class="mb-2 sm:mb-0">
               <span class="text-sm font-semibold text-(--color-ink) block">{item.label}</span>
               <span class="text-xs text-(--color-ink-muted)">{item.file} · {formatMB(item.size)}</span>
-              <span class="text-[10px] font-mono text-(--color-ink-faint) block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
+              <span class="text-xs font-mono text-(--color-ink-faint) block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
                 SHA256: {item.sha256.substring(0, 16)}…
               </span>
             </div>
@@ -72,7 +72,7 @@ function formatMB(bytes: number): string {
             <div class="mb-2 sm:mb-0">
               <span class="text-sm font-semibold text-(--color-ink) block">{item.label}</span>
               <span class="text-xs text-(--color-ink-muted)">{item.file} · {formatMB(item.size)}</span>
-              <span class="text-[10px] font-mono text-(--color-ink-faint) block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
+              <span class="text-xs font-mono text-(--color-ink-faint) block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
                 SHA256: {item.sha256.substring(0, 16)}…
               </span>
             </div>
@@ -160,7 +160,7 @@ function formatMB(bytes: number): string {
             <div class="mb-2 sm:mb-0">
               <span class="text-sm font-semibold text-(--color-ink) block">{item.label}</span>
               <span class="text-xs text-(--color-ink-muted)">{item.file} · {formatMB(item.size)}</span>
-              <span class="text-[10px] font-mono text-(--color-ink-faint) block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
+              <span class="text-xs font-mono text-(--color-ink-faint) block mt-0.5 truncate max-w-sm sm:max-w-md" title={item.sha256}>
                 SHA256: {item.sha256.substring(0, 16)}…
               </span>
             </div>

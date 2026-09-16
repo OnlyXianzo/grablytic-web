@@ -5,9 +5,9 @@
 <section id="showcase" class="text-center py-20 px-4 overflow-hidden relative scroll-mt-24">
   <div class="showcase-header mb-10 max-w-2xl mx-auto">
     <span class="eyebrow mb-2 inline-block" data-reveal>
-      App Tour · Live Interface
+      App tour · live interface
     </span>
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-(--color-ink) tracking-tight" data-reveal>
+    <h2 class="text-3xl sm:text-4xl font-bold text-(--color-ink) tracking-tight" data-reveal>
       See it in action
     </h2>
     <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3" data-reveal>
@@ -121,20 +121,26 @@
     cursor: pointer;
   }
 
+  .frame:focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 4px;
+    border-radius: 28px;
+  }
+
   .frame-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 28px;
+    border-radius: 24px;
     border: 1px solid var(--color-hairline);
     background: var(--color-tile-low);
-    padding: 5px;
+    padding: 4px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+    box-shadow: 0 12px 32px rgba(28, 19, 16, 0.55);
     transform-origin: center center;
     will-change: transform, opacity;
-    transition: box-shadow 300ms ease, border-color 300ms ease;
+    transition: box-shadow 0.7s var(--ease-premium, cubic-bezier(0.32, 0.72, 0, 1)), border-color 0.7s var(--ease-premium, cubic-bezier(0.32, 0.72, 0, 1));
   }
 
   :root[data-theme="light"] .frame-inner {
@@ -148,7 +154,7 @@
   /* SSR fallback for active card */
   .frame.is-active .frame-inner {
     border-color: rgba(255, 180, 163, 0.65);
-    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 28px rgba(155, 80, 62, 0.3);
+    box-shadow: 0 20px 48px rgba(28, 19, 16, 0.6), 0 0 28px rgba(155, 80, 62, 0.3);
   }
 
   /* Tactile Frame Caption Tag — on-screenshot pill, stays dark in both themes
@@ -203,7 +209,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 23px;
+    border-radius: 20px;
     display: block;
     user-select: none;
     -webkit-user-drag: none;
