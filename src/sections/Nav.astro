@@ -37,16 +37,22 @@ const { base = '' } = Astro.props;
       </button>
     </div>
   </div>
-  <div id="nav-menu" class="nav-overlay hidden md:hidden fixed inset-0 z-40 flex-col items-center justify-center gap-2 px-8" style="background: color-mix(in srgb, var(--color-paper-base) 82%, transparent); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);" role="menu" aria-label="Site menu">
-    <a href={`${base}#showcase`} role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Tour</a>
-    <a href={`${base}#features`} role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Features</a>
-    <a href={`${base}#downloads`} role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Downloads</a>
-    <a href="/nightly" role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Nightly builds</a>
-    <a href={`${base}#faq`} role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">FAQ</a>
-    <a href="/docs/" role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-semibold text-(--color-terracotta) transition-colors">Docs →</a>
-    <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">by @OnlyXianzo</a>
-  </div>
 </nav>
+
+<!-- Full-screen menu lives OUTSIDE the auto-hiding nav: any transform on
+  #site-nav (even translateY(0)) would re-anchor a fixed descendant to the
+  nav box instead of the viewport, collapsing the overlay into a strip
+  with no blur coverage. As a body-level sibling it is always viewport-
+  anchored. z-40 sits below the nav pill (z-50) so the X stays tappable. -->
+<div id="nav-menu" class="nav-overlay hidden md:hidden fixed inset-0 z-40 flex-col items-center justify-center gap-2 px-8" style="background: color-mix(in srgb, var(--color-paper-base) 82%, transparent); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);" role="menu" aria-label="Site menu">
+  <a href={`${base}#showcase`} role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Tour</a>
+  <a href={`${base}#features`} role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Features</a>
+  <a href={`${base}#downloads`} role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Downloads</a>
+  <a href="/nightly" role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">Nightly builds</a>
+  <a href={`${base}#faq`} role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">FAQ</a>
+  <a href="/docs/" role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-semibold text-(--color-terracotta) transition-colors">Docs →</a>
+  <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" role="menuitem" class="nav-overlay-link block px-4 py-3 rounded-xl text-lg font-medium text-(--color-ink-muted) hover:text-(--color-ink) transition-colors">by @OnlyXianzo</a>
+</div>
 
 <style>
   .nav-burger .burger-lines {
@@ -113,11 +119,15 @@ const { base = '' } = Astro.props;
       menuBtn.setAttribute('aria-expanded', String(open));
       menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       document.body.style.overflow = open ? 'hidden' : '';
-      // The overlay is fixed INSIDE the auto-hiding nav: any translate on
-      // #site-nav would re-anchor it off-viewport (lost blur coverage).
-      // Pin the nav visible while the menu is open so the overlay always
-      // covers the viewport, even under rapid toggling.
-      if (open && nav) nav.style.transform = 'translateY(0)';
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        // Force a reflow so the link stagger animation replays on EVERY
+        // open — without it, rapid toggles within one frame skip the style
+        // recalc and the links appear with no entrance effect.
+        void menu.offsetWidth;
+        // Keep the pill (and its X) on screen while the menu is open.
+        if (nav) nav.style.transform = 'translateY(0)';
+      }
     };
 
     menuBtn?.addEventListener('click', (e) => {
@@ -170,7 +180,7 @@ const { base = '' } = Astro.props;
           const delta = currentScrollY - lastScrollY;
 
           // Never hide the nav while the menu overlay is open — hiding
-          // re-anchors the fixed overlay off-viewport and kills its blur.
+          // would slide the pill (and its close X) off-screen.
           const menuOpen = menu && !menu.classList.contains('hidden');
 
           // Clamped top region (overscroll protection on iOS / Android)

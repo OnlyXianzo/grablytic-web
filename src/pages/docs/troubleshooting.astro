@@ -122,10 +122,12 @@ const rows: Row[] = [
           <summary class="text-(--color-ink) text-base sm:text-lg font-semibold">
             <span>{r.symptom}</span>
           </summary>
+          <div class="faq-panel"><div class="faq-panel-inner">
           <div class="mt-3 text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed pt-3 border-t border-(--color-tile-highest) space-y-2">
             <p><strong class="text-(--color-ink)">Likely cause:</strong> {r.cause}</p>
             <p><strong class="text-(--color-ink)">Fix:</strong> {r.fix}</p>
           </div>
+          </div></div>
         </details>
       ))}
     </div>

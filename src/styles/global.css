@@ -369,6 +369,25 @@ details.faq-item[open] summary::after {
   color: var(--color-terracotta);
 }
 
+/* Accordion disclosure via grid-rows — no JS measuring, no finish-event
+   races. The native <details> toggle reverses mid-transition cleanly, so
+   rapid clicks always respond instantly. The plus-to-cross icon rotation
+   above is the press feedback (details are excluded from press-scale). */
+details.faq-item > .faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s var(--ease-premium);
+}
+
+details.faq-item[open] > .faq-panel {
+  grid-template-rows: 1fr;
+}
+
+details.faq-item > .faq-panel > .faq-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
 /* Tactile Active Press (Universal spring feedback for touch and click).
    NOTE: details.faq-item is intentionally excluded — :active fires on the
    same tap that toggles the accordion, scaling the tile while the height
@@ -400,6 +419,10 @@ details.faq-item[open] summary::after {
   .frame::before {
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
+  }
+
+  details.faq-item > .faq-panel {
     transition: none !important;
   }
 }
