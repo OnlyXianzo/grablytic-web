@@ -113,6 +113,11 @@ const { base = '' } = Astro.props;
       menuBtn.setAttribute('aria-expanded', String(open));
       menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       document.body.style.overflow = open ? 'hidden' : '';
+      // The overlay is fixed INSIDE the auto-hiding nav: any translate on
+      // #site-nav would re-anchor it off-viewport (lost blur coverage).
+      // Pin the nav visible while the menu is open so the overlay always
+      // covers the viewport, even under rapid toggling.
+      if (open && nav) nav.style.transform = 'translateY(0)';
     };
 
     menuBtn?.addEventListener('click', (e) => {
@@ -164,8 +169,12 @@ const { base = '' } = Astro.props;
           const currentScrollY = Math.max(0, window.scrollY);
           const delta = currentScrollY - lastScrollY;
 
+          // Never hide the nav while the menu overlay is open — hiding
+          // re-anchors the fixed overlay off-viewport and kills its blur.
+          const menuOpen = menu && !menu.classList.contains('hidden');
+
           // Clamped top region (overscroll protection on iOS / Android)
-          if (currentScrollY <= 48) {
+          if (currentScrollY <= 48 || menuOpen) {
             nav.style.transform = 'translateY(0)';
             lastScrollY = currentScrollY;
           } else if (Math.abs(delta) > 10) {

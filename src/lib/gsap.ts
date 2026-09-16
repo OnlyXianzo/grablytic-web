@@ -299,11 +299,13 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
 
       if (isOpen) {
         // Smooth closing — pin layout height first so the WAAPI shrink tracks
-        // a fixed box (no auto-layout fighting / jump), then detach `open`
-        // with the closed height still pinned so no tall-closed flash paints,
-        // and scrub inline styles on finish AND cancel (no stuck height/
-        // overflow). Opacity stays at 1 throughout: fading to 0.92 and back
-        // snaps on effect removal (visible pop on every close).
+        // a fixed box (no auto-layout fighting / jump). fill:forwards holds
+        // the closed end-state after the last frame: without it the effect
+        // drops before onfinish runs and one tall frame can paint (the
+        // close pop-out). The handler then pins the closed height inline,
+        // detaches `open`, cancels the effect, and scrubs — all with zero
+        // flash frames. Opacity stays at 1 throughout (a 0.92 dip would snap
+        // back on effect removal).
         isAnimating = true;
         const extra = boxExtras();
         const startHeight = details.offsetHeight - extra;
@@ -316,12 +318,21 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
           height: [`${startHeight}px`, `${endHeight}px`],
         }, {
           duration: 260,
-          easing: 'cubic-bezier(0.32, 0.72, 0, 1)'
+          easing: 'cubic-bezier(0.32, 0.72, 0, 1)',
+          fill: 'forwards',
         });
 
         const scrubCloseStyles = () => {
           details.style.height = '';
           details.style.overflow = '';
+        };
+
+        anim.onfinish = () => {
+          details.style.height = `${endHeight}px`;
+          details.removeAttribute('open');
+          anim.cancel();
+          scrubCloseStyles();
+          isAnimating = false;
         };
 
         anim.onfinish = () => {
@@ -347,14 +358,17 @@ export function initAccordions(selector: string = 'details.faq-item'): void {
           height: [`${startHeight}px`, `${endHeight}px`],
         }, {
           duration: 300,
-          easing: 'cubic-bezier(0.32, 0.72, 0, 1)'
+          easing: 'cubic-bezier(0.32, 0.72, 0, 1)',
+          fill: 'forwards',
         });
 
         anim.onfinish = () => {
+          anim.cancel();
           details.style.overflow = '';
           isAnimating = false;
         };
         anim.oncancel = () => {
+          anim.cancel();
           details.style.overflow = '';
           isAnimating = false;
         };
