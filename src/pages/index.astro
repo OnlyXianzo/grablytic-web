@@ -11,7 +11,13 @@ import Faq from '../sections/Faq.astro';
 import Community from '../sections/Community.astro';
 import Footer from '../sections/Footer.astro';
 import { faqs } from '../data/faqs';
+import { features } from '../data/features';
+import stats from '../data/stats.json';
 import '../styles/global.css';
+
+// softwareVersion tracks the latest GitHub release (stats.json is refreshed
+// by prebuild + the daily cron), so structured data never goes stale.
+const version = stats.latest_tag.replace(/^v/, '');
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -20,6 +26,65 @@ const faqJsonLd = {
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const softwareJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Grablytic',
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: ['Android', 'Linux', 'Windows'],
+  softwareVersion: version,
+  description:
+    'Privacy-first yt-dlp media downloader for Android, Linux and Windows. Highest-fidelity downloads from 1,000+ platforms with zero telemetry.',
+  url: 'https://grablytic.vercel.app/',
+  downloadUrl: 'https://github.com/OnlyXianzo/Grablytic/releases/latest',
+  releaseNotes: `https://github.com/OnlyXianzo/Grablytic/releases/tag/${stats.latest_tag}`,
+  license: 'https://github.com/OnlyXianzo/Grablytic/blob/main/LICENSE',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  author: {
+    '@type': 'Organization',
+    name: 'OnlyXianzo',
+    url: 'https://github.com/OnlyXianzo',
+  },
+};
+
+// Site entity: ties the domain to the GitHub org so search engines
+// disambiguate the current brand name via sameAs.
+// NOTE: no SearchAction — there is no on-site search endpoint, and a
+// sitelinks search box pointing at a dead URL would be a broken promise.
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://grablytic.vercel.app/#website',
+  url: 'https://grablytic.vercel.app/',
+  name: 'Grablytic',
+  inLanguage: 'en',
+  publisher: {
+    '@type': 'Organization',
+    '@id': 'https://github.com/OnlyXianzo#org',
+    name: 'OnlyXianzo',
+    url: 'https://github.com/OnlyXianzo',
+    sameAs: [
+      'https://github.com/OnlyXianzo',
+      'https://github.com/OnlyXianzo/Grablytic',
+    ],
+  },
+};
+
+// Generated from the same `features` array the Features section renders,
+// so every list item matches visible <h3> copy one-to-one.
+const featuresJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Grablytic features',
+  itemListElement: features.map((f, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: f.title,
+    description: f.body,
+    url: `https://grablytic.vercel.app${f.guideAnchor}`,
   })),
 };
 ---
@@ -48,31 +113,14 @@ const faqJsonLd = {
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@OnlyXianzo" />
+  <meta name="twitter:creator" content="@OnlyXianzo" />
   <meta name="twitter:title" content="Grablytic: Private yt-dlp Downloader for Android & Desktop" />
   <meta name="twitter:description" content="Highest-fidelity media downloads from 1,000+ platforms. No ads, no tracking, 100% local." />
   <meta name="twitter:image" content="https://grablytic.vercel.app/og-image.jpg" />
   <meta name="twitter:image:alt" content="Grablytic — private yt-dlp media downloader" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Grablytic",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": ["Android", "Linux", "Windows"],
-    "softwareVersion": "0.0.2",
-    "description": "Privacy-first yt-dlp media downloader for Android, Linux and Windows. Highest-fidelity downloads from 1,000+ platforms with zero telemetry.",
-    "url": "https://grablytic.vercel.app/",
-    "downloadUrl": "https://github.com/OnlyXianzo/Grablytic/releases/latest",
-    "releaseNotes": "https://github.com/OnlyXianzo/Grablytic/releases/tag/v0.0.2",
-    "license": "https://github.com/OnlyXianzo/Grablytic/blob/main/LICENSE",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "author": {
-      "@type": "Organization",
-      "name": "OnlyXianzo",
-      "url": "https://github.com/OnlyXianzo"
-    }
-  }
-  </script>
+  <script type="application/ld+json" set:html={JSON.stringify(softwareJsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(featuresJsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />

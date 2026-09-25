@@ -1,6 +1,7 @@
 ---
 // src/sections/Downloads.astro — Architecture matrix and platform downloads with checksums and byte sizes
-import { androidDownloads, linuxDownloads, windowsDownloads, REL } from '../data/downloads';
+import { androidDownloads, linuxDownloads, windowsDownloads, REL, TAG, REPO } from '../data/downloads';
+import stats from '../data/stats.json';
 import TerminalBlock from '../components/TerminalBlock.astro';
 
 function formatMB(bytes: number): string {
@@ -18,6 +19,8 @@ function formatMB(bytes: number): string {
     </h2>
     <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3" data-reveal>
       Dedicated native binaries compiled per ABI with embedded Bionic FFmpeg and dual JavaScript runtimes.
+      Table pinned to {TAG} (every SHA-256 verified) — newest is {stats.latest_tag} on
+      <a href={`${REPO}/releases/latest`} target="_blank" rel="noopener noreferrer" class="text-(--color-terracotta) hover:underline">GitHub Releases →</a>.
     </p>
     <TerminalBlock
       command="curl -fsSL https://raw.githubusercontent.com/OnlyXianzo/Grablytic/main/install.sh | bash"

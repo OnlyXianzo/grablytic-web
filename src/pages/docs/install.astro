@@ -4,11 +4,50 @@ import Nav from '../../sections/Nav.astro';
 import Footer from '../../sections/Footer.astro';
 import TerminalBlock from '../../components/TerminalBlock.astro';
 import { TAG, REL, REPO, androidDownloads, linuxDownloads, windowsDownloads } from '../../data/downloads';
+import stats from '../../data/stats.json';
 import '../../styles/global.css';
 
 function formatMB(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
+
+// HowTo mirrors the visible 4-step Android list below verbatim (short names).
+// Google retired HowTo rich results; Bing/DuckDuckGo still consume it.
+const howtoJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Install Grablytic on Android',
+  description:
+    'Install the Grablytic APK, grant permissions, verify engine health, and exempt the app from battery optimization.',
+  totalTime: 'PT5M',
+  tool: [{ '@type': 'HowToTool', name: 'Android 8+ phone' }],
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Allow installs.',
+      text: 'Open the APK — Android will ask you to allow installs from your browser or file manager. Grant it once.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Install & open.',
+      text: 'FFmpeg and the JS runtime ship inside the APK, so there is nothing else to download. Grant storage/media access when asked.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Check readiness.',
+      text: 'Open Settings → Diagnostics & Logs and confirm the engine reports healthy before your first download.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Exempt from battery optimization.',
+      text: 'So background downloads survive screen lock: system Settings → Apps → Grablytic → Battery → Unrestricted (wording varies by vendor).',
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -28,6 +67,15 @@ function formatMB(bytes: number): string {
   <meta property="og:title" content="Install Grablytic — Android, Linux & Windows Setup Guide" />
   <meta property="og:description" content="Pick the right APK, Linux package, or Windows zip. Verify checksums and finish first-launch setup." />
   <meta property="og:image" content="https://grablytic.vercel.app/og-image.jpg" />
+  <meta property="og:image:alt" content="Install Grablytic — Android, Linux & Windows Setup Guide" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@OnlyXianzo" />
+  <meta name="twitter:creator" content="@OnlyXianzo" />
+  <meta name="twitter:title" content="Install Grablytic — Android, Linux & Windows Setup Guide" />
+  <meta name="twitter:description" content="Pick the right APK, Linux package, or Windows zip. Verify checksums and finish first-launch setup." />
+  <meta name="twitter:image" content="https://grablytic.vercel.app/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Install Grablytic — Android, Linux & Windows Setup Guide" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,6 +87,7 @@ function formatMB(bytes: number): string {
     ]
   }
   </script>
+  <script type="application/ld+json" set:html={JSON.stringify(howtoJsonLd)} />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" href="/logo.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -59,7 +108,7 @@ function formatMB(bytes: number): string {
       <span aria-current="page" class="text-(--color-ink-muted)">Install</span>
     </nav>
 
-    <span class="eyebrow mb-2 inline-block">Guide · {TAG}</span>
+    <span class="eyebrow mb-2 inline-block">Guide · {TAG} · latest {stats.latest_tag} on <a href={`${REPO}/releases/latest`} class="underline underline-offset-2">GitHub →</a></span>
     <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Install Grablytic</h1>
     <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3 max-w-2xl">
       Grablytic runs on Android 8+, Windows 10/11, and modern Linux. Everything below
