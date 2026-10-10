@@ -36,7 +36,7 @@ Rules: never commit `fetched_at`-only churn if you didn't mean to (revert `stats
 src/pages/            index.astro, nightly.astro, docs/{index,install,faq,features,troubleshooting}.astro
 src/sections/         Nav, Hero, Showcase, Features, Downloads, Faq, Community, Footer (landing composer)
 src/components/       ThemeToggle.astro (light/dark, localStorage + OS fallback)
-src/data/             downloads.ts (v0.0.2 matrix: TAG/REL/REPO + SHA256/size per file),
+src/data/             downloads.ts (v0.0.5 matrix: TAG/REL/REPO + SHA256/size per file),
                       features.ts (card copy + guideAnchor -> /docs/*),
                       faqs.ts, stats.json, nightly.json
 src/lib/gsap.ts       hero/scroll/count-up/magnetic/accordion + dialog-close animation

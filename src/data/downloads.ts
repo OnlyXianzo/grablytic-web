@@ -1,4 +1,4 @@
-export const TAG = 'v0.0.2';
+export const TAG = 'v0.0.5';
 export const REL = `https://github.com/OnlyXianzo/Grablytic/releases/download/${TAG}`;
 export const REPO = 'https://github.com/OnlyXianzo/Grablytic';
 
@@ -14,7 +14,7 @@ export interface DownloadItem {
 export const downloads: DownloadItem[] = [
   // Android
   {
-    file: 'grablytic-v0.0.2-arm64-deno.apk',
+    file: 'grablytic-v0.0.5-arm64-deno.apk',
     label: 'Android arm64 (Deno, recommended)',
     os: 'android',
     arch: 'arm64',
@@ -22,7 +22,7 @@ export const downloads: DownloadItem[] = [
     size: 154730022,
   },
   {
-    file: 'grablytic-v0.0.2-arm64-node.apk',
+    file: 'grablytic-v0.0.5-arm64-node.apk',
     label: 'Android arm64 (Node.js)',
     os: 'android',
     arch: 'arm64',
@@ -30,7 +30,7 @@ export const downloads: DownloadItem[] = [
     size: 113797350,
   },
   {
-    file: 'grablytic-v0.0.2-armv7-node.apk',
+    file: 'grablytic-v0.0.5-armv7-node.apk',
     label: 'Android 32-bit (armeabi-v7a)',
     os: 'android',
     arch: 'armv7',
@@ -38,7 +38,7 @@ export const downloads: DownloadItem[] = [
     size: 105148198,
   },
   {
-    file: 'grablytic-v0.0.2-x86_64-deno.apk',
+    file: 'grablytic-v0.0.5-x86_64-deno.apk',
     label: 'Android x86_64 (Chromebook/emulator)',
     os: 'android',
     arch: 'x86_64',
@@ -46,7 +46,7 @@ export const downloads: DownloadItem[] = [
     size: 161111934,
   },
   {
-    file: 'grablytic-v0.0.2-x86_64-node.apk',
+    file: 'grablytic-v0.0.5-x86_64-node.apk',
     label: 'Android x86_64 (Node.js)',
     os: 'android',
     arch: 'x86_64',
@@ -54,7 +54,7 @@ export const downloads: DownloadItem[] = [
     size: 115553730,
   },
   {
-    file: 'grablytic-v0.0.2-universal.apk',
+    file: 'grablytic-v0.0.5-universal.apk',
     label: 'Android universal (all ABIs, 458 MB)',
     os: 'android',
     arch: 'universal',
