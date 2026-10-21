@@ -47,7 +47,7 @@ const rows: Row[] = [
   {
     symptom: 'Resume finds nothing after a restart',
     cause: 'Expired or misplaced partial files.',
-    fix: 'Only .part files with metadata younger than 24h in the cache directory qualify. Verify the cache directory path in settings before retrying.',
+    fix: 'Resume scans search both download roots recursively for .part files younger than 24h. Verify your download directory path in settings if partial files are stored elsewhere.',
   },
   {
     symptom: 'Subtitles download but are not in the file',

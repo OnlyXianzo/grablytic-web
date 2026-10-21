@@ -1,0 +1,201 @@
+---
+// src/pages/changelog.astro — Release notes and changelog
+import Nav from '../sections/Nav.astro';
+import Footer from '../sections/Footer.astro';
+import { TAG, REPO } from '../data/downloads';
+import stats from '../data/stats.json';
+import '../styles/global.css';
+
+const releases = [
+  {
+    version: 'v0.6.0',
+    date: 'October 21, 2026',
+    tag: 'v0.6.0',
+    summary: 'Local crash capture, reviewable bug reporting without telemetry, unified version stamping, and download resilience.',
+    highlights: [
+      {
+        title: 'Offline crash capture',
+        body: 'Crashes and unhandled exceptions write to local storage whether reporting is on or off. The fatal crash handler runs without network calls. On the next launch, a banner offers the option to inspect and send the report, backed by a three-day cooldown.',
+      },
+      {
+        title: 'Reviewable report queue',
+        body: 'Reports live in an atomic local queue capped at three items, with fingerprint deduplication across seven days and a 64 KB body limit. Submission uses a prefilled GitHub issue form for manual review or a token-free draft. The application never stores a GitHub write credential.',
+      },
+      {
+        title: 'Python engine exit capture',
+        body: 'Unexpected Python exits are recorded directly from the process exit code, preserving failure details even when stdout closes before process termination.',
+      },
+      {
+        title: 'Exit-point redaction',
+        body: 'Stored summaries, report bodies, issue URLs, and network payloads scrub tokens, cookie headers, and sensitive parameters independently.',
+      },
+      {
+        title: 'Length-guarded issue URLs',
+        body: 'When a report body exceeds GitHub query-string URL length limits, Grablytic copies the full issue markdown to the clipboard and keeps the queue entry instead of losing the text.',
+      },
+      {
+        title: 'Unified version stamping',
+        body: 'The About screen, bug reports, and diagnostic logs now read the exact build version stamped from pubspec.yaml (0.6.0+6).',
+      },
+      {
+        title: 'Engine controls and title safety',
+        body: 'The engine logging level forwards properly to yt-dlp. Long video titles clamp in bytes to prevent filesystem errors, and resume scans search both download roots recursively.',
+      },
+    ],
+  },
+  {
+    version: 'v0.0.5',
+    date: 'October 11, 2026',
+    tag: 'v0.0.5',
+    summary: 'Format picker upgrade, offline link queue, Netscape cookie parser, and adaptive branding.',
+    highlights: [
+      {
+        title: 'Format Picker overhaul',
+        body: 'Added description and thumbnail toggles, portrait-safe format ladder, batch quality selector, and custom naming hierarchies. Fixed audio preset mapping for Opus streams.',
+      },
+      {
+        title: 'Clipboard and Link Saver',
+        body: 'Automatic clipboard detection on startup, persistent offline queue with batch dispatch, and per-link controls.',
+      },
+      {
+        title: 'Netscape cookie parser',
+        body: 'Automatic format detection for Netscape cookie files, JSON exports, and raw headers, with YouTube cluster validation.',
+      },
+      {
+        title: 'Native notifications',
+        body: 'Replaced in-app toast banners with native system notifications and notification permission checks on Android 13+.',
+      },
+    ],
+  },
+  {
+    version: 'v0.0.4',
+    date: 'September 25, 2026',
+    tag: 'v0.0.4',
+    summary: 'Dual JS runtime support (Deno and QuickJS), background observation, and packaging matrix.',
+    highlights: [
+      {
+        title: 'Dual JS runtimes',
+        body: 'Bundled Deno and QuickJS solvers for YouTube signature challenges on Android and desktop platforms.',
+      },
+      {
+        title: 'Desktop packaging',
+        body: 'Debian, RPM, Arch Linux (.pkg.tar.zst), tarball, and Windows portable zip packages built in CI.',
+      },
+    ],
+  },
+  {
+    version: 'v0.0.2',
+    date: 'September 14, 2026',
+    tag: 'v0.0.2',
+    summary: 'Desktop release launch with Chaquopy engine bridge stabilization.',
+    highlights: [
+      {
+        title: 'Multi-platform support',
+        body: 'First unified builds supporting Android, Linux, and Windows desktop environments.',
+      },
+    ],
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Changelog and release notes for Grablytic: private yt-dlp media downloader for Android, Linux, and Windows." />
+  <title>Grablytic Changelog — Releases &amp; Updates</title>
+  <link rel="canonical" href="https://grablytic.vercel.app/changelog/" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta name="theme-color" content="#131313" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Grablytic" />
+  <meta property="og:url" content="https://grablytic.vercel.app/changelog/" />
+  <meta property="og:title" content="Grablytic Changelog — Releases & Updates" />
+  <meta property="og:description" content="Release notes, fixes, and architecture improvements across versions." />
+  <meta property="og:image" content="https://grablytic.vercel.app/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@OnlyXianzo" />
+  <meta name="twitter:creator" content="@OnlyXianzo" />
+  <meta name="twitter:title" content="Grablytic Changelog — Releases & Updates" />
+  <meta name="twitter:description" content="Release notes, fixes, and architecture improvements across versions." />
+  <meta name="twitter:image" content="https://grablytic.vercel.app/og-image.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://grablytic.vercel.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Changelog", "item": "https://grablytic.vercel.app/changelog/" }
+    ]
+  }
+  </script>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/logo.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+</head>
+<body class="bg-(--color-paper-base) text-(--color-ink) antialiased selection:bg-(--color-terracotta-container)/30 selection:text-(--color-terracotta)">
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <Nav base="/" />
+  <main id="main-content" class="pt-28 pb-20 px-4 max-w-4xl mx-auto">
+    <nav aria-label="Breadcrumb" class="text-xs text-(--color-ink-faint) mb-6">
+      <a href="/" class="hover:text-(--color-ink) transition-colors">Home</a>
+      <span aria-hidden="true" class="mx-1.5">/</span>
+      <span aria-current="page" class="text-(--color-ink-muted)">Changelog</span>
+    </nav>
+
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="eyebrow mb-2 inline-block">Release history</span>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Changelog</h1>
+      <p class="text-sm sm:text-base text-(--color-ink-muted) mt-3">
+        Detailed release notes and updates. Pinned to <span class="font-mono text-(--color-terracotta)">{stats.latest_tag}</span>.
+        View source tags and assets on
+        <a href={`${REPO}/releases`} target="_blank" rel="noopener noreferrer" class="text-(--color-terracotta) hover:underline">GitHub Releases →</a>.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+      {releases.map((rel) => (
+        <article class="paper-tile p-6 sm:p-8" id={rel.version}>
+          <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-(--color-tile-highest) pb-4 mb-6">
+            <div class="flex items-center gap-3">
+              <h2 class="text-2xl font-bold text-(--color-ink) font-mono">{rel.version}</h2>
+              {rel.version === stats.latest_tag && (
+                <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-(--color-terracotta-container)/20 text-(--color-terracotta) border border-(--color-terracotta-container)/40">
+                  Latest
+                </span>
+              )}
+            </div>
+            <div class="flex items-center gap-4 text-xs text-(--color-ink-muted)">
+              <time>{rel.date}</time>
+              <a href={`${REPO}/releases/tag/${rel.tag}`} target="_blank" rel="noopener noreferrer" class="text-(--color-terracotta) hover:underline font-mono">
+                Assets →
+              </a>
+            </div>
+          </div>
+
+          <p class="text-sm sm:text-base text-(--color-ink) mb-6 leading-relaxed font-medium">
+            {rel.summary}
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {rel.highlights.map((item) => (
+              <div class="p-4 rounded-xl bg-(--color-tile) border border-(--color-line)/30">
+                <h3 class="text-sm font-bold text-(--color-ink) mb-1.5">{item.title}</h3>
+                <p class="text-xs text-(--color-ink-muted) leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </main>
+  <Footer />
+</body>
+</html>

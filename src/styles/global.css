@@ -306,6 +306,9 @@
   border-top: 1px solid var(--color-hairline);
   border-bottom: 1px solid var(--color-hairline);
   background: var(--color-tile-low);
+  padding-block: 4px;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
 
 .marquee-track {

@@ -173,7 +173,7 @@ const sections: ManualSection[] = [
       'Update channels stable / nightly / master in Settings → Updates — the engine (yt-dlp plus its solver scripts) refreshes with SHA-256 integrity checks.',
       'Desktop updates the engine silently; Android bundles engine binaries into app updates because the OS forbids executing downloaded files.',
       'Diagnostics & Logs is your dashboard: FFmpeg, download helper, and JS runtime health, yt-dlp version, and a live filterable log stream (level, tag, text, source).',
-      'Bug to report? Export log file attaches a redacted tail (or the full log via the switch) — tokens are scrubbed automatically.',
+      'Bug to report? Crashes write to disk offline and prompt on next launch without background telemetry. The issue composer scrubs tokens, cookies, and private URLs before opening a reviewable GitHub issue or copying a length-guarded draft to your clipboard.',
     ],
   },
 ];

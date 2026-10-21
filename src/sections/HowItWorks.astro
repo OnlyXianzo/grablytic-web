@@ -29,10 +29,10 @@ const steps = [
     </h2>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" data-reveal-group>
-    {steps.map((step, i) => (
-      <div class={`paper-tile p-6 ${i === 1 ? 'sm:translate-y-4' : ''}`} data-reveal>
-        <div class="primary-value tnum mb-2" aria-hidden="true">{step.n}</div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-stretch" data-reveal-group>
+    {steps.map((step) => (
+      <div class="paper-tile p-6 flex flex-col h-full hover:-translate-y-1 transition-transform duration-300" data-reveal>
+        <span class="eyebrow mb-3 block" aria-hidden="true">Step {step.n}</span>
         <h3 class="text-base sm:text-lg font-bold text-(--color-ink) mb-2">{step.title}</h3>
         <p class="text-xs sm:text-sm text-(--color-ink-muted) leading-relaxed">{step.body}</p>
       </div>

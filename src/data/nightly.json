@@ -2,9 +2,9 @@
   "available": true,
   "tag": "nightly",
   "published_at": "2026-09-15T18:04:26Z",
-  "commit_sha": "20260925",
+  "commit_sha": "20261021",
   "highlights": [
-    "# Grablytic Nightly Build — 20260925 (`5e7dc07`)",
+    "# Grablytic Nightly Build — 20261021 (`b1a3aae`)",
     "> **Rolling Pre-Release**: Built automatically from `main` branch with cutting-edge engine features, native platform hardening, and regression fixes.",
     "---",
     "## ✨ What's New & User Benefits",
@@ -16,81 +16,81 @@
   "asset_count": 15,
   "assets": [
     {
-      "name": "grablytic-0.0.4-1.aarch64.rpm",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.4-1.aarch64.rpm",
-      "size": 28672841
+      "name": "grablytic-0.0.5-1.aarch64.rpm",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.5-1.aarch64.rpm",
+      "size": 29991988
     },
     {
-      "name": "grablytic-0.0.4-1.x86_64.rpm",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.4-1.x86_64.rpm",
-      "size": 29054495
+      "name": "grablytic-0.0.5-1.x86_64.rpm",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.5-1.x86_64.rpm",
+      "size": 30372828
     },
     {
-      "name": "grablytic-0.0.4-nightly-20260925-5e7dc07-1-aarch64.pkg.tar.zst",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.4-nightly-20260925-5e7dc07-1-aarch64.pkg.tar.zst",
-      "size": 23789747
+      "name": "grablytic-0.0.5-nightly-20261021-b1a3aae-1-aarch64.pkg.tar.zst",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.5-nightly-20261021-b1a3aae-1-aarch64.pkg.tar.zst",
+      "size": 25019434
     },
     {
-      "name": "grablytic-0.0.4-nightly-20260925-5e7dc07-1-x86_64.pkg.tar.zst",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.4-nightly-20260925-5e7dc07-1-x86_64.pkg.tar.zst",
-      "size": 24455386
+      "name": "grablytic-0.0.5-nightly-20261021-b1a3aae-1-x86_64.pkg.tar.zst",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.5-nightly-20261021-b1a3aae-1-x86_64.pkg.tar.zst",
+      "size": 25485444
     },
     {
-      "name": "grablytic-0.0.4-nightly-20260925-5e7dc07-linux-arm64.tar.gz",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.4-nightly-20260925-5e7dc07-linux-arm64.tar.gz",
-      "size": 28386556
+      "name": "grablytic-0.0.5-nightly-20261021-b1a3aae-linux-arm64.tar.gz",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.5-nightly-20261021-b1a3aae-linux-arm64.tar.gz",
+      "size": 29708778
     },
     {
-      "name": "grablytic-0.0.4-nightly-20260925-5e7dc07-linux-x64.tar.gz",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.4-nightly-20260925-5e7dc07-linux-x64.tar.gz",
-      "size": 28816412
+      "name": "grablytic-0.0.5-nightly-20261021-b1a3aae-linux-x64.tar.gz",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-0.0.5-nightly-20261021-b1a3aae-linux-x64.tar.gz",
+      "size": 30136294
     },
     {
-      "name": "grablytic-v0.0.4-nightly-20260925-5e7dc07-arm64-deno.apk",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.4-nightly-20260925-5e7dc07-arm64-deno.apk",
-      "size": 154992070
+      "name": "grablytic-v0.0.5-nightly-20261021-b1a3aae-arm64-deno.apk",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.5-nightly-20261021-b1a3aae-arm64-deno.apk",
+      "size": 156921421
     },
     {
-      "name": "grablytic-v0.0.4-nightly-20260925-5e7dc07-arm64-node.apk",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.4-nightly-20260925-5e7dc07-arm64-node.apk",
-      "size": 114058946
+      "name": "grablytic-v0.0.5-nightly-20261021-b1a3aae-arm64-node.apk",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.5-nightly-20261021-b1a3aae-arm64-node.apk",
+      "size": 115988917
     },
     {
-      "name": "grablytic-v0.0.4-nightly-20260925-5e7dc07-armv7-node.apk",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.4-nightly-20260925-5e7dc07-armv7-node.apk",
-      "size": 105410862
+      "name": "grablytic-v0.0.5-nightly-20261021-b1a3aae-armv7-node.apk",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.5-nightly-20261021-b1a3aae-armv7-node.apk",
+      "size": 107355425
     },
     {
-      "name": "grablytic-v0.0.4-nightly-20260925-5e7dc07-universal.apk",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.4-nightly-20260925-5e7dc07-universal.apk",
-      "size": 458291306
+      "name": "grablytic-v0.0.5-nightly-20261021-b1a3aae-universal.apk",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.5-nightly-20261021-b1a3aae-universal.apk",
+      "size": 460683725
     },
     {
-      "name": "grablytic-v0.0.4-nightly-20260925-5e7dc07-x86_64-deno.apk",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.4-nightly-20260925-5e7dc07-x86_64-deno.apk",
-      "size": 161379242
+      "name": "grablytic-v0.0.5-nightly-20261021-b1a3aae-x86_64-deno.apk",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.5-nightly-20261021-b1a3aae-x86_64-deno.apk",
+      "size": 163312209
     },
     {
-      "name": "grablytic-v0.0.4-nightly-20260925-5e7dc07-x86_64-node.apk",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.4-nightly-20260925-5e7dc07-x86_64-node.apk",
-      "size": 115821462
+      "name": "grablytic-v0.0.5-nightly-20261021-b1a3aae-x86_64-node.apk",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-v0.0.5-nightly-20261021-b1a3aae-x86_64-node.apk",
+      "size": 117753233
     },
     {
-      "name": "grablytic-windows-x64-nightly-20260925-5e7dc07.zip",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-windows-x64-nightly-20260925-5e7dc07.zip",
-      "size": 31443618
+      "name": "grablytic-windows-x64-nightly-20261021-b1a3aae.zip",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic-windows-x64-nightly-20261021-b1a3aae.zip",
+      "size": 32807851
     },
     {
-      "name": "grablytic_0.0.4_amd64.deb",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic_0.0.4_amd64.deb",
-      "size": 18666162
+      "name": "grablytic_0.0.5_amd64.deb",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic_0.0.5_amd64.deb",
+      "size": 19898432
     },
     {
-      "name": "grablytic_0.0.4_arm64.deb",
-      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic_0.0.4_arm64.deb",
-      "size": 18360972
+      "name": "grablytic_0.0.5_arm64.deb",
+      "download_url": "https://github.com/OnlyXianzo/Grablytic/releases/download/nightly/grablytic_0.0.5_arm64.deb",
+      "size": 19574474
     }
   ],
   "html_url": "https://github.com/OnlyXianzo/Grablytic/releases/tag/nightly",
-  "fetched_at": "2026-09-25T10:25:48.838Z"
+  "fetched_at": "2026-10-21T21:05:10.986Z"
 }

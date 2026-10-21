@@ -11,12 +11,8 @@ import { TAG, REL, REPO } from '../data/downloads';
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-(--color-sage) opacity-75"></span>
         <span class="relative inline-flex rounded-full h-2 w-2 bg-(--color-sage)"></span>
       </span>
-      <span class="eyebrow-muted text-xs">LOCAL MEDIA EXTRACTION · ZERO TELEMETRY · GPL-3.0</span>
+      <span class="eyebrow-muted text-xs">PRIVATE YT-DLP DOWNLOADER · ZERO TELEMETRY · GPL-3.0</span>
     </div>
-    <a href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-(--color-tile-low) border border-(--color-line)/40 text-xs font-semibold text-(--color-ink-muted) hover:text-(--color-ink) hover:border-(--color-terracotta)/50 transition">
-      <span class="text-(--color-ink-faint)">by</span>
-      <span class="text-(--color-terracotta)">@OnlyXianzo</span>
-    </a>
   </div>
 
   <div class="mb-6 relative group cursor-pointer transition-transform duration-300 hover:scale-105" data-hero="logo">
@@ -26,8 +22,8 @@ import { TAG, REL, REPO } from '../data/downloads';
       </picture>
   </div>
 
-  <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-(--color-ink) max-w-[680px] leading-[1.12]" data-hero="title">
-    <span class="hero-gradient">Grablytic — private yt-dlp downloader for Android and desktop</span><br />
+  <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-(--color-ink) max-w-[640px] leading-[1.08] text-balance" data-hero="title">
+    <span class="hero-gradient">Private media downloads for Android and desktop</span><br />
     <span class="text-(--color-terracotta)">No ads. No tracking.</span>
   </h1>
 
@@ -36,7 +32,7 @@ import { TAG, REL, REPO } from '../data/downloads';
   </p>
 
   <div class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-3 w-full max-w-lg" data-hero="cta">
-    <a id="dl-primary" class="btn-primary btn-magnetic w-full sm:w-auto" href={`${REL}/grablytic-v0.0.2-arm64-deno.apk`}>
+    <a id="dl-primary" class="btn-primary btn-magnetic w-full sm:w-auto" href={`${REL}/grablytic-${TAG}-arm64-deno.apk`}>
       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
       </svg>
@@ -52,21 +48,12 @@ import { TAG, REL, REPO } from '../data/downloads';
   </div>
 
   <div class="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2" data-hero="cta2">
-    <a class="text-xs font-semibold text-(--color-ink-muted) hover:text-(--color-ink) transition inline-flex items-center gap-1.5" href="https://github.com/OnlyXianzo" target="_blank" rel="noopener noreferrer">
-      <span>+ Follow @OnlyXianzo</span>
-    </a>
-    <a id="obtainium-add" class="text-xs font-semibold text-(--color-ink-muted) hover:text-(--color-ink) transition inline-flex items-center gap-1.5" href="obtainium://app/https://github.com/OnlyXianzo/Grablytic">
-      <span>✦ Add to Obtainium</span>
-    </a>
     <a class="text-xs font-semibold text-(--color-terracotta) hover:underline transition inline-flex items-center gap-1.5" href="#how">
       <span>See how it works →</span>
     </a>
-    <button class="text-xs font-semibold text-(--color-ink-muted) hover:text-(--color-ink) transition cursor-pointer inline-flex items-center gap-1.5" onclick="document.getElementById('donate-dialog')?.showModal()">
-      <span>♥ Support Grablytic</span>
-    </button>
   </div>
 
-  <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl w-full pt-8 border-t border-(--color-tile-highest)" data-hero="stats">
+  <div class="mt-10 grid grid-cols-3 gap-4 sm:gap-6 max-w-2xl w-full pt-8 border-t border-(--color-tile-highest)" data-hero="stats">
     <div class="text-center">
       <b class="primary-value tnum block">1,000+</b>
       <span class="text-xs text-(--color-ink-muted)">supported platforms</span>
@@ -80,15 +67,6 @@ import { TAG, REL, REPO } from '../data/downloads';
     <div class="text-center">
       <b class="primary-value tnum block">3</b>
       <span class="text-xs text-(--color-ink-muted)">operating systems</span>
-    </div>
-    <div class="text-center">
-      <a href="https://github.com/OnlyXianzo/Grablytic" target="_blank" rel="noopener noreferrer" class="group block hover:opacity-90 transition">
-        <b class="primary-value tnum block flex items-center justify-center gap-1">
-          <span class="text-lg text-(--color-terracotta)">★</span>
-          <span data-count={stats.stars}>{stats.stars}</span>
-        </b>
-        <span class="text-xs text-(--color-ink-muted) group-hover:text-(--color-terracotta) transition-colors">GitHub stars</span>
-      </a>
     </div>
   </div>
 </header>
@@ -114,7 +92,7 @@ import { TAG, REL, REPO } from '../data/downloads';
     const ua = navigator.userAgent || '';
     const mob = d.mobile || /Android|Mobile/i.test(ua);
     const plat = (d.platform || '').toLowerCase();
-    const tag = 'v0.0.2';
+    const tag = 'v0.6.0';
     const base = `https://github.com/OnlyXianzo/Grablytic/releases/download/${tag}/`;
 
     const icons = {
@@ -168,20 +146,20 @@ import { TAG, REL, REPO } from '../data/downloads';
 
     if (mob || /android/i.test(ua)) {
       if (/armv7|armeabi/i.test(ua)) {
-        setBtn('grablytic-v0.0.2-armv7-node.apk', 'Download for Android (32-bit)', 'android');
+        setBtn('grablytic-v0.6.0-armv7-node.apk', 'Download for Android (32-bit)', 'android');
         setObtainium('armv7-node');
       } else if (/x86_64|x86/i.test(ua)) {
-        setBtn('grablytic-v0.0.2-x86_64-deno.apk', 'Download for Android (x86_64)', 'android');
+        setBtn('grablytic-v0.6.0-x86_64-deno.apk', 'Download for Android (x86_64)', 'android');
         setObtainium('x86_64-deno');
       } else {
-        setBtn('grablytic-v0.0.2-arm64-deno.apk', 'Download for Android (arm64)', 'android');
+        setBtn('grablytic-v0.6.0-arm64-deno.apk', 'Download for Android (arm64)', 'android');
         setObtainium('arm64-deno');
       }
     } else if (/win/i.test(plat) || /windows/i.test(ua)) {
       setBtn('grablytic-windows-x64.zip', 'Download for Windows (x64)', 'windows');
       setObtainium(null);
     } else if (/linux/i.test(plat) || /linux/i.test(ua)) {
-      setBtn('grablytic-0.0.2-linux-x64.tar.gz', 'Download for Linux (x64)', 'linux');
+      setBtn('grablytic-0.6.0-linux-x64.tar.gz', 'Download for Linux (x64)', 'linux');
       setObtainium(null);
     } else {
       setBtn('https://github.com/OnlyXianzo/Grablytic/releases/latest', 'Download (All Platforms)', 'generic');
