@@ -92,7 +92,7 @@ import { TAG, REL, REPO } from '../data/downloads';
     const ua = navigator.userAgent || '';
     const mob = d.mobile || /Android|Mobile/i.test(ua);
     const plat = (d.platform || '').toLowerCase();
-    const tag = 'v0.6.0';
+    const tag = 'v0.0.6';
     const base = `https://github.com/OnlyXianzo/Grablytic/releases/download/${tag}/`;
 
     const icons = {
@@ -146,20 +146,20 @@ import { TAG, REL, REPO } from '../data/downloads';
 
     if (mob || /android/i.test(ua)) {
       if (/armv7|armeabi/i.test(ua)) {
-        setBtn('grablytic-v0.6.0-armv7-node.apk', 'Download for Android (32-bit)', 'android');
+        setBtn('grablytic-v0.0.6-armv7-node.apk', 'Download for Android (32-bit)', 'android');
         setObtainium('armv7-node');
       } else if (/x86_64|x86/i.test(ua)) {
-        setBtn('grablytic-v0.6.0-x86_64-deno.apk', 'Download for Android (x86_64)', 'android');
+        setBtn('grablytic-v0.0.6-x86_64-deno.apk', 'Download for Android (x86_64)', 'android');
         setObtainium('x86_64-deno');
       } else {
-        setBtn('grablytic-v0.6.0-arm64-deno.apk', 'Download for Android (arm64)', 'android');
+        setBtn('grablytic-v0.0.6-arm64-deno.apk', 'Download for Android (arm64)', 'android');
         setObtainium('arm64-deno');
       }
     } else if (/win/i.test(plat) || /windows/i.test(ua)) {
       setBtn('grablytic-windows-x64.zip', 'Download for Windows (x64)', 'windows');
       setObtainium(null);
     } else if (/linux/i.test(plat) || /linux/i.test(ua)) {
-      setBtn('grablytic-0.6.0-linux-x64.tar.gz', 'Download for Linux (x64)', 'linux');
+      setBtn('grablytic-0.0.6-linux-x64.tar.gz', 'Download for Linux (x64)', 'linux');
       setObtainium(null);
     } else {
       setBtn('https://github.com/OnlyXianzo/Grablytic/releases/latest', 'Download (All Platforms)', 'generic');
